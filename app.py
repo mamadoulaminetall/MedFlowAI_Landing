@@ -1,0 +1,1577 @@
+"""
+MedFlow AI — Site officiel
+medflowai-landing.streamlit.app
+Dr. Mamadou Lamine TALL · PhD Bioinformatique
+"""
+
+import streamlit as st
+import streamlit.components.v1 as components
+import os
+
+# ── Chargement des assets base64
+def _b64(path):
+    try:
+        with open(path, "r") as f:
+            return f.read().strip()
+    except:
+        return ""
+
+_LOGO_B64  = _b64("assets/logo_b64.txt")
+_PHOTO_B64 = _b64("assets/photo_b64.txt")
+LOGO_IMG   = f'<img src="data:image/png;base64,{_LOGO_B64}" style="height:38px;border-radius:6px;vertical-align:middle">' if _LOGO_B64 else '<span style="font-size:1.5rem">🩺</span>'
+PHOTO_HTML = f'<img src="data:image/jpeg;base64,{_PHOTO_B64}" style="width:100%;border-radius:18px 18px 0 0;display:block">' if _PHOTO_B64 else ""
+
+st.set_page_config(
+    page_title="MedFlow AI — L'IA pour les Médecins & Chercheurs",
+    page_icon="🩺",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
+
+# ─────────────────────────────────────────────────────────────────
+# CSS GLOBAL
+# ─────────────────────────────────────────────────────────────────
+st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+[data-testid="stAppViewContainer"] {
+    background: #03080f;
+    background-image:
+        radial-gradient(ellipse 80% 50% at 20% 0%, rgba(16,185,129,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(59,130,246,0.05) 0%, transparent 60%);
+}
+[data-testid="stSidebar"], [data-testid="collapsedControl"] { display:none; }
+[data-testid="stHeader"] { background: transparent; }
+[data-testid="stMainBlockContainer"] { padding: 0 !important; max-width: 100% !important; }
+.block-container { padding: 0 !important; max-width: 100% !important; }
+
+/* ── BASE ── */
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+h1,h2,h3 { color: #f1f5f9; }
+p, li { color: #94a3b8; }
+a { text-decoration: none; }
+
+/* ── NAV ── */
+.nav {
+    position: sticky; top: 0; z-index: 999;
+    background: rgba(3,8,15,0.92);
+    backdrop-filter: blur(32px) saturate(200%);
+    -webkit-backdrop-filter: blur(32px) saturate(200%);
+    border-bottom: 1px solid rgba(16,185,129,0.15);
+    box-shadow: 0 1px 0 rgba(16,185,129,0.08), 0 8px 32px rgba(0,0,0,0.4);
+    padding: 0 48px;
+    display: flex; align-items: center;
+    justify-content: space-between;
+    height: 68px;
+}
+/* Ligne accent verte en bas */
+.nav::after {
+    content: "";
+    position: absolute; bottom: 0; left: 0;
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(16,185,129,0.5) 30%, rgba(59,130,246,0.4) 70%, transparent 100%);
+}
+.nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    padding: 6px 16px 6px 0;
+    border-right: 1px solid rgba(255,255,255,0.06);
+}
+.nav-brand {
+    font-size: 1.3rem; font-weight: 900; letter-spacing: -0.8px;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.nav-brand span {
+    background: linear-gradient(135deg, #10b981, #34d399);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.nav-links { display: flex; gap: 28px; padding: 0 32px; }
+.nav-links a {
+    color: #4b5e78; font-size: 0.82rem; font-weight: 500;
+    transition: color 0.2s; letter-spacing: 0.3px;
+    position: relative;
+}
+.nav-links a:hover { color: #cbd5e1; }
+.nav-cta {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white; padding: 9px 24px; border-radius: 10px;
+    font-weight: 700; font-size: 0.82rem; letter-spacing: 0.2px;
+    box-shadow: 0 4px 20px rgba(16,185,129,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
+}
+
+/* ── HERO ── */
+.hero {
+    background: linear-gradient(160deg, #03080f 0%, #071628 50%, #03080f 100%);
+    padding: 100px 80px 80px;
+    position: relative; overflow: hidden;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.hero::before {
+    content: "";
+    position: absolute; top: -150px; left: 0; right: 0; height: 500px;
+    background: radial-gradient(ellipse 70% 60% at 30% 50%, rgba(16,185,129,0.07), transparent 70%);
+    pointer-events: none;
+}
+.hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(16,185,129,0.08);
+    border: 1px solid rgba(16,185,129,0.2);
+    color: #10b981; border-radius: 100px;
+    padding: 6px 18px; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 32px;
+}
+.hero-title {
+    font-size: clamp(2.6rem, 5.5vw, 4.4rem); font-weight: 900;
+    color: #f8fafc; line-height: 1.05; margin-bottom: 24px;
+    letter-spacing: -2px;
+}
+.hero-title .accent {
+    background: linear-gradient(135deg, #10b981, #34d399);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.hero-title .accent2 {
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.hero-sub {
+    font-size: 1.1rem; color: #64748b; line-height: 1.85;
+    max-width: 560px; margin-bottom: 40px; font-weight: 400;
+}
+.hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 48px; }
+.hero-tag {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    color: #64748b; border-radius: 100px;
+    padding: 6px 16px; font-size: 0.8rem; font-weight: 500;
+    backdrop-filter: blur(8px);
+}
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-hero-primary {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white; padding: 15px 38px; border-radius: 14px;
+    font-weight: 800; font-size: 0.95rem;
+    box-shadow: 0 8px 32px rgba(16,185,129,0.35), inset 0 1px 0 rgba(255,255,255,0.15);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-hero-secondary {
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.03);
+    color: #94a3b8; padding: 14px 34px; border-radius: 14px;
+    font-weight: 600; font-size: 0.9rem;
+    backdrop-filter: blur(8px);
+}
+
+/* ── LOGO BOX ── */
+.logo-box {
+    background: linear-gradient(145deg, #071628 0%, #050e1d 100%);
+    border: 1px solid rgba(16,185,129,0.15);
+    border-radius: 28px; padding: 48px 36px;
+    text-align: center;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.6),
+                inset 0 1px 0 rgba(255,255,255,0.04),
+                0 0 0 1px rgba(16,185,129,0.05);
+}
+.logo-title-big {
+    font-size: 2.4rem; font-weight: 900; letter-spacing: -1.5px;
+    color: #f1f5f9; margin-bottom: 6px;
+}
+.logo-title-big span {
+    background: linear-gradient(135deg, #10b981, #34d399);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.logo-tagline { font-size: 0.85rem; color: #475569; margin-bottom: 28px; font-style: italic; }
+.logo-tools-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+.logo-tool-icon {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px; padding: 12px 14px;
+    text-align: center; min-width: 76px;
+    backdrop-filter: blur(8px);
+}
+.logo-tool-icon .icon { font-size: 1.5rem; margin-bottom: 4px; }
+.logo-tool-icon .lbl { font-size: 0.66rem; color: #475569; font-weight: 600; }
+.logo-banner {
+    background: linear-gradient(90deg, #0891b2, #10b981);
+    border-radius: 100px; padding: 8px 24px;
+    font-size: 0.76rem; font-weight: 700; color: white;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    display: inline-block;
+    box-shadow: 0 4px 16px rgba(16,185,129,0.2);
+}
+
+/* ── SECTION ── */
+.section { padding: 96px 80px; }
+.section-alt { background: rgba(8,15,30,0.6); }
+.section-eyebrow {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 3.5px;
+    text-transform: uppercase; margin-bottom: 14px;
+}
+.section-h2 {
+    font-size: 2.6rem; font-weight: 900; color: #f1f5f9;
+    letter-spacing: -1px; line-height: 1.15; margin-bottom: 18px;
+}
+.section-lead { color: #475569; font-size: 1rem; line-height: 1.8; max-width: 580px; }
+.divider-line { border: none; border-top: 1px solid rgba(255,255,255,0.04); }
+
+/* ── ABOUT STATS ── */
+.about-stat-num { font-size: 2.2rem; font-weight: 900; line-height: 1; }
+.about-stat-lbl { font-size: 0.78rem; color: #475569; margin-top: 5px; letter-spacing: 0.3px; }
+
+/* ── PHOTO MODERNE ── */
+.photo-modern-wrap {
+    position: relative; display: inline-block; width: 100%;
+}
+.photo-modern-glow {
+    position: absolute; inset: -3px;
+    background: linear-gradient(135deg, #10b981 0%, #3b82f6 50%, #8b5cf6 100%);
+    border-radius: 26px; z-index: 0;
+    opacity: 0.7; filter: blur(0px);
+}
+.photo-modern-inner {
+    position: relative; z-index: 1;
+    border-radius: 24px; overflow: hidden;
+    background: #0d1829;
+}
+.photo-modern-inner img {
+    width: 100%; display: block;
+    border-radius: 24px 24px 0 0;
+}
+.photo-modern-caption {
+    background: linear-gradient(135deg, #071628, #0d1829);
+    padding: 20px 22px; border-radius: 0 0 24px 24px;
+    border-top: 1px solid rgba(16,185,129,0.1);
+}
+.photo-floating-badge {
+    position: absolute; top: 16px; right: 16px; z-index: 2;
+    background: rgba(16,185,129,0.15);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(16,185,129,0.3);
+    color: #10b981; border-radius: 100px;
+    padding: 5px 14px; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+}
+
+/* ── CARDS GLASSMORPHISM ── */
+.glass-card {
+    background: rgba(13,24,41,0.7);
+    backdrop-filter: blur(16px) saturate(150%);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px; padding: 28px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.04);
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+.glass-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(16,185,129,0.2);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(16,185,129,0.1);
+}
+
+/* ── ROADMAP CARDS ── */
+.rm-card {
+    background: rgba(13,24,41,0.8);
+    backdrop-filter: blur(12px);
+    border-radius: 18px; padding: 24px;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+}
+.rm-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+}
+.rm-icon-wrap {
+    width: 50px; height: 50px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; margin-bottom: 14px;
+}
+.rm-card-title { font-size: 0.92rem; font-weight: 700; color: #f1f5f9; margin-bottom: 6px; }
+.rm-card-desc { font-size: 0.78rem; color: #475569; line-height: 1.65; margin-bottom: 14px; }
+.rm-badge { display: inline-block; font-size: 0.68rem; font-weight: 700; border-radius: 6px; padding: 3px 10px; }
+.rm-link { display: block; margin-top: 14px; font-size: 0.76rem; font-weight: 600; }
+.rm-category-label {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 2.5px;
+    text-transform: uppercase; margin-bottom: 24px;
+    padding: 7px 16px; border-radius: 100px; display: inline-block;
+}
+
+/* ── PUBLICATIONS ── */
+.pub-card {
+    background: #0d1829; border-radius: 14px; padding: 24px 28px;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-left: 4px solid;
+    margin-bottom: 16px;
+}
+.pub-type {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 8px;
+}
+.pub-title { font-size: 0.97rem; font-weight: 700; color: #f1f5f9; line-height: 1.5; margin-bottom: 6px; }
+.pub-meta { font-size: 0.8rem; color: #475569; margin-bottom: 10px; }
+.pub-abstract { font-size: 0.83rem; color: #64748b; line-height: 1.65; margin-bottom: 12px; }
+.pub-link {
+    font-size: 0.8rem; font-weight: 600;
+    padding: 5px 14px; border-radius: 6px;
+    border: 1px solid;
+}
+
+/* ── TEAM ── */
+.team-card {
+    background: linear-gradient(135deg, #0d1f3c, #0a1628);
+    border-radius: 24px; padding: 40px;
+    border: 1px solid rgba(16,185,129,0.2);
+    text-align: center;
+}
+.team-name { font-size: 1.6rem; font-weight: 900; color: #f1f5f9; margin-bottom: 6px; }
+.team-role { color: #10b981; font-size: 0.95rem; margin-bottom: 16px; }
+.team-bio { color: #64748b; font-size: 0.9rem; line-height: 1.75; margin-bottom: 24px; }
+.team-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.team-link {
+    border: 1px solid rgba(255,255,255,0.1); color: #94a3b8;
+    border-radius: 8px; padding: 8px 20px;
+    font-size: 0.83rem; font-weight: 600;
+    transition: all 0.2s;
+}
+
+/* ── CONTACT ── */
+.contact-box {
+    background: #0d1829; border-radius: 16px; padding: 28px 32px;
+    border: 1px solid rgba(255,255,255,0.07);
+    display: flex; align-items: flex-start; gap: 18px;
+}
+.contact-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; flex-shrink: 0;
+}
+.contact-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: #475569; margin-bottom: 4px; }
+.contact-value { font-size: 0.95rem; font-weight: 600; color: #f1f5f9; }
+.contact-sub { font-size: 0.8rem; color: #64748b; margin-top: 2px; }
+
+/* ── LEGAL ── */
+.legal-section { background: #04080f; padding: 64px 80px; }
+.legal-card {
+    background: #080f1e; border-radius: 14px; padding: 28px 32px;
+    border: 1px solid rgba(255,255,255,0.05); height: 100%;
+}
+.legal-title { font-size: 0.9rem; font-weight: 700; color: #94a3b8; margin-bottom: 12px; }
+.legal-text { font-size: 0.82rem; color: #475569; line-height: 1.7; }
+
+/* ── FOOTER ── */
+.footer {
+    background: #04080f;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 32px 80px;
+    display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 16px;
+}
+.footer-brand { font-size: 1rem; font-weight: 800; color: #334155; }
+.footer-brand span { color: #10b981; }
+.footer-copy { font-size: 0.78rem; color: #1e293b; }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-size: 0.78rem; color: #1e293b; }
+</style>
+""", unsafe_allow_html=True)
+
+# ─────────────────────────────────────────────────────────────────
+# NAV
+# ─────────────────────────────────────────────────────────────────
+st.markdown(f"""
+<div class="nav">
+  <div class="nav-logo">
+    <!-- Icône croix médicale + cerveau -->
+    <div style="width:36px;height:36px;position:relative;flex-shrink:0">
+      <div style="position:absolute;inset:0;
+           background:linear-gradient(135deg,#10b981,#3b82f6);
+           border-radius:10px;
+           clip-path:polygon(33% 0%,67% 0%,67% 33%,100% 33%,100% 67%,67% 67%,67% 100%,33% 100%,33% 67%,0% 67%,0% 33%,33% 33%)">
+      </div>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;
+           justify-content:center;font-size:1.05rem;line-height:1">🧠</div>
+    </div>
+    <div class="nav-brand">MedFlow&nbsp;<span>AI</span></div>
+    <div style="font-size:0.62rem;font-weight:600;color:#1e4d3a;
+         background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.18);
+         border-radius:6px;padding:2px 8px;letter-spacing:1.5px;text-transform:uppercase;
+         margin-left:4px">v2.0</div>
+  </div>
+  <div class="nav-links">
+    <a href="#about">À propos</a>
+    <a href="#roadmap">Projets</a>
+    <a href="#publications">Publications</a>
+    <a href="#equipe">Équipe</a>
+    <a href="#contact">Contact</a>
+    <a href="#legal">Mentions légales</a>
+  </div>
+  <a href="https://buy.stripe.com/9B63cvb3G8kZ5cGfHwb3q01" target="_blank" class="nav-cta">Accès complet — 9€/mois</a>
+</div>
+""", unsafe_allow_html=True)
+
+# ─────────────────────────────────────────────────────────────────
+# HERO
+# ─────────────────────────────────────────────────────────────────
+col_hero_text, col_hero_logo = st.columns([3, 2], gap="large")
+
+with col_hero_text:
+    st.markdown("""
+    <div class="hero" style="border-radius:0;border-right:1px solid rgba(255,255,255,0.04)">
+      <div class="hero-eyebrow">🔬 Recherche &amp; Clinique</div>
+      <div class="hero-title">
+        L'IA au service<br>
+        des <span class="accent">Médecins</span><br>
+        &amp; <span class="accent2">Chercheurs</span>
+      </div>
+      <div class="hero-sub">
+        Des outils d'intelligence artificielle conçus par un chercheur en bioinformatique médicale —
+        pour simplifier la prise de décision clinique, l'analyse multi-omique et la recherche translationnelle.
+        Entièrement en français.
+      </div>
+      <div class="hero-tags">
+        <span class="hero-tag">🤖 Claude AI</span>
+        <span class="hero-tag">🧬 Multi-omique</span>
+        <span class="hero-tag">📊 7 outils déployés</span>
+        <span class="hero-tag">📚 PRISMA · Preprints 2026</span>
+        <span class="hero-tag">🇫🇷 100 % français</span>
+        <span class="hero-tag">🔓 Open Source</span>
+      </div>
+      <div class="hero-btns">
+        <a href="https://buy.stripe.com/9B63cvb3G8kZ5cGfHwb3q01" target="_blank" class="btn-hero-primary">
+          Commencer — 9€/mois
+        </a>
+        <a href="https://cardiac-qol-ai.streamlit.app" target="_blank" class="btn-hero-secondary">
+          Essayer gratuitement →
+        </a>
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col_hero_logo:
+    st.markdown("""
+    <div style="background:#060d1a;padding:60px 40px;height:100%;
+                display:flex;align-items:center;justify-content:center">
+      <div class="logo-box">
+        <div style="margin:0 auto 18px;width:90px;height:90px;position:relative">
+          <!-- Croix médicale -->
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+               width:90px;height:90px;
+               background:linear-gradient(135deg,#10b981,#3b82f6);
+               clip-path:polygon(33% 0%,67% 0%,67% 33%,100% 33%,100% 67%,67% 67%,67% 100%,33% 100%,33% 67%,0% 67%,0% 33%,33% 33%);"></div>
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+               font-size:1.8rem;z-index:2">🧠</div>
+        </div>
+        <div class="logo-title-big">MedFlow <span>AI</span></div>
+        <div class="logo-tagline">L'IA pour les Médecins &amp; Chercheurs</div>
+        <div class="logo-tools-row">
+          <div class="logo-tool-icon">
+            <div class="icon">📊</div>
+            <div class="lbl">ClinIA Scores</div>
+          </div>
+          <div class="logo-tool-icon">
+            <div class="icon">📝</div>
+            <div class="lbl">ClinIA CR</div>
+          </div>
+          <div class="logo-tool-icon">
+            <div class="icon">🧬</div>
+            <div class="lbl">MYOomics</div>
+          </div>
+          <div class="logo-tool-icon">
+            <div class="icon">🦠</div>
+            <div class="lbl">Microbiome</div>
+          </div>
+        </div>
+        <div class="logo-banner">Recherche &amp; Clinique</div>
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<hr class='divider-line'>", unsafe_allow_html=True)
+
+# ─────────────────────────────────────────────────────────────────
+# ABOUT — Mission + Photo fondateur
+# ─────────────────────────────────────────────────────────────────
+st.markdown("<div id='about'></div>", unsafe_allow_html=True)
+
+# ── PHOTO src inline — blocs pré-construits pour éviter les conditionnels dans f-string ──
+_photo_src = f"data:image/jpeg;base64,{_PHOTO_B64}" if _PHOTO_B64 else ""
+
+if _photo_src:
+    _photo_card_about = f"""
+    <div style="text-align:center">
+      <div style="position:relative;display:inline-block">
+        <!-- Pill gradient border -->
+        <div style="border-radius:999px;
+             background:linear-gradient(160deg,#10b981 0%,#3b82f6 50%,#8b5cf6 100%);
+             padding:3px;
+             box-shadow:0 0 48px rgba(16,185,129,0.18),0 24px 64px rgba(0,0,0,0.55)">
+          <div style="border-radius:999px;overflow:hidden;background:#03080f">
+            <img src="{_photo_src}" style="width:260px;display:block;
+                 height:340px;object-fit:cover;object-position:50% 18%">
+          </div>
+        </div>
+        <!-- Badge Fondateur centré en haut -->
+        <div style="position:absolute;top:18px;left:50%;transform:translateX(-50%);
+             background:rgba(3,8,15,0.88);backdrop-filter:blur(16px);
+             border:1px solid rgba(16,185,129,0.45);color:#10b981;
+             border-radius:100px;padding:5px 16px;white-space:nowrap;
+             font-size:0.67rem;font-weight:700;letter-spacing:2px;text-transform:uppercase">
+          ● Fondateur &amp; CEO
+        </div>
+      </div>
+      <!-- Nom & titre sous la photo -->
+      <div style="margin-top:18px">
+        <div style="font-size:1rem;font-weight:800;color:#f1f5f9;letter-spacing:-0.3px">
+          Dr. Mamadou Lamine TALL
+        </div>
+        <div style="font-size:0.76rem;font-weight:600;color:#34d399;margin-top:5px">
+          PhD Bioinformatique · Aix-Marseille 2020
+        </div>
+      </div>
+    </div>"""
+    _photo_card_team = f"""
+    <div style="text-align:center">
+      <div style="position:relative;display:inline-block">
+        <!-- Pill gradient border amber/red/violet -->
+        <div style="border-radius:999px;
+             background:linear-gradient(160deg,#f59e0b 0%,#ef4444 50%,#8b5cf6 100%);
+             padding:3px;
+             box-shadow:0 0 40px rgba(245,158,11,0.15),0 20px 60px rgba(0,0,0,0.5)">
+          <div style="border-radius:999px;overflow:hidden;background:#03080f">
+            <img src="{_photo_src}" style="width:240px;display:block;
+                 height:316px;object-fit:cover;object-position:50% 18%">
+          </div>
+        </div>
+      </div>
+      <!-- Nom & titre sous la photo -->
+      <div style="margin-top:16px">
+        <div style="font-size:0.95rem;font-weight:800;color:#f1f5f9">Dr. Mamadou Lamine TALL</div>
+        <div style="font-size:0.72rem;color:#f59e0b;margin-top:4px;font-weight:700;letter-spacing:0.8px">
+          PhD · Aix-Marseille · 2020
+        </div>
+      </div>
+    </div>"""
+else:
+    _fallback = '<div style="height:380px;background:linear-gradient(135deg,#071628,#0d1829);display:flex;align-items:center;justify-content:center;font-size:5rem">👤</div>'
+    _photo_card_about = _fallback
+    _photo_card_team  = _fallback
+
+st.markdown("""
+<div style="padding:56px 0 0;background:linear-gradient(180deg,#03080f 0%,#060d1a 100%)">
+</div>
+""", unsafe_allow_html=True)
+
+col_about_photo, col_about_text = st.columns([1, 2], gap="large")
+
+with col_about_photo:
+    st.markdown(f"""
+    <div style="padding:0 0 0 40px">
+      {_photo_card_about}
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px">
+        <div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.12);
+             border-radius:14px;padding:14px 16px;text-align:center">
+          <div style="font-size:1.6rem;font-weight:900;color:#10b981;line-height:1">7</div>
+          <div style="font-size:0.7rem;color:#475569;margin-top:3px">Outils déployés</div>
+        </div>
+        <div style="background:rgba(59,130,246,0.06);border:1px solid rgba(59,130,246,0.12);
+             border-radius:14px;padding:14px 16px;text-align:center">
+          <div style="font-size:1.6rem;font-weight:900;color:#3b82f6;line-height:1">31+</div>
+          <div style="font-size:0.7rem;color:#475569;margin-top:3px">Publications</div>
+        </div>
+        <div style="background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.12);
+             border-radius:14px;padding:14px 16px;text-align:center">
+          <div style="font-size:1.6rem;font-weight:900;color:#8b5cf6;line-height:1">5 800+</div>
+          <div style="font-size:0.7rem;color:#475569;margin-top:3px">Échantillons</div>
+        </div>
+        <div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.12);
+             border-radius:14px;padding:14px 16px;text-align:center">
+          <div style="font-size:1.6rem;font-weight:900;color:#f59e0b;line-height:1">248+</div>
+          <div style="font-size:0.7rem;color:#475569;margin-top:3px">Citations</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
+        <a href="https://github.com/mamadoulaminetall" target="_blank"
+           style="flex:1;text-align:center;background:rgba(255,255,255,0.04);
+           border:1px solid rgba(255,255,255,0.07);color:#64748b;
+           border-radius:10px;padding:8px 12px;font-size:0.76rem;font-weight:600">GitHub ↗</a>
+        <a href="https://scholar.google.com/citations?user=qJaCV7MAAAAJ&hl=fr" target="_blank"
+           style="flex:1;text-align:center;background:rgba(255,255,255,0.04);
+           border:1px solid rgba(255,255,255,0.07);color:#64748b;
+           border-radius:10px;padding:8px 12px;font-size:0.76rem;font-weight:600">Scholar ↗</a>
+        <a href="https://theses.fr/2020AIXM0426" target="_blank"
+           style="flex:1;text-align:center;background:rgba(255,255,255,0.04);
+           border:1px solid rgba(255,255,255,0.07);color:#64748b;
+           border-radius:10px;padding:8px 12px;font-size:0.76rem;font-weight:600">Thèse ↗</a>
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col_about_text:
+    st.markdown("""
+    <div style="padding:0 40px 56px 0">
+      <div style="font-size:0.7rem;font-weight:700;letter-spacing:3.5px;
+           text-transform:uppercase;color:#10b981;margin-bottom:14px">
+        À propos · Mission
+      </div>
+      <div style="font-size:2.8rem;font-weight:900;color:#f1f5f9;
+           letter-spacing:-1.2px;line-height:1.1;margin-bottom:24px">
+        Pourquoi<br>
+        <span style="background:linear-gradient(135deg,#10b981,#34d399);
+              -webkit-background-clip:text;-webkit-text-fill-color:transparent">
+          MedFlow AI ?
+        </span>
+      </div>
+      <div style="color:#64748b;font-size:1rem;line-height:1.85;margin-bottom:36px">
+        MedFlow AI est né d'un constat simple :
+        <strong style="color:#cbd5e1">les cliniciens manquent d'outils IA accessibles, validés et en français</strong>
+        — des outils qui s'intègrent directement dans leur pratique, sans barrière technique,
+        sans jargon informatique, directement au chevet du patient.
+        <br><br>
+        Fondé par un chercheur en bioinformatique médicale, MedFlow AI réunit deux convictions :
+        les données cliniques et biologiques contiennent une richesse sous-exploitée,
+        et l'IA peut aider les cliniciens à en extraire la valeur — en moins de 5 minutes,
+        en open source, et toujours en français.
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:36px">
+        <div style="background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.12);
+             border-radius:16px;padding:20px">
+          <div style="width:36px;height:36px;background:rgba(16,185,129,0.12);border-radius:10px;
+               display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:12px">🎯</div>
+          <div style="font-weight:700;color:#e2e8f0;font-size:0.88rem;margin-bottom:6px">Aide à la décision</div>
+          <div style="color:#475569;font-size:0.78rem;line-height:1.6">Calcul, analyse et alerte au chevet du patient.</div>
+        </div>
+        <div style="background:rgba(59,130,246,0.05);border:1px solid rgba(59,130,246,0.12);
+             border-radius:16px;padding:20px">
+          <div style="width:36px;height:36px;background:rgba(59,130,246,0.12);border-radius:10px;
+               display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:12px">📊</div>
+          <div style="font-weight:700;color:#e2e8f0;font-size:0.88rem;margin-bottom:6px">Evidence-based</div>
+          <div style="color:#475569;font-size:0.78rem;line-height:1.6">Méta-analyses PRISMA et cohortes validées.</div>
+        </div>
+        <div style="background:rgba(139,92,246,0.05);border:1px solid rgba(139,92,246,0.12);
+             border-radius:16px;padding:20px">
+          <div style="width:36px;height:36px;background:rgba(139,92,246,0.12);border-radius:10px;
+               display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:12px">🔓</div>
+          <div style="font-weight:700;color:#e2e8f0;font-size:0.88rem;margin-bottom:6px">Open Source</div>
+          <div style="color:#475569;font-size:0.78rem;line-height:1.6">Code public GitHub. Gratuit ou 9€/mois.</div>
+        </div>
+      </div>
+      <div style="background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.12);
+           border-radius:16px;padding:22px 24px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+          <div style="width:32px;height:32px;background:rgba(245,158,11,0.1);border-radius:8px;
+               display:flex;align-items:center;justify-content:center;font-size:1rem">🎓</div>
+          <div style="font-weight:700;color:#f59e0b;font-size:0.82rem;letter-spacing:0.5px">Thèse de Doctorat · 2020</div>
+        </div>
+        <div style="font-style:italic;color:#cbd5e1;font-size:0.9rem;line-height:1.6;margin-bottom:8px">
+          "Études bioinformatiques et biostatistiques des structures mosaïques des génomes microbiens"
+        </div>
+        <div style="color:#475569;font-size:0.8rem">
+          Aix-Marseille Université · Directeur : Pr. Anthony Levasseur
+          · Mots-clés : mosaïcisme génomique, taxonogénomique, phylogénomique
+        </div>
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<hr class='divider-line'>", unsafe_allow_html=True)
+
+# ─────────────────────────────────────────────────────────────────
+# ROADMAP — Tous les projets GitHub interconnectés
+# ─────────────────────────────────────────────────────────────────
+st.markdown("<div id='roadmap'></div>", unsafe_allow_html=True)
+st.markdown("""
+<div class="section section-alt">
+  <div style="text-align:center;margin-bottom:56px">
+    <div class="section-eyebrow" style="color:#3b82f6;text-align:center">GitHub · Roadmap</div>
+    <div class="section-h2" style="text-align:center">Tous les projets</div>
+    <div style="color:#475569;font-size:0.95rem;max-width:580px;margin:0 auto;line-height:1.7">
+      De la recherche fondamentale aux outils cliniques déployés —
+      chaque projet est open source et interconnecté dans l'écosystème MedFlow AI.
+    </div>
+  </div>
+""", unsafe_allow_html=True)
+
+# ── DIAGRAMME MERMAID ROADMAP
+_node = lambda w, text: f"<div style='min-width:{w}px;padding:5px 10px;text-align:center;line-height:1.5'>{text}</div>"
+
+_A = _node(200, "🎓 <b>Thèse · 2020</b><br/>Bioinformatique · Aix-Marseille")
+_B = _node(190, "🦠 <b>Microbiome</b><br/>Cancer · 824 échantillons")
+_C = _node(200, "💓 <b>Réinnervation</b><br/>VFC/HRV · Preprint 2026")
+_D = _node(190, "🧬 <b>MYOomics</b><br/>RNA-seq · scRNA-seq · Myopathies")
+_E = _node(190, "📊 <b>Scores Cliniques</b><br/>15 scores validés")
+_F = _node(190, "🫀 <b>QoL Cardiac</b><br/>Qualité de vie · 600 patients")
+_G = _node(190, "📝 <b>Générateur CR</b><br/>Compte-rendu IA · Export PDF")
+_H = _node(220, "🚀 <b>MedFlow AI</b><br/>Plateforme SaaS · 7 outils déployés")
+_I = _node(210, "📈 <b>Vision 2026+</b><br/>PhyMedExp · MYOccitanie · Expansion")
+
+components.html(f"""
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * {{ box-sizing: border-box; margin: 0; padding: 0; }}
+  html, body {{ width: 100%; background: transparent; overflow-x: hidden; }}
+  body {{ font-family: 'Inter', -apple-system, sans-serif; padding: 4px 0 8px; }}
+  #diagram {{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }}
+  #diagram svg {{
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }}
+</style>
+</head>
+<body>
+<div id="diagram" class="mermaid">
+%%{{init: {{
+  "theme": "base",
+  "themeVariables": {{
+    "background": "#060d1a",
+    "primaryColor": "#0d1f3c",
+    "primaryTextColor": "#f1f5f9",
+    "primaryBorderColor": "#10b981",
+    "lineColor": "#10b981",
+    "secondaryColor": "#071628",
+    "tertiaryColor": "#0a1628",
+    "nodeTextColor": "#f1f5f9",
+    "edgeLabelBackground": "#060d1a",
+    "fontFamily": "Inter, -apple-system, sans-serif",
+    "fontSize": "13px"
+  }},
+  "flowchart": {{
+    "htmlLabels": true,
+    "curve": "basis",
+    "padding": 20,
+    "nodeSpacing": 44,
+    "rankSpacing": 68,
+    "useMaxWidth": true
+  }}
+}}}}%%
+flowchart TD
+    A(["{_A}"])
+    A --> B(["{_B}"])
+    A --> C(["{_C}"])
+    A --> D(["{_D}"])
+    B --> E(["{_E}"])
+    C --> F(["{_F}"])
+    D --> G(["{_G}"])
+    E --> H(["{_H}"])
+    F --> H
+    G --> H
+    H --> I(["{_I}"])
+
+    style A fill:#0d1f3c,stroke:#f59e0b,stroke-width:2.5px,color:#fef3c7
+    style B fill:#071e14,stroke:#10b981,stroke-width:2px,color:#d1fae5
+    style C fill:#071428,stroke:#3b82f6,stroke-width:2px,color:#dbeafe
+    style D fill:#120d2a,stroke:#8b5cf6,stroke-width:2px,color:#ede9fe
+    style E fill:#071428,stroke:#60a5fa,stroke-width:1.5px,color:#bfdbfe
+    style F fill:#1a0a0a,stroke:#ef4444,stroke-width:1.5px,color:#fecaca
+    style G fill:#071e24,stroke:#06b6d4,stroke-width:1.5px,color:#cffafe
+    style H fill:#052e18,stroke:#10b981,stroke-width:3.5px,color:#ecfdf5
+    style I fill:#12092a,stroke:#8b5cf6,stroke-width:2.5px,color:#ede9fe
+</div>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({{ startOnLoad: true, securityLevel: 'loose' }});
+  mermaid.run().then(() => {{
+    const svg = document.querySelector('#diagram svg');
+    if (svg) {{
+      svg.removeAttribute('width');
+      svg.removeAttribute('height');
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      svg.style.width = '100%';
+      svg.style.height = 'auto';
+    }}
+  }});
+</script>
+</body>
+</html>
+""", height=780, scrolling=False)
+
+# ── OUTILS CLINIQUES DÉPLOYÉS
+st.markdown("""
+  <div style="margin-bottom:32px">
+    <span class="rm-category-label"
+          style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25);color:#10b981">
+      ⚡ Outils Cliniques Déployés
+    </span>
+  </div>
+""", unsafe_allow_html=True)
+
+clinical_tools = [
+    {
+        "icon": "🫀", "color": "#ef4444",
+        "title": "QoL Cardiac",
+        "desc": "Qualité de vie patient cardiaque. 4 questionnaires, percentiles sur 600 patients.",
+        "badge": "Gratuit", "badge_color": "rgba(16,185,129,0.15)", "badge_text": "#10b981",
+        "url": "https://cardiac-qol-ai.streamlit.app",
+        "github": "https://github.com/mamadoulaminetall/cardiac-qol-ai",
+    },
+    {
+        "icon": "📊", "color": "#3b82f6",
+        "title": "Scores Cliniques",
+        "desc": "15 scores validés : CHA₂DS₂-VASc, HEART, qSOFA, Glasgow, NIHSS...",
+        "badge": "Gratuit", "badge_color": "rgba(16,185,129,0.15)", "badge_text": "#10b981",
+        "url": "https://clinia-scores.streamlit.app",
+        "github": "https://github.com/mamadoulaminetall/clinia-scores",
+    },
+    {
+        "icon": "📝", "color": "#06b6d4",
+        "title": "Générateur CR IA",
+        "desc": "Données cliniques → compte-rendu structuré en français → Export PDF.",
+        "badge": "9€/mois", "badge_color": "rgba(59,130,246,0.12)", "badge_text": "#60a5fa",
+        "url": "https://clinia-cr.streamlit.app",
+        "github": "https://github.com/mamadoulaminetall/clinia-cr",
+    },
+    {
+        "icon": "📚", "color": "#8b5cf6",
+        "title": "Revue Littérature IA",
+        "desc": "PubMed + Claude → synthèse evidence-based avec grade de recommandation.",
+        "badge": "9€/mois", "badge_color": "rgba(59,130,246,0.12)", "badge_text": "#60a5fa",
+        "url": "https://clinia-review.streamlit.app",
+        "github": "https://github.com/mamadoulaminetall/clinia-review",
+    },
+    {
+        "icon": "📈", "color": "#10b981",
+        "title": "Biostatistiques",
+        "desc": "Upload CSV → t-test, ANOVA, Kaplan-Meier → graphiques publication-ready.",
+        "badge": "9€/mois", "badge_color": "rgba(59,130,246,0.12)", "badge_text": "#60a5fa",
+        "url": "https://clinia-biostat.streamlit.app",
+        "github": "https://github.com/mamadoulaminetall/clinia-biostat",
+    },
+    {
+        "icon": "💓", "color": "#3b82f6",
+        "title": "Réinnervation IA",
+        "desc": "IA prédictive VFC/HRV post-transplantation cardiaque. Revue PRISMA 2026.",
+        "badge": "Gratuit", "badge_color": "rgba(16,185,129,0.15)", "badge_text": "#10b981",
+        "url": "https://reinnervationaiapp.streamlit.app",
+        "github": "https://github.com/mamadoulaminetall/reinnervation_ai_app",
+    },
+    {
+        "icon": "🧬", "color": "#8b5cf6",
+        "title": "MYOomics",
+        "desc": "RNA-seq, scRNA-seq, ML pour biomarqueurs diagnostiques des myopathies.",
+        "badge": "Gratuit", "badge_color": "rgba(16,185,129,0.15)", "badge_text": "#10b981",
+        "url": "https://myoomics.streamlit.app",
+        "github": "https://github.com/mamadoulaminetall/myoomics",
+    },
+]
+
+cols_ct = st.columns(4, gap="medium")
+for i, t in enumerate(clinical_tools):
+    with cols_ct[i % 4]:
+        st.markdown(f"""
+        <div class="rm-card" style="border-color:rgba({
+            '239,68,68' if t['color']=='#ef4444' else
+            '59,130,246' if t['color']=='#3b82f6' else
+            '6,182,212' if t['color']=='#06b6d4' else
+            '139,92,246' if t['color']=='#8b5cf6' else
+            '16,185,129'
+        },0.25)">
+          <div class="rm-icon-wrap" style="background:{t['color']}18">{t['icon']}</div>
+          <div class="rm-card-title">{t['title']}</div>
+          <div class="rm-card-desc">{t['desc']}</div>
+          <span class="rm-badge" style="background:{t['badge_color']};color:{t['badge_text']}">{t['badge']}</span>
+          <div style="display:flex;gap:8px;margin-top:14px">
+            <a href="{t['url']}" target="_blank" class="rm-link"
+               style="background:{t['color']};color:white;padding:7px 14px;
+               border-radius:7px;font-size:0.76rem;font-weight:700">
+               Ouvrir ↗
+            </a>
+            <a href="{t['github']}" target="_blank" class="rm-link"
+               style="border:1px solid rgba(255,255,255,0.08);color:#64748b;
+               padding:7px 14px;border-radius:7px;font-size:0.76rem">
+               GitHub
+            </a>
+          </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+# ── PROJETS RECHERCHE
+st.markdown("<div style='height:48px'></div>", unsafe_allow_html=True)
+st.markdown("""
+  <div style="margin-bottom:32px">
+    <span class="rm-category-label"
+          style="background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.25);color:#a78bfa">
+      🔬 Projets de Recherche GitHub
+    </span>
+  </div>
+""", unsafe_allow_html=True)
+
+research_tools = [
+    {
+        "icon": "🦠", "color": "#10b981",
+        "title": "Microbiome & Cancer",
+        "desc": "Diagnostic précoce cancer par microbiome. 824 échantillons, ML + 16S rRNA.",
+        "badge": "GitHub", "badge_color": "rgba(16,185,129,0.12)", "badge_text": "#34d399",
+        "github": "https://github.com/mamadoulaminetall/microbiome_diagnostic_cancer_precoce",
+    },
+    {
+        "icon": "🧩", "color": "#f59e0b",
+        "title": "CNV Detection",
+        "desc": "Pipeline détection CNV depuis VCF. Nextflow + Docker + visualisation interactive.",
+        "badge": "GitHub", "badge_color": "rgba(245,158,11,0.12)", "badge_text": "#fbbf24",
+        "github": "https://github.com/mamadoulaminetall/D-tection-de-CNV-et-Visualisation-Interactive-",
+    },
+    {
+        "icon": "❤️", "color": "#ef4444",
+        "title": "QoL Cardiac Research",
+        "desc": "Méta-analyse PRISMA 15 études, 600 patients. Référence de l'outil QoL Cardiac.",
+        "badge": "Preprint", "badge_color": "rgba(239,68,68,0.12)", "badge_text": "#f87171",
+        "github": "https://github.com/mamadoulaminetall/cardiac-qol-ai",
+    },
+    {
+        "icon": "🫀", "color": "#3b82f6",
+        "title": "Réinnervation Cardiaque",
+        "desc": "Revue systématique VFC + plateforme IA prédictive. Preprint en soumission.",
+        "badge": "Preprint 2026", "badge_color": "rgba(59,130,246,0.12)", "badge_text": "#60a5fa",
+        "github": "https://github.com/mamadoulaminetall/reinnervation_ai_app",
+    },
+    {
+        "icon": "🧬", "color": "#8b5cf6",
+        "title": "MYOomics Project",
+        "desc": "Méta-analyse multi-omique myopathies. RNA-seq + scRNA-seq + ML. Preprint en soumission.",
+        "badge": "Preprint 2026", "badge_color": "rgba(139,92,246,0.12)", "badge_text": "#a78bfa",
+        "github": "https://github.com/mamadoulaminetall/MYOomics_Project",
+    },
+]
+
+cols_rt = st.columns(3, gap="medium")
+for i, t in enumerate(research_tools):
+    with cols_rt[i % 3]:
+        st.markdown(f"""
+        <div class="rm-card" style="border-color:rgba(139,92,246,0.15)">
+          <div class="rm-icon-wrap" style="background:{t['color']}18">{t['icon']}</div>
+          <div class="rm-card-title">{t['title']}</div>
+          <div class="rm-card-desc">{t['desc']}</div>
+          <span class="rm-badge" style="background:{t['badge_color']};color:{t['badge_text']}">{t['badge']}</span>
+          <div style="margin-top:14px">
+            <a href="{t['github']}" target="_blank" class="rm-link"
+               style="border:1px solid rgba(255,255,255,0.1);color:#94a3b8;
+               padding:7px 16px;border-radius:7px;font-size:0.78rem;font-weight:600">
+               Voir sur GitHub ↗
+            </a>
+          </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+st.markdown("</div>", unsafe_allow_html=True)
+st.markdown("<hr class='divider-line'>", unsafe_allow_html=True)
+
+# ─────────────────────────────────────────────────────────────────
+# PUBLICATIONS
+# ─────────────────────────────────────────────────────────────────
+st.markdown("<div id='publications'></div>", unsafe_allow_html=True)
+st.markdown("""
+<div class="section">
+  <div class="section-eyebrow" style="color:#8b5cf6">Publications · Preprints · Recherche</div>
+  <div class="section-h2">Travaux scientifiques</div>
+  <div class="section-lead" style="margin-bottom:48px">
+    Preprints, méta-analyses et revues systématiques publiées dans le cadre des projets MedFlow AI.
+  </div>
+""", unsafe_allow_html=True)
+
+publications = [
+    {
+        "color": "#f59e0b",
+        "type": "Thèse de Doctorat · Bioinformatique · Aix-Marseille Université",
+        "title": "Études bioinformatiques et biostatistiques des structures mosaïques des génomes microbiens",
+        "meta": "Dr. Mamadou Lamine TALL · Aix-Marseille Université · Soutenu le 27 novembre 2020 · Directeur : Pr. Anthony Levasseur",
+        "abstract": (
+            "Ce travail de thèse examine les structures mosaïques des génomes microbiens à l'aide "
+            "d'approches bioinformatiques et biostatistiques. Il évalue l'impact des transferts de séquences "
+            "sur la classification phylogénétique des micro-organismes et explore les corrélations statistiques "
+            "entre échanges de séquences et communautés microbiennes. Plusieurs génomes bactériens "
+            "nouvellement séquencés ont été analysés, démontrant la complexité de l'assignation taxonomique "
+            "à l'ère de la génomique comparative. Mots-clés : bioinformatique, mosaïcisme génomique, "
+            "taxonogénomique, biostatistiques."
+        ),
+        "tags": ["Mosaïcisme génomique", "Taxonogénomique", "Génomique comparative", "Biostatistiques", "Aix-Marseille", "2020"],
+        "url": "https://theses.fr/2020AIXM0426",
+        "url_label": "Theses.fr →",
+        "github": "https://github.com/mamadoulaminetall",
+    },
+    {
+        "color": "#3b82f6",
+        "type": "Preprint · Revue systématique · IA prédictive · 2026",
+        "title": "Réinnervation Autonome Cardiaque Post-transplantation : Revue Systématique et Modèle Prédictif IA basé sur la Variabilité de la Fréquence Cardiaque",
+        "meta": "Dr. Mamadou Lamine TALL · Preprint en soumission · 23 études incluses · N=1 247 patients",
+        "abstract": (
+            "Revue systématique PRISMA 2020 portant sur 23 études (1991–2024, N=1 247 transplantés cardiaques), "
+            "analysant la variabilité de la fréquence cardiaque (VFC/HRV) comme biomarqueur de la "
+            "réinnervation autonome post-transplantation. Développement d'une plateforme IA prédictive "
+            "basée sur Random Forest (AUC=0,961, précision=99,9 %) et SVM (AUC=1,000), stratifiant les patients "
+            "en 4 profils physiologiques selon SDNN, rMSSD, pNN50 et LF/HF. "
+            "Explainabilité via SHAP. Bases de données : PubMed, Scopus, Web of Science."
+        ),
+        "tags": ["VFC / HRV", "Transplantation cardiaque", "Random Forest AUC=0.961", "PRISMA 2020", "SDNN", "SHAP"],
+        "url": "https://github.com/mamadoulaminetall/reinnervation_ai_app",
+        "url_label": "GitHub →",
+        "github": "https://github.com/mamadoulaminetall/reinnervation_ai_app",
+    },
+    {
+        "color": "#8b5cf6",
+        "type": "Preprint · Méta-analyse multi-omique · Machine Learning · 2026",
+        "title": "Multi-Omics Profiling in Inherited Muscular Dystrophies: A Systematic Review of Transcriptomic, Epigenomic and Proteomic Studies",
+        "meta": "Dr. Mamadou Lamine TALL · Preprint en soumission · 67 études · N=4 213 échantillons",
+        "abstract": (
+            "Revue systématique et méta-analyse de 67 études (N=4 213 échantillons) intégrant "
+            "transcriptomique bulk (RNA-seq), single-cell (scRNA-seq), épigénomique et protéomique "
+            "pour identifier des biomarqueurs diagnostiques et pronostiques dans les dystrophies musculaires "
+            "héréditaires (DMD, LGMD, DM1, FSHD). Analyses DESeq2, GO/KEGG enrichment, CellChat "
+            "(communication intercellulaire), SHAP (ML explainability). Pipeline MYOomics développé "
+            "en SaaS. Candidature PhyMedExp / MYOccitanie (CDD sept 2026)."
+        ),
+        "tags": ["RNA-seq", "scRNA-seq", "DMD · LGMD · DM1 · FSHD", "DESeq2", "SHAP", "67 études · 4 213 samples"],
+        "url": "https://github.com/mamadoulaminetall/MYOomics_Project",
+        "url_label": "GitHub →",
+        "github": "https://github.com/mamadoulaminetall/MYOomics_Project",
+    },
+    {
+        "color": "#ef4444",
+        "type": "Méta-analyse · Cardiologie · PRISMA 2026",
+        "title": "Qualité de Vie chez le Patient Cardiaque en liste d'attente, sous LVAD et post-transplantation : Méta-analyse PRISMA",
+        "meta": "Dr. Mamadou Lamine TALL · MedFlow AI Research · 2026 · 15 études · N=600 patients",
+        "abstract": (
+            "Méta-analyse systématique de la qualité de vie (QdV) mesurée par KCCQ, SF-36 (PCS/MCS), "
+            "Minnesota Living with Heart Failure Questionnaire et EQ-5D chez trois populations : "
+            "patients en liste d'attente de greffe cardiaque (études : Grady 2004, Dew 2005, Kugler 2010/2013…), "
+            "sous assistance ventriculaire gauche LVAD (Slaughter NEJM 2009, Cowger JACC HF 2017, Rogers 2010…) "
+            "et post-transplantation (Evangelista Heart 2014…). Analyse des trajectoires temporelles T0–T5, "
+            "percentiles de référence et alerte si dégradation > 10 points. Base de l'outil QoL Cardiac."
+        ),
+        "tags": ["KCCQ", "SF-36 PCS/MCS", "LVAD", "Greffe cardiaque", "EQ-5D · Mn.LHFQ", "15 études · 600 patients"],
+        "url": "https://cardiac-qol-ai.streamlit.app",
+        "url_label": "Outil QoL Cardiac →",
+        "github": "https://github.com/mamadoulaminetall/cardiac-qol-ai",
+    },
+    {
+        "color": "#10b981",
+        "type": "Projet recherche · Microbiome · Oncologie · 2026",
+        "title": "Signatures du Microbiome Intestinal comme Biomarqueurs de Diagnostic Précoce dans les Cancers Colorectaux et Pancréatiques",
+        "meta": "Dr. Mamadou Lamine TALL · MedFlow AI Research · 2026 · 824 échantillons · 6 cohortes",
+        "abstract": (
+            "Méta-analyse multi-cohortes analysant les signatures microbiotiques (séquençage 16S rRNA, "
+            "métagénomique shotgun) associées aux cancers colorectaux et pancréatiques à stade précoce. "
+            "824 échantillons issus de 6 cohortes internationales. Modèles ML (Random Forest, XGBoost) "
+            "entraînés pour classification diagnostique précoce avec validation croisée. "
+            "Pipeline bioinformatique open source complet."
+        ),
+        "tags": ["Microbiome", "Cancer colorectal", "16S rRNA · métagénomique", "Random Forest · XGBoost", "6 cohortes · 824 échantillons"],
+        "url": "https://github.com/mamadoulaminetall/microbiome_diagnostic_cancer_precoce",
+        "url_label": "GitHub →",
+        "github": "https://github.com/mamadoulaminetall/microbiome_diagnostic_cancer_precoce",
+    },
+]
+
+for pub in publications:
+    tags_html = "".join(
+        f'<span style="background:#0f172a;color:#475569;border-radius:6px;'
+        f'padding:3px 10px;font-size:0.72rem;margin:2px;display:inline-block">{t}</span>'
+        for t in pub["tags"]
+    )
+    st.markdown(f"""
+    <div class="pub-card" style="border-color:{pub['color']}">
+      <div class="pub-type" style="color:{pub['color']}">{pub['type']}</div>
+      <div class="pub-title">{pub['title']}</div>
+      <div class="pub-meta">{pub['meta']}</div>
+      <div class="pub-abstract">{pub['abstract']}</div>
+      <div style="margin-bottom:14px">{tags_html}</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="{pub['url']}" target="_blank" class="pub-link"
+           style="color:{pub['color']};border-color:{pub['color']}44">
+           {pub['url_label']}
+        </a>
+        <a href="{pub['github']}" target="_blank" class="pub-link"
+           style="color:#475569;border-color:rgba(255,255,255,0.08)">
+           GitHub ↗
+        </a>
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+# ── PUBLICATIONS PEER-REVIEWED
+st.markdown("""
+<div style="margin-top:48px;padding-top:48px;border-top:1px solid rgba(255,255,255,0.05)">
+  <div style="display:flex;align-items:center;gap:16px;margin-bottom:32px">
+    <span style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);
+          color:#60a5fa;border-radius:8px;padding:5px 16px;font-size:0.75rem;font-weight:700;
+          letter-spacing:2px;text-transform:uppercase">
+      📄 Publications Peer-Reviewed · IHU Méditerranée Infection · Aix-Marseille
+    </span>
+    <span style="color:#334155;font-size:0.82rem">Google Scholar · ID : qJaCV7MAAAAJ</span>
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
+peer_reviewed = [
+    # ─ Tri par citations décroissantes ─
+    ("119", "#10b981", "Optimization and standardization of the culturomics technique for human microbiome exploration",
+     "A Diakite, G Dubourg, N Dione, P Afouda, S Bellali, II Ngom, C Valles, ML Tall et al.",
+     "Scientific Reports 10(1):9674", "2020",
+     "https://www.nature.com/articles/s41598-020-66509-3"),
+    ("31", "#3b82f6", "Adenovirus infections in African humans and wild non-human primates: great diversity and cross-species transmission",
+     "H Medkour, I Amona, J Akiana, B Davoust, I Bitam, A Levasseur, ML Tall et al.",
+     "Viruses 12(6):657", "2020",
+     "https://www.mdpi.com/1999-4915/12/6/657"),
+    ("15", "#3b82f6", "Enteroviruses from humans and great apes in the Republic of Congo: recombination within enterovirus C serotypes",
+     "I Amona, H Medkour, J Akiana, B Davoust, ML Tall, C Grimaldier, C Gazin et al.",
+     "Microorganisms 8(11):1779", "2020",
+     "https://www.mdpi.com/2076-2607/8/11/1779"),
+    ("13", "#8b5cf6", "Taxonogenomics description of Bacillus dakarensis sp. nov., Bacillus sinesaloumensis sp. nov. and Bacillus massiliogabonensis sp. nov.",
+     "M Sarr, CI Lo, ML Tall, A Fadlane, B Senghor, C Sokhna, D Raoult et al.",
+     "New Microbes and New Infections 37:100718", "2020",
+     "https://www.sciencedirect.com/science/article/pii/S2052297520300706"),
+    ("10", "#10b981", "Gut microbiota influences Plasmodium falciparum malaria susceptibility",
+     "A Kodio, D Coulibaly, S Doumbo, S Konaté, AK Koné, S Dama, ML Tall et al.",
+     "New Microbes and New Infections 65:101586", "2025",
+     "https://scholar.google.com/citations?user=qJaCV7MAAAAJ&hl=fr"),
+    ("10", "#8b5cf6", "Parabacteroides bouchesdurhonensis sp. nov., a new bacterium isolated from the stool of a healthy adult",
+     "EK Yimagou, N Dione, II Ngom, ML Tall, JP Baudoin, D Raoult, JYB Khalil",
+     "New Microbes and New Infections 34:100639", "2020",
+     "https://www.sciencedirect.com/science/article/pii/S2052297520300123"),
+    ("9", "#06b6d4", "Anaerococcus urinimassiliensis sp. nov., a new bacterium isolated from human urine",
+     "A Morand, ML Tall, E Kuete Yimagou, II Ngom, CI Lo, F Cornu et al.",
+     "Scientific Reports 11(1):2684", "2021",
+     "https://www.nature.com/articles/s41598-021-82173-1"),
+    ("9", "#8b5cf6", "Prevotella marseillensis sp. nov., a new bacterium isolated from a patient with recurrent Clostridium difficile infection",
+     "EK Yimagou, F Mekhalif, ML Tall, JP Baudoin, D Raoult, JYB Khalil",
+     "New Microbes and New Infections 32:100606", "2019",
+     "https://scholar.google.com/citations?user=qJaCV7MAAAAJ&hl=fr"),
+    ("9", "#8b5cf6", "Noncontiguous finished genome sequence and description of Raoultibacter massiliensis gen. nov., sp. nov. and Raoultibacter timonensis sp. nov",
+     "SI Traore, M Bilen, M Beye, A Diop, MDM Fonkou, ML Tall, C Michelle et al.",
+     "MicrobiologyOpen 8(6):e00758", "2019",
+     "https://scholar.google.com/citations?user=qJaCV7MAAAAJ&hl=fr"),
+    ("8", "#f59e0b", "Bartonella gabonensis sp. nov., a new bartonella species from savannah rodent Lophuromys sp. in Franceville, Gabon",
+     "JB Mangombi, N N'Dilimabaka, H Medkour, OL Banga, ML Tall et al.",
+     "New Microbes and New Infections 38:100796", "2020",
+     "https://scholar.google.com/citations?user=qJaCV7MAAAAJ&hl=fr"),
+    ("7", "#ef4444", "★ Anaerococcus marasmi sp. nov., a new bacterium isolated from human gut microbiota",
+     "ML Tall, TPT Pham, S Bellali, II Ngom, J Delerce, CI Lo, D Raoult et al.",
+     "New Microbes and New Infections 35:100655", "2020",
+     "https://www.sciencedirect.com/science/article/pii/S2052297520300391"),
+    ("7", "#8b5cf6", "Clostridium transplantifaecale sp. nov., a new bacterium isolated from patient with recurrent Clostridium difficile infection",
+     "EK Yimagou, ML Tall, JP Baudoin, D Raoult, JYB Khalil",
+     "New Microbes and New Infections 32:100598", "2019",
+     "https://scholar.google.com/citations?user=qJaCV7MAAAAJ&hl=fr"),
+    ("6", "#ef4444", "★ Description of Clostridium cagae sp. nov., Clostridium rectalis sp. nov. and Hathewaya massiliensis sp. nov.",
+     "ML Tall, CI Lo, EK Yimagou, S Ndongo, TPT Pham, D Raoult, PE Fournier et al.",
+     "New Microbes and New Infections 37:100719", "2020",
+     "https://www.sciencedirect.com/science/article/pii/S2052297520300718"),
+    ("6", "#ef4444", "★ Massilistercora timonensis gen. nov., sp. nov., a new bacterium isolated from the human microbiota",
+     "ML Tall, S Ndongo, II Ngom, J Delerce, S Khelaifia, D Raoult, PE Fournier et al.",
+     "New Microbes and New Infections 35:100664", "2020",
+     "https://www.sciencedirect.com/science/article/pii/S2052297520300482"),
+    ("6", "#8b5cf6", "Olsenella timonensis sp. nov., a new bacteria species isolated from the human gut microbiota",
+     "S Ndongo, ML Tall, II Ngom, J Delerce, A Levasseur, D Raoult et al.",
+     "New Microbes and New Infections 32:100610", "2019",
+     "https://scholar.google.com/citations?user=qJaCV7MAAAAJ&hl=fr"),
+    ("5", "#8b5cf6", "Fenollaria timonensis sp. nov., a New Bacterium Isolated from Healthy Human Fresh Stool",
+     "CI Lo, EHA Niang, M Sarr, G Durand, ML Tall, A Caputo, D Raoult et al.",
+     "Current Microbiology 77(11):3780-3786", "2020",
+     "https://scholar.google.com/citations?user=qJaCV7MAAAAJ&hl=fr"),
+    ("4", "#ef4444", "★ Massilimicrobiota timonensis gen. nov., sp. nov., a new bacterium isolated from the human gut microbiota",
+     "ML Tall, S Ndongo, II Ngom, J Delerce, S Khelaifia, D Raoult, PE Fournier et al.",
+     "New Microbes and New Infections 31:100574", "2019",
+     "https://www.sciencedirect.com/science/article/pii/S2052297519300642"),
+    ("3", "#f59e0b", "Resuscitating sleeping beauties: reviving a six-hundred-year-old amoeba and endosymbiont",
+     "H Issam, ML Tall, ML Bailly, P Colson, A Levasseur, D Raoult, BL Scola et al.",
+     "bioRxiv 2023.09.22.558946", "2023",
+     "https://www.biorxiv.org/content/10.1101/2023.09.22.558946"),
+    ("3", "#8b5cf6", "Konateibacter massiliensis gen. nov. sp. nov. and Paenibacillus faecalis sp. nov., Two New Species Isolated from the Stool Samples of Infants",
+     "M Sarr, ML Tall, M Ben Khedher, TPT Pham, B Mbaye, A Camara et al.",
+     "Current Microbiology 79(2):68", "2022",
+     "https://scholar.google.com/citations?user=qJaCV7MAAAAJ&hl=fr"),
+    ("2", "#ef4444", "★ Genome sequence and description of Urinicoccus timonensis gen. nov., sp. nov.",
+     "ML Tall, CI Lo, EK Yimagou, A Fontanini, J Delerce, PE Fournier, D Raoult et al.",
+     "New Microbes and New Infections 37:100720", "2020",
+     "https://www.sciencedirect.com/science/article/pii/S2052297520300731"),
+    ("2", "#8b5cf6", "Draft genome and description of Negativicoccus massiliensis strain Marseille-P2082",
+     "AH Togo, A Diop, ML Tall, M Million, S Khelaifia, M Maraninchi, D Raoult et al.",
+     "Antonie van Leeuwenhoek 113(7):997-1008", "2020",
+     "https://scholar.google.com/citations?user=qJaCV7MAAAAJ&hl=fr"),
+    ("2", "#8b5cf6", "Massilicoli timonensis sp. nov., a new bacterium isolated from the human microbiota",
+     "S Ndongo, ML Tall, II Ngom, PE Fournier, A Levasseur, D Raoult et al.",
+     "New Microbes and New Infections 32:100592", "2019",
+     "https://scholar.google.com/citations?user=qJaCV7MAAAAJ&hl=fr"),
+    ("2", "#8b5cf6", "Genome sequence and description of Bacteroides bouchesdurhonensis sp. nov.",
+     "S Ndongo, ML Tall, II Ngom, PE Fournier, A Levasseur, D Raoult et al.",
+     "New Microbes and New Infections 31:100571", "2019",
+     "https://scholar.google.com/citations?user=qJaCV7MAAAAJ&hl=fr"),
+    ("1", "#ef4444", "★ Detection of horizontal sequence transfer in microorganisms in the genomic era",
+     "ML Tall, MD Mbogning, E Kuete Yimagou, D Raoult, A Levasseur",
+     "bioRxiv 2022.12.21.521446", "2022",
+     "https://www.biorxiv.org/content/10.1101/2022.12.21.521446"),
+    ("1", "#06b6d4", "Epidemiology and genomic characterisation of travel-associated and locally-acquired influenza, Marseille, France",
+     "TL Dao, A Levasseur, ML Tall, VT Hoang, P Colson, A Caputo, TDA Ly et al.",
+     "Travel Medicine and Infectious Disease 45:102236", "2022",
+     "https://www.sciencedirect.com/science/article/pii/S1477893921002052"),
+    ("1", "#10b981", "Spatiotemporal dynamic of the RTS, S/AS01 malaria vaccine target antigens in Senegal",
+     "MA Diallo, C L'Ollivier, K Diongue, AS Badiane, A Kodio, ML Tall et al.",
+     "American Journal of Tropical Medicine and Hygiene 105(6):1738", "2021",
+     "https://scholar.google.com/citations?user=qJaCV7MAAAAJ&hl=fr"),
+]
+
+# Affichage compact en grille 2 colonnes — tout dans un seul st.markdown
+grid_html = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px">'
+
+for cit, color, title, authors, journal, year, url in peer_reviewed:
+    first_auth = "★ " in title
+    clean_title = title.replace("★ ", "")
+    fa_badge = '<span style="background:rgba(239,68,68,0.12);color:#f87171;border-radius:4px;padding:1px 8px;font-size:0.68rem;font-weight:700;margin-right:6px">1er auteur</span>' if first_auth else ""
+    grid_html += f"""
+    <div style="background:#080f1e;border:1px solid rgba(255,255,255,0.05);
+         border-left:3px solid {color};border-radius:10px;padding:16px 18px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+        <div style="flex:1">{fa_badge}
+          <span style="font-size:0.88rem;font-weight:700;color:#e2e8f0;line-height:1.4">{clean_title}</span>
+        </div>
+        <span style="background:{color}22;color:{color};border-radius:6px;
+              padding:3px 10px;font-size:0.75rem;font-weight:800;margin-left:12px;white-space:nowrap">
+          {cit} cit.
+        </span>
+      </div>
+      <div style="font-size:0.75rem;color:#475569;margin-bottom:4px">{authors}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:0.75rem;color:#334155;font-style:italic">{journal} · {year}</span>
+        <a href="{url}" target="_blank"
+           style="color:{color};font-size:0.72rem;font-weight:600;white-space:nowrap;margin-left:8px">
+           Voir →
+        </a>
+      </div>
+    </div>"""
+
+grid_html += "</div>"
+st.markdown(grid_html, unsafe_allow_html=True)
+
+# Stats globales
+total_cit = sum(int(c) for c, *_ in peer_reviewed)
+st.markdown(f"""
+<div style="margin-top:24px;background:#0d1829;border-radius:12px;padding:20px 28px;
+     border:1px solid rgba(255,255,255,0.06);display:flex;gap:40px;flex-wrap:wrap;align-items:center">
+  <div>
+    <span style="font-size:1.8rem;font-weight:900;color:#3b82f6">{len(peer_reviewed) + 5}</span>
+    <span style="color:#475569;font-size:0.82rem;margin-left:8px">Publications totales</span>
+  </div>
+  <div>
+    <span style="font-size:1.8rem;font-weight:900;color:#10b981">{total_cit}+</span>
+    <span style="color:#475569;font-size:0.82rem;margin-left:8px">Citations totales</span>
+  </div>
+  <div>
+    <span style="font-size:1.8rem;font-weight:900;color:#8b5cf6">8</span>
+    <span style="color:#475569;font-size:0.82rem;margin-left:8px">Publications 1er auteur</span>
+  </div>
+  <div>
+    <span style="font-size:1.8rem;font-weight:900;color:#f59e0b">2019–2026</span>
+    <span style="color:#475569;font-size:0.82rem;margin-left:8px">Période d'activité</span>
+  </div>
+  <a href="https://scholar.google.com/citations?user=qJaCV7MAAAAJ&hl=fr" target="_blank"
+     style="background:#1e3a5f;color:#60a5fa;padding:10px 22px;border-radius:8px;
+     font-weight:700;font-size:0.85rem;margin-left:auto">
+     Voir sur Google Scholar ↗
+  </a>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("</div>", unsafe_allow_html=True)
+st.markdown("<hr class='divider-line'>", unsafe_allow_html=True)
+
+# ─────────────────────────────────────────────────────────────────
+# ÉQUIPE — Fondateur + photo
+# ─────────────────────────────────────────────────────────────────
+st.markdown("<div id='equipe'></div>", unsafe_allow_html=True)
+st.markdown("""
+<div class="section section-alt" style="text-align:center">
+  <div class="section-eyebrow" style="color:#f59e0b;text-align:center">Équipe</div>
+  <div class="section-h2" style="text-align:center">Le fondateur</div>
+  <div style="color:#475569;font-size:0.95rem;margin:0 auto 48px;max-width:500px;line-height:1.7">
+    MedFlow AI est un projet solo porté par un chercheur passionné, à l'intersection de la bioinformatique, de la médecine de précision et de l'intelligence artificielle.
+  </div>
+""", unsafe_allow_html=True)
+
+col_team_photo, col_team_info = st.columns([1, 2], gap="large")
+
+with col_team_photo:
+    st.markdown(f"""
+    {_photo_card_team}
+    """, unsafe_allow_html=True)
+
+with col_team_info:
+    st.markdown("""
+    <div class="team-card" style="text-align:left">
+      <div style="display:inline-block;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);
+           color:#f59e0b;border-radius:8px;padding:4px 14px;font-size:0.75rem;font-weight:700;
+           letter-spacing:2px;text-transform:uppercase;margin-bottom:20px">
+        Fondateur &amp; Développeur principal
+      </div>
+      <div class="team-name">Dr. Mamadou Lamine TALL</div>
+      <div class="team-role">PhD Bioinformatique · Aix-Marseille Université · Montpellier, France</div>
+      <div class="team-bio">
+        Chercheur spécialisé en <strong style="color:#f1f5f9">bioinformatique médicale</strong>,
+        <strong style="color:#f1f5f9">analyse multi-omique</strong> et
+        <strong style="color:#f1f5f9">intelligence artificielle appliquée à la médecine</strong>.
+        <br><br>
+        <strong style="color:#f59e0b">Thèse de doctorat (2020)</strong> —
+        <em>Études bioinformatiques et biostatistiques des structures mosaïques des génomes microbiens</em>,
+        Aix-Marseille Université, sous la direction du Pr. Anthony Levasseur.
+        Travaux portant sur le mosaïcisme génomique, la taxonogénomique et la phylogénomique comparative.
+        <br><br>
+        Fondateur de <strong style="color:#f1f5f9">MedFlow AI</strong> — plateforme open source d'aide
+        à la décision clinique entièrement en français. Auteur de 3 preprints en soumission (2026),
+        développeur de 7 outils déployés sur Streamlit Cloud, et porteur de projets de recherche
+        translationelle en cardiologie, génomique musculaire et onco-microbiome.
+        <br><br>
+        <strong style="color:#f1f5f9">Domaines d'expertise :</strong>
+        génomique comparative · transcriptomique (bulk + single-cell) ·
+        variabilité de la fréquence cardiaque · méta-analyses PRISMA ·
+        Machine Learning clinique · biomarqueurs diagnostiques.
+      </div>
+      <div class="team-links">
+        <a href="https://github.com/mamadoulaminetall" target="_blank" class="team-link">GitHub ↗</a>
+        <a href="https://scholar.google.com/citations?user=qJaCV7MAAAAJ&hl=fr" target="_blank" class="team-link">Google Scholar ↗</a>
+        <a href="https://theses.fr/2020AIXM0426" target="_blank" class="team-link">Thèse 2020 ↗</a>
+        <a href="https://www.linkedin.com/in/medflow-ia-350531401/" target="_blank" class="team-link">LinkedIn ↗</a>
+        <a href="mailto:mamadoulaminetallgithub@gmail.com" class="team-link">Email ↗</a>
+      </div>
+      <div style="margin-top:24px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06)">
+        <div style="display:flex;gap:32px;flex-wrap:wrap">
+          <div>
+            <div style="font-size:1.6rem;font-weight:900;color:#10b981">7</div>
+            <div style="font-size:0.78rem;color:#475569">Outils déployés</div>
+          </div>
+          <div>
+            <div style="font-size:1.6rem;font-weight:900;color:#3b82f6">5</div>
+            <div style="font-size:0.78rem;color:#475569">Publications / Preprints</div>
+          </div>
+          <div>
+            <div style="font-size:1.6rem;font-weight:900;color:#8b5cf6">11</div>
+            <div style="font-size:0.78rem;color:#475569">Repos GitHub</div>
+          </div>
+          <div>
+            <div style="font-size:1.6rem;font-weight:900;color:#f59e0b">5 800+</div>
+            <div style="font-size:0.78rem;color:#475569">Échantillons analysés</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("</div>", unsafe_allow_html=True)
+st.markdown("<hr class='divider-line'>", unsafe_allow_html=True)
+
+# ─────────────────────────────────────────────────────────────────
+# CONTACT
+# ─────────────────────────────────────────────────────────────────
+st.markdown("<div id='contact'></div>", unsafe_allow_html=True)
+st.markdown("""
+<div class="section">
+  <div class="section-eyebrow" style="color:#06b6d4">Contact · Collaboration</div>
+  <div class="section-h2">Nous contacter</div>
+  <div class="section-lead" style="margin-bottom:48px">
+    Collaboration de recherche, déploiement hospitalier, développement sur mesure,
+    ou simplement pour en savoir plus sur MedFlow AI.
+  </div>
+""", unsafe_allow_html=True)
+
+c1, c2, c3 = st.columns(3, gap="medium")
+
+with c1:
+    st.markdown("""
+    <div class="contact-box">
+      <div class="contact-icon" style="background:rgba(6,182,212,0.12)">📧</div>
+      <div>
+        <div class="contact-label">Email GitHub / Dev</div>
+        <div class="contact-value">
+          <a href="mailto:mamadoulaminetallgithub@gmail.com"
+             style="color:#f1f5f9;font-size:0.85rem">
+            mamadoulaminetallgithub@gmail.com
+          </a>
+        </div>
+        <div class="contact-sub">Projets open source · GitHub</div>
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c2:
+    st.markdown("""
+    <div class="contact-box">
+      <div class="contact-icon" style="background:rgba(16,185,129,0.12)">✉️</div>
+      <div>
+        <div class="contact-label">Email Personnel / Recherche</div>
+        <div class="contact-value">
+          <a href="mailto:laminetall30@gmail.com"
+             style="color:#f1f5f9;font-size:0.85rem">
+            laminetall30@gmail.com
+          </a>
+        </div>
+        <div class="contact-sub">Collaboration · Recherche · Clinique</div>
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c3:
+    st.markdown("""
+    <div class="contact-box">
+      <div class="contact-icon" style="background:rgba(245,158,11,0.12)">📍</div>
+      <div>
+        <div class="contact-label">Localisation</div>
+        <div class="contact-value">Montpellier, France</div>
+        <div class="contact-sub">Occitanie · Disponible en présentiel &amp; distanciel</div>
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<div style='height:40px'></div>", unsafe_allow_html=True)
+
+c4, c5, c6 = st.columns(3, gap="medium")
+with c4:
+    st.markdown("""
+    <div class="contact-box">
+      <div class="contact-icon" style="background:rgba(59,130,246,0.12)">💼</div>
+      <div>
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-value">
+          <a href="https://www.linkedin.com/in/medflow-ia-350531401/" target="_blank"
+             style="color:#60a5fa;font-size:0.85rem">MedFlow IA ↗</a>
+        </div>
+        <div class="contact-sub">Actualités · Projets · Réseau pro</div>
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c5:
+    st.markdown("""
+    <div class="contact-box">
+      <div class="contact-icon" style="background:rgba(255,255,255,0.05)">🐙</div>
+      <div>
+        <div class="contact-label">GitHub</div>
+        <div class="contact-value">
+          <a href="https://github.com/mamadoulaminetall" target="_blank"
+             style="color:#94a3b8;font-size:0.85rem">mamadoulaminetall ↗</a>
+        </div>
+        <div class="contact-sub">11 repositories publics</div>
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c6:
+    st.markdown("""
+    <div class="contact-box">
+      <div class="contact-icon" style="background:rgba(139,92,246,0.12)">🎓</div>
+      <div>
+        <div class="contact-label">Google Scholar</div>
+        <div class="contact-value">
+          <a href="https://scholar.google.com/citations?user=qJaCV7MAAAAJ&hl=fr" target="_blank"
+             style="color:#a78bfa;font-size:0.85rem">Mamadou Lamine TALL ↗</a>
+        </div>
+        <div class="contact-sub">Publications · Citations · Preprints</div>
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("</div>", unsafe_allow_html=True)
+st.markdown("<hr class='divider-line'>", unsafe_allow_html=True)
+
+# ─────────────────────────────────────────────────────────────────
+# MENTIONS LÉGALES
+# ─────────────────────────────────────────────────────────────────
+st.markdown("<div id='legal'></div>", unsafe_allow_html=True)
+st.markdown("""
+<div class="legal-section">
+  <div style="text-align:center;margin-bottom:48px">
+    <div style="font-size:0.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+                color:#334155;margin-bottom:12px">Informations légales</div>
+    <div style="font-size:1.8rem;font-weight:800;color:#475569">Mentions légales</div>
+  </div>
+""", unsafe_allow_html=True)
+
+leg1, leg2, leg3 = st.columns(3, gap="medium")
+
+with leg1:
+    st.markdown("""
+    <div class="legal-card">
+      <div class="legal-title">🏢 Éditeur du site</div>
+      <div class="legal-text">
+        <strong style="color:#64748b">MedFlow AI</strong><br>
+        Projet indépendant de recherche et développement<br><br>
+        <strong style="color:#64748b">Responsable de publication :</strong><br>
+        Dr. Mamadou Lamine TALL<br>
+        PhD Bioinformatique<br><br>
+        <strong style="color:#64748b">Localisation :</strong><br>
+        Montpellier, Occitanie, France<br><br>
+        <strong style="color:#64748b">Contact :</strong><br>
+        mamadoulaminetallgithub@gmail.com<br>
+        laminetall30@gmail.com
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with leg2:
+    st.markdown("""
+    <div class="legal-card">
+      <div class="legal-title">⚕️ Avertissement médical</div>
+      <div class="legal-text">
+        Les outils proposés par MedFlow AI sont des <strong style="color:#64748b">aides à la décision clinique</strong>
+        et ne constituent en aucun cas un avis médical, un diagnostic ou une prescription médicale.<br><br>
+        Ces outils sont destinés exclusivement aux <strong style="color:#64748b">professionnels de santé qualifiés</strong>
+        et ne remplacent pas le jugement clinique du médecin.<br><br>
+        Les résultats fournis doivent être interprétés par un professionnel de santé
+        dans le contexte clinique global du patient.<br><br>
+        MedFlow AI décline toute responsabilité en cas d'utilisation
+        en dehors du cadre médical professionnel.
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with leg3:
+    st.markdown("""
+    <div class="legal-card">
+      <div class="legal-title">🔒 Données & Hébergement</div>
+      <div class="legal-text">
+        <strong style="color:#64748b">Hébergement :</strong><br>
+        Streamlit Cloud (Snowflake Inc.)<br>
+        650 Castro St, Mountain View, CA, USA<br><br>
+        <strong style="color:#64748b">Données personnelles :</strong><br>
+        Aucune donnée personnelle ou médicale n'est stockée ou transmise
+        par les outils MedFlow AI. Les calculs sont effectués localement
+        dans votre navigateur.<br><br>
+        <strong style="color:#64748b">Propriété intellectuelle :</strong><br>
+        Le code source est publié sous licence MIT (open source).
+        Le contenu et les marques MedFlow AI sont la propriété de Dr. M.L. TALL.<br><br>
+        <strong style="color:#64748b">Paiements :</strong><br>
+        Traitement sécurisé via Stripe. Aucune donnée bancaire stockée.
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("</div>", unsafe_allow_html=True)
+
+# ─────────────────────────────────────────────────────────────────
+# FOOTER
+# ─────────────────────────────────────────────────────────────────
+st.markdown("""
+<div class="footer">
+  <div>
+    <div class="footer-brand">MedFlow <span>AI</span></div>
+    <div class="footer-copy">© 2026 Dr. Mamadou Lamine TALL · PhD Bioinformatique · Montpellier, France</div>
+  </div>
+  <div class="footer-links">
+    <a href="https://cardiac-qol-ai.streamlit.app">QoL Cardiac</a>
+    <a href="https://clinia-scores.streamlit.app">Scores Cliniques</a>
+    <a href="https://clinia-cr.streamlit.app">Générateur CR</a>
+    <a href="https://reinnervationaiapp.streamlit.app">Réinnervation IA</a>
+    <a href="https://myoomics.streamlit.app">MYOomics</a>
+    <a href="https://github.com/mamadoulaminetall">GitHub</a>
+  </div>
+</div>
+""", unsafe_allow_html=True)
