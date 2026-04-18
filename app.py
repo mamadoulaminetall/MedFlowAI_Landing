@@ -207,7 +207,11 @@ a { text-decoration: none; }
 
 /* ── SECTION ── */
 .section { padding: 96px 80px; }
-.section-alt { background: rgba(8,15,30,0.6); }
+.section-alt {
+    background: rgba(8,15,30,0.7);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
 .section-eyebrow {
     font-size: 0.7rem; font-weight: 700; letter-spacing: 3.5px;
     text-transform: uppercase; margin-bottom: 14px;
@@ -218,6 +222,25 @@ a { text-decoration: none; }
 }
 .section-lead { color: #475569; font-size: 1rem; line-height: 1.8; max-width: 580px; }
 .divider-line { border: none; border-top: 1px solid rgba(255,255,255,0.04); }
+
+/* ── SÉPARATION BLOCS — effet glow subtil ── */
+[data-testid="stVerticalBlock"] > [data-testid="stVerticalBlockBorderWrapper"] {
+    border: none !important;
+}
+.block-sep {
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(16,185,129,0.3) 25%,
+        rgba(59,130,246,0.3) 50%,
+        rgba(139,92,246,0.3) 75%,
+        transparent 100%);
+    margin: 0;
+}
+.section-wrap {
+    border-top: 1px solid rgba(255,255,255,0.05);
+    box-shadow: 0 -1px 0 rgba(255,255,255,0.02), inset 0 1px 0 rgba(255,255,255,0.02);
+}
 
 /* ── ABOUT STATS ── */
 .about-stat-num { font-size: 2.2rem; font-weight: 900; line-height: 1; }
@@ -386,21 +409,11 @@ a { text-decoration: none; }
 st.markdown(f"""
 <div class="nav">
   <div class="nav-logo">
-    <!-- Icône croix médicale + cerveau -->
-    <div style="width:36px;height:36px;position:relative;flex-shrink:0">
-      <div style="position:absolute;inset:0;
-           background:linear-gradient(135deg,#10b981,#3b82f6);
-           border-radius:10px;
-           clip-path:polygon(33% 0%,67% 0%,67% 33%,100% 33%,100% 67%,67% 67%,67% 100%,33% 100%,33% 67%,0% 67%,0% 33%,33% 33%)">
-      </div>
-      <div style="position:absolute;inset:0;display:flex;align-items:center;
-           justify-content:center;font-size:1.05rem;line-height:1">🧠</div>
-    </div>
-    <div class="nav-brand">MedFlow&nbsp;<span>AI</span></div>
+    {LOGO_IMG}
     <div style="font-size:0.62rem;font-weight:600;color:#1e4d3a;
          background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.18);
          border-radius:6px;padding:2px 8px;letter-spacing:1.5px;text-transform:uppercase;
-         margin-left:4px">v2.0</div>
+         margin-left:8px">v2.0</div>
   </div>
   <div class="nav-links">
     <a href="#about">À propos</a>
@@ -453,21 +466,17 @@ with col_hero_text:
     """, unsafe_allow_html=True)
 
 with col_hero_logo:
-    st.markdown("""
-    <div style="background:#060d1a;padding:60px 40px;height:100%;
-                display:flex;align-items:center;justify-content:center">
+    _logo_big = LOGO_IMG.replace('height:38px', 'height:90px').replace('border-radius:6px', 'border-radius:14px') if _LOGO_B64 else '<span style="font-size:4rem">🩺</span>'
+    st.markdown(f"""
+    <div style="background:linear-gradient(160deg,#060d1a 0%,#071e14 100%);
+                padding:60px 40px;height:100%;
+                display:flex;align-items:center;justify-content:center;
+                border-left:1px solid rgba(16,185,129,0.1)">
       <div class="logo-box">
-        <div style="margin:0 auto 18px;width:90px;height:90px;position:relative">
-          <!-- Croix médicale -->
-          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-               width:90px;height:90px;
-               background:linear-gradient(135deg,#10b981,#3b82f6);
-               clip-path:polygon(33% 0%,67% 0%,67% 33%,100% 33%,100% 67%,67% 67%,67% 100%,33% 100%,33% 67%,0% 67%,0% 33%,33% 33%);"></div>
-          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-               font-size:1.8rem;z-index:2">🧠</div>
+        <div style="margin:0 auto 24px;text-align:center">
+          {_logo_big}
         </div>
-        <div class="logo-title-big">MedFlow <span>AI</span></div>
-        <div class="logo-tagline">L'IA pour les Médecins &amp; Chercheurs</div>
+        <div class="logo-tagline" style="font-size:0.9rem;margin-bottom:28px">L'IA pour les Médecins &amp; Chercheurs</div>
         <div class="logo-tools-row">
           <div class="logo-tool-icon">
             <div class="icon">📊</div>
@@ -491,7 +500,7 @@ with col_hero_logo:
     </div>
     """, unsafe_allow_html=True)
 
-st.markdown("<hr class='divider-line'>", unsafe_allow_html=True)
+st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────────
 # ABOUT — Mission + Photo fondateur
@@ -678,7 +687,7 @@ with col_about_text:
     </div>
     """, unsafe_allow_html=True)
 
-st.markdown("<hr class='divider-line'>", unsafe_allow_html=True)
+st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────────
 # ROADMAP — Tous les projets GitHub interconnectés
@@ -966,7 +975,7 @@ for i, t in enumerate(research_tools):
         """, unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
-st.markdown("<hr class='divider-line'>", unsafe_allow_html=True)
+st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────────
 # PUBLICATIONS
@@ -1284,7 +1293,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
-st.markdown("<hr class='divider-line'>", unsafe_allow_html=True)
+st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────────
 # ÉQUIPE — Fondateur + photo
@@ -1367,7 +1376,7 @@ with col_team_info:
     """, unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
-st.markdown("<hr class='divider-line'>", unsafe_allow_html=True)
+st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────────
 # CONTACT
@@ -1480,7 +1489,7 @@ with c6:
     """, unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
-st.markdown("<hr class='divider-line'>", unsafe_allow_html=True)
+st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────────
 # MENTIONS LÉGALES
