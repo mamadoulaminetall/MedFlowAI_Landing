@@ -37,10 +37,10 @@ st.markdown("""
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 [data-testid="stAppViewContainer"] {
-    background: #03080f;
+    background: #020c1e;
     background-image:
-        radial-gradient(ellipse 80% 50% at 20% 0%, rgba(16,185,129,0.06) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(59,130,246,0.05) 0%, transparent 60%);
+        radial-gradient(ellipse 80% 50% at 20% 0%, rgba(16,185,129,0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(59,130,246,0.04) 0%, transparent 60%);
 }
 [data-testid="stSidebar"], [data-testid="collapsedControl"] { display:none; }
 [data-testid="stHeader"] { background: transparent; }
@@ -208,9 +208,10 @@ a { text-decoration: none; }
 /* ── SECTION ── */
 .section { padding: 96px 80px; }
 .section-alt {
-    background: rgba(8,15,30,0.7);
-    border-top: 1px solid rgba(255,255,255,0.05);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    background: #040c1c;
+    border-top: 1px solid rgba(59,130,246,0.08);
+    border-bottom: 1px solid rgba(59,130,246,0.08);
+    box-shadow: inset 0 1px 0 rgba(59,130,246,0.04), inset 0 -1px 0 rgba(59,130,246,0.04);
 }
 .section-eyebrow {
     font-size: 0.7rem; font-weight: 700; letter-spacing: 3.5px;
@@ -223,18 +224,19 @@ a { text-decoration: none; }
 .section-lead { color: #475569; font-size: 1rem; line-height: 1.8; max-width: 580px; }
 .divider-line { border: none; border-top: 1px solid rgba(255,255,255,0.04); }
 
-/* ── SÉPARATION BLOCS — effet glow subtil ── */
+/* ── SÉPARATION BLOCS — glow visible ── */
 [data-testid="stVerticalBlock"] > [data-testid="stVerticalBlockBorderWrapper"] {
     border: none !important;
 }
 .block-sep {
-    width: 100%; height: 1px;
+    width: 100%; height: 3px;
     background: linear-gradient(90deg,
         transparent 0%,
-        rgba(16,185,129,0.3) 25%,
-        rgba(59,130,246,0.3) 50%,
-        rgba(139,92,246,0.3) 75%,
+        rgba(16,185,129,0.5) 20%,
+        rgba(59,130,246,0.45) 50%,
+        rgba(139,92,246,0.45) 80%,
         transparent 100%);
+    box-shadow: 0 0 20px rgba(16,185,129,0.15), 0 0 40px rgba(59,130,246,0.08);
     margin: 0;
 }
 .section-wrap {
@@ -379,7 +381,8 @@ a { text-decoration: none; }
 .contact-sub { font-size: 0.8rem; color: #64748b; margin-top: 2px; }
 
 /* ── LEGAL ── */
-.legal-section { background: #04080f; padding: 64px 80px; }
+.legal-section { background: #020609; padding: 64px 80px;
+    border-top: 1px solid rgba(255,255,255,0.05); }
 .legal-card {
     background: #080f1e; border-radius: 14px; padding: 28px 32px;
     border: 1px solid rgba(255,255,255,0.05); height: 100%;
@@ -389,17 +392,27 @@ a { text-decoration: none; }
 
 /* ── FOOTER ── */
 .footer {
-    background: #04080f;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    padding: 32px 80px;
+    background: #020609;
+    border-top: 1px solid rgba(16,185,129,0.12);
+    padding: 40px 80px;
     display: flex; align-items: center;
     justify-content: space-between; flex-wrap: wrap; gap: 16px;
 }
-.footer-brand { font-size: 1rem; font-weight: 800; color: #334155; }
-.footer-brand span { color: #10b981; }
-.footer-copy { font-size: 0.78rem; color: #1e293b; }
-.footer-links { display: flex; gap: 20px; }
-.footer-links a { font-size: 0.78rem; color: #1e293b; }
+.footer-brand {
+    font-size: 1.1rem; font-weight: 900;
+    background: linear-gradient(135deg, #f8fafc 0%, #94a3b8 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.footer-brand span {
+    background: linear-gradient(135deg, #10b981, #34d399);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.footer-copy { font-size: 0.78rem; color: #4b5e78; margin-top: 4px; }
+.footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+.footer-links a { font-size: 0.78rem; color: #4b5e78; transition: color 0.2s; }
+.footer-links a:hover { color: #10b981; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -428,77 +441,110 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────────
-# HERO
+# HERO — full-width centered + stats bar
 # ─────────────────────────────────────────────────────────────────
-col_hero_text, col_hero_logo = st.columns([3, 2], gap="large")
+_logo_big = LOGO_IMG.replace('height:38px', 'height:80px').replace('border-radius:6px', 'border-radius:14px') if _LOGO_B64 else '<span style="font-size:4rem">🩺</span>'
 
-with col_hero_text:
-    st.markdown("""
-    <div class="hero" style="border-radius:0;border-right:1px solid rgba(255,255,255,0.04)">
-      <div class="hero-eyebrow">🔬 Recherche &amp; Clinique</div>
-      <div class="hero-title">
-        L'IA au service<br>
-        des <span class="accent">Médecins</span><br>
-        &amp; <span class="accent2">Chercheurs</span>
+st.markdown(f"""
+<div style="background:linear-gradient(170deg,#020c1e 0%,#031525 45%,#020b18 100%);
+            padding:100px 80px 0;position:relative;overflow:hidden;">
+  <!-- Orbs décoratifs -->
+  <div style="position:absolute;top:-120px;left:-60px;width:600px;height:600px;
+       background:radial-gradient(ellipse,rgba(16,185,129,0.07) 0%,transparent 65%);
+       pointer-events:none"></div>
+  <div style="position:absolute;top:-80px;right:-80px;width:500px;height:500px;
+       background:radial-gradient(ellipse,rgba(59,130,246,0.06) 0%,transparent 65%);
+       pointer-events:none"></div>
+  <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:900px;height:300px;
+       background:radial-gradient(ellipse,rgba(139,92,246,0.04) 0%,transparent 65%);
+       pointer-events:none"></div>
+
+  <!-- Contenu centré -->
+  <div style="max-width:860px;margin:0 auto;text-align:center;position:relative;z-index:1">
+
+    <!-- Logo -->
+    <div style="margin-bottom:28px">{_logo_big}</div>
+
+    <!-- Eyebrow pill -->
+    <div style="display:inline-flex;align-items:center;gap:8px;
+         background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.22);
+         color:#10b981;border-radius:100px;padding:7px 20px;
+         font-size:0.72rem;font-weight:700;letter-spacing:2.5px;
+         text-transform:uppercase;margin-bottom:32px">
+      🔬 &nbsp;Recherche &amp; Clinique · Open Source
+    </div>
+
+    <!-- Headline -->
+    <div style="font-size:clamp(2.8rem,6vw,4.8rem);font-weight:900;color:#f8fafc;
+         line-height:1.04;letter-spacing:-2.5px;margin-bottom:24px">
+      L'IA au service des<br>
+      <span style="background:linear-gradient(135deg,#10b981 0%,#34d399 50%,#3b82f6 100%);
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+            background-clip:text">
+        Médecins &amp; Chercheurs
+      </span>
+    </div>
+
+    <!-- Sous-titre -->
+    <div style="font-size:1.1rem;color:#64748b;line-height:1.8;
+         max-width:640px;margin:0 auto 40px">
+      Des outils IA conçus par un chercheur en bioinformatique médicale —
+      pour la décision clinique, l'analyse multi-omique et la recherche translationnelle.
+      <strong style="color:#94a3b8">Entièrement en français.</strong>
+    </div>
+
+    <!-- Tags -->
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:44px">
+      <span class="hero-tag">🤖 Claude AI</span>
+      <span class="hero-tag">🧬 Multi-omique</span>
+      <span class="hero-tag">📊 7 outils déployés</span>
+      <span class="hero-tag">📚 PRISMA · Preprints 2026</span>
+      <span class="hero-tag">🇫🇷 100 % français</span>
+      <span class="hero-tag">🔓 Open Source</span>
+    </div>
+
+    <!-- Boutons -->
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:72px">
+      <a href="https://buy.stripe.com/9B63cvb3G8kZ5cGfHwb3q01" target="_blank"
+         class="btn-hero-primary">
+        Commencer — 9€/mois
+      </a>
+      <a href="https://cardiac-qol-ai.streamlit.app" target="_blank"
+         class="btn-hero-secondary">
+        Essayer gratuitement →
+      </a>
+    </div>
+  </div>
+
+  <!-- Stats bar — fond légèrement plus sombre, séparation nette -->
+  <div style="border-top:1px solid rgba(255,255,255,0.06);
+       background:rgba(2,8,16,0.6);backdrop-filter:blur(12px);
+       padding:28px 80px;display:flex;justify-content:center;
+       gap:0;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:32px;flex-wrap:wrap;justify-content:center">
+      <div style="text-align:center;padding:0 32px">
+        <div style="font-size:2rem;font-weight:900;color:#10b981;line-height:1">7</div>
+        <div style="font-size:0.72rem;color:#475569;margin-top:4px;letter-spacing:0.5px">Outils déployés</div>
       </div>
-      <div class="hero-sub">
-        Des outils d'intelligence artificielle conçus par un chercheur en bioinformatique médicale —
-        pour simplifier la prise de décision clinique, l'analyse multi-omique et la recherche translationnelle.
-        Entièrement en français.
+      <div style="width:1px;height:40px;background:rgba(255,255,255,0.06)"></div>
+      <div style="text-align:center;padding:0 32px">
+        <div style="font-size:2rem;font-weight:900;color:#3b82f6;line-height:1">31+</div>
+        <div style="font-size:0.72rem;color:#475569;margin-top:4px;letter-spacing:0.5px">Publications indexées</div>
       </div>
-      <div class="hero-tags">
-        <span class="hero-tag">🤖 Claude AI</span>
-        <span class="hero-tag">🧬 Multi-omique</span>
-        <span class="hero-tag">📊 7 outils déployés</span>
-        <span class="hero-tag">📚 PRISMA · Preprints 2026</span>
-        <span class="hero-tag">🇫🇷 100 % français</span>
-        <span class="hero-tag">🔓 Open Source</span>
+      <div style="width:1px;height:40px;background:rgba(255,255,255,0.06)"></div>
+      <div style="text-align:center;padding:0 32px">
+        <div style="font-size:2rem;font-weight:900;color:#8b5cf6;line-height:1">5 800+</div>
+        <div style="font-size:0.72rem;color:#475569;margin-top:4px;letter-spacing:0.5px">Échantillons analysés</div>
       </div>
-      <div class="hero-btns">
-        <a href="https://buy.stripe.com/9B63cvb3G8kZ5cGfHwb3q01" target="_blank" class="btn-hero-primary">
-          Commencer — 9€/mois
-        </a>
-        <a href="https://cardiac-qol-ai.streamlit.app" target="_blank" class="btn-hero-secondary">
-          Essayer gratuitement →
-        </a>
+      <div style="width:1px;height:40px;background:rgba(255,255,255,0.06)"></div>
+      <div style="text-align:center;padding:0 32px">
+        <div style="font-size:2rem;font-weight:900;color:#f59e0b;line-height:1">248+</div>
+        <div style="font-size:0.72rem;color:#475569;margin-top:4px;letter-spacing:0.5px">Citations Google Scholar</div>
       </div>
     </div>
-    """, unsafe_allow_html=True)
-
-with col_hero_logo:
-    _logo_big = LOGO_IMG.replace('height:38px', 'height:90px').replace('border-radius:6px', 'border-radius:14px') if _LOGO_B64 else '<span style="font-size:4rem">🩺</span>'
-    st.markdown(f"""
-    <div style="background:linear-gradient(160deg,#060d1a 0%,#071e14 100%);
-                padding:60px 40px;height:100%;
-                display:flex;align-items:center;justify-content:center;
-                border-left:1px solid rgba(16,185,129,0.1)">
-      <div class="logo-box">
-        <div style="margin:0 auto 24px;text-align:center">
-          {_logo_big}
-        </div>
-        <div class="logo-tagline" style="font-size:0.9rem;margin-bottom:28px">L'IA pour les Médecins &amp; Chercheurs</div>
-        <div class="logo-tools-row">
-          <div class="logo-tool-icon">
-            <div class="icon">📊</div>
-            <div class="lbl">ClinIA Scores</div>
-          </div>
-          <div class="logo-tool-icon">
-            <div class="icon">📝</div>
-            <div class="lbl">ClinIA CR</div>
-          </div>
-          <div class="logo-tool-icon">
-            <div class="icon">🧬</div>
-            <div class="lbl">MYOomics</div>
-          </div>
-          <div class="logo-tool-icon">
-            <div class="icon">🦠</div>
-            <div class="lbl">Microbiome</div>
-          </div>
-        </div>
-        <div class="logo-banner">Recherche &amp; Clinique</div>
-      </div>
-    </div>
-    """, unsafe_allow_html=True)
+  </div>
+</div>
+""", unsafe_allow_html=True)
 
 st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
 
@@ -571,7 +617,8 @@ else:
     _photo_card_team  = _fallback
 
 st.markdown("""
-<div style="padding:56px 0 0;background:linear-gradient(180deg,#03080f 0%,#060d1a 100%)">
+<div style="background:#050e1d;padding:56px 0 0;
+     border-bottom:1px solid rgba(255,255,255,0.04)">
 </div>
 """, unsafe_allow_html=True)
 
@@ -579,7 +626,7 @@ col_about_photo, col_about_text = st.columns([1, 2], gap="large")
 
 with col_about_photo:
     st.markdown(f"""
-    <div style="padding:0 0 0 40px">
+    <div style="padding:0 0 56px 40px;background:#050e1d">
       {_photo_card_about}
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px">
         <div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.12);
@@ -622,7 +669,7 @@ with col_about_photo:
 
 with col_about_text:
     st.markdown("""
-    <div style="padding:0 40px 56px 0">
+    <div style="padding:0 40px 56px 0;background:#050e1d">
       <div style="font-size:0.7rem;font-weight:700;letter-spacing:3.5px;
            text-transform:uppercase;color:#10b981;margin-bottom:14px">
         À propos · Mission
@@ -697,7 +744,7 @@ st.markdown("""
 <div class="section section-alt">
   <div style="text-align:center;margin-bottom:56px">
     <div class="section-eyebrow" style="color:#3b82f6;text-align:center">GitHub · Roadmap</div>
-    <div class="section-h2" style="text-align:center">Tous les projets</div>
+    <div class="section-h2" style="text-align:center;font-size:2.8rem">Tous les projets</div>
     <div style="color:#475569;font-size:0.95rem;max-width:580px;margin:0 auto;line-height:1.7">
       De la recherche fondamentale aux outils cliniques déployés —
       chaque projet est open source et interconnecté dans l'écosystème MedFlow AI.
@@ -982,7 +1029,7 @@ st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
 # ─────────────────────────────────────────────────────────────────
 st.markdown("<div id='publications'></div>", unsafe_allow_html=True)
 st.markdown("""
-<div class="section">
+<div class="section" style="background:#030810">
   <div class="section-eyebrow" style="color:#8b5cf6">Publications · Preprints · Recherche</div>
   <div class="section-h2">Travaux scientifiques</div>
   <div class="section-lead" style="margin-bottom:48px">
@@ -1118,7 +1165,7 @@ st.markdown("""
           letter-spacing:2px;text-transform:uppercase">
       📄 Publications Peer-Reviewed · IHU Méditerranée Infection · Aix-Marseille
     </span>
-    <span style="color:#334155;font-size:0.82rem">Google Scholar · ID : qJaCV7MAAAAJ</span>
+    <span style="color:#475569;font-size:0.82rem">Google Scholar · ID : qJaCV7MAAAAJ</span>
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -1252,7 +1299,7 @@ for cit, color, title, authors, journal, year, url in peer_reviewed:
       </div>
       <div style="font-size:0.75rem;color:#475569;margin-bottom:4px">{authors}</div>
       <div style="display:flex;justify-content:space-between;align-items:center">
-        <span style="font-size:0.75rem;color:#334155;font-style:italic">{journal} · {year}</span>
+        <span style="font-size:0.75rem;color:#475569;font-style:italic">{journal} · {year}</span>
         <a href="{url}" target="_blank"
            style="color:{color};font-size:0.72rem;font-weight:600;white-space:nowrap;margin-left:8px">
            Voir →
@@ -1300,7 +1347,7 @@ st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
 # ─────────────────────────────────────────────────────────────────
 st.markdown("<div id='equipe'></div>", unsafe_allow_html=True)
 st.markdown("""
-<div class="section section-alt" style="text-align:center">
+<div class="section section-alt" style="text-align:center;background:#040c1c">
   <div class="section-eyebrow" style="color:#f59e0b;text-align:center">Équipe</div>
   <div class="section-h2" style="text-align:center">Le fondateur</div>
   <div style="color:#475569;font-size:0.95rem;margin:0 auto 48px;max-width:500px;line-height:1.7">
@@ -1383,7 +1430,7 @@ st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
 # ─────────────────────────────────────────────────────────────────
 st.markdown("<div id='contact'></div>", unsafe_allow_html=True)
 st.markdown("""
-<div class="section">
+<div class="section" style="background:#030c18">
   <div class="section-eyebrow" style="color:#06b6d4">Contact · Collaboration</div>
   <div class="section-h2">Nous contacter</div>
   <div class="section-lead" style="margin-bottom:48px">
@@ -1499,8 +1546,8 @@ st.markdown("""
 <div class="legal-section">
   <div style="text-align:center;margin-bottom:48px">
     <div style="font-size:0.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;
-                color:#334155;margin-bottom:12px">Informations légales</div>
-    <div style="font-size:1.8rem;font-weight:800;color:#475569">Mentions légales</div>
+                color:#475569;margin-bottom:12px">Informations légales</div>
+    <div style="font-size:1.8rem;font-weight:800;color:#64748b">Mentions légales</div>
   </div>
 """, unsafe_allow_html=True)
 
@@ -1568,19 +1615,37 @@ st.markdown("</div>", unsafe_allow_html=True)
 # ─────────────────────────────────────────────────────────────────
 # FOOTER
 # ─────────────────────────────────────────────────────────────────
-st.markdown("""
+st.markdown(f"""
 <div class="footer">
   <div>
-    <div class="footer-brand">MedFlow <span>AI</span></div>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+      {LOGO_IMG}
+      <div class="footer-brand">MedFlow <span>AI</span></div>
+    </div>
     <div class="footer-copy">© 2026 Dr. Mamadou Lamine TALL · PhD Bioinformatique · Montpellier, France</div>
+    <div style="display:flex;gap:16px;margin-top:10px">
+      <a href="https://github.com/mamadoulaminetall" target="_blank"
+         style="color:#4b5e78;font-size:0.75rem;transition:color 0.2s">GitHub ↗</a>
+      <a href="https://scholar.google.com/citations?user=qJaCV7MAAAAJ&hl=fr" target="_blank"
+         style="color:#4b5e78;font-size:0.75rem;transition:color 0.2s">Scholar ↗</a>
+      <a href="https://www.linkedin.com/in/medflow-ia-350531401/" target="_blank"
+         style="color:#4b5e78;font-size:0.75rem;transition:color 0.2s">LinkedIn ↗</a>
+    </div>
   </div>
-  <div class="footer-links">
-    <a href="https://cardiac-qol-ai.streamlit.app">QoL Cardiac</a>
-    <a href="https://clinia-scores.streamlit.app">Scores Cliniques</a>
-    <a href="https://clinia-cr.streamlit.app">Générateur CR</a>
-    <a href="https://reinnervationaiapp.streamlit.app">Réinnervation IA</a>
-    <a href="https://myoomics.streamlit.app">MYOomics</a>
-    <a href="https://github.com/mamadoulaminetall">GitHub</a>
+  <div>
+    <div style="font-size:0.7rem;color:#4b5e78;text-transform:uppercase;letter-spacing:2px;
+         font-weight:700;margin-bottom:12px">Outils</div>
+    <div class="footer-links">
+      <a href="https://cardiac-qol-ai.streamlit.app">QoL Cardiac</a>
+      <a href="https://clinia-scores.streamlit.app">Scores Cliniques</a>
+      <a href="https://clinia-cr.streamlit.app">Générateur CR</a>
+    </div>
+    <div class="footer-links" style="margin-top:8px">
+      <a href="https://reinnervationaiapp.streamlit.app">Réinnervation IA</a>
+      <a href="https://myoomics.streamlit.app">MYOomics</a>
+      <a href="https://buy.stripe.com/9B63cvb3G8kZ5cGfHwb3q01" target="_blank"
+         style="color:#10b981;font-size:0.78rem;font-weight:700">Accès complet ↗</a>
+    </div>
   </div>
 </div>
 """, unsafe_allow_html=True)
