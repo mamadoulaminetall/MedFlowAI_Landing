@@ -445,106 +445,81 @@ st.markdown(f"""
 # ─────────────────────────────────────────────────────────────────
 _logo_big = LOGO_IMG.replace('height:38px', 'height:80px').replace('border-radius:6px', 'border-radius:14px') if _LOGO_B64 else '<span style="font-size:4rem">🩺</span>'
 
-st.markdown(f"""
-<div style="background:linear-gradient(170deg,#020c1e 0%,#031525 45%,#020b18 100%);
-            padding:100px 80px 0;position:relative;overflow:hidden;">
-  <!-- Orbs décoratifs -->
-  <div style="position:absolute;top:-120px;left:-60px;width:600px;height:600px;
-       background:radial-gradient(ellipse,rgba(16,185,129,0.07) 0%,transparent 65%);
-       pointer-events:none"></div>
-  <div style="position:absolute;top:-80px;right:-80px;width:500px;height:500px;
-       background:radial-gradient(ellipse,rgba(59,130,246,0.06) 0%,transparent 65%);
-       pointer-events:none"></div>
-  <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:900px;height:300px;
-       background:radial-gradient(ellipse,rgba(139,92,246,0.04) 0%,transparent 65%);
-       pointer-events:none"></div>
-
-  <!-- Contenu centré -->
-  <div style="max-width:860px;margin:0 auto;text-align:center;position:relative;z-index:1">
-
-    <!-- Logo -->
-    <div style="margin-bottom:28px">{_logo_big}</div>
-
-    <!-- Eyebrow pill -->
-    <div style="display:inline-flex;align-items:center;gap:8px;
-         background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.22);
-         color:#10b981;border-radius:100px;padding:7px 20px;
-         font-size:0.72rem;font-weight:700;letter-spacing:2.5px;
-         text-transform:uppercase;margin-bottom:32px">
-      🔬 &nbsp;Recherche &amp; Clinique · Open Source
-    </div>
-
-    <!-- Headline -->
-    <div style="font-size:clamp(2.8rem,6vw,4.8rem);font-weight:900;color:#f8fafc;
-         line-height:1.04;letter-spacing:-2.5px;margin-bottom:24px">
-      L'IA au service des<br>
-      <span style="background:linear-gradient(135deg,#10b981 0%,#34d399 50%,#3b82f6 100%);
-            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-            background-clip:text">
-        Médecins &amp; Chercheurs
-      </span>
-    </div>
-
-    <!-- Sous-titre -->
-    <div style="font-size:1.1rem;color:#64748b;line-height:1.8;
-         max-width:640px;margin:0 auto 40px">
-      Des outils IA conçus par un chercheur en bioinformatique médicale —
-      pour la décision clinique, l'analyse multi-omique et la recherche translationnelle.
-      <strong style="color:#94a3b8">Entièrement en français.</strong>
-    </div>
-
-    <!-- Tags -->
-    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:44px">
-      <span class="hero-tag">🤖 Claude AI</span>
-      <span class="hero-tag">🧬 Multi-omique</span>
-      <span class="hero-tag">📊 7 outils déployés</span>
-      <span class="hero-tag">📚 PRISMA · Preprints 2026</span>
-      <span class="hero-tag">🇫🇷 100 % français</span>
-      <span class="hero-tag">🔓 Open Source</span>
-    </div>
-
-    <!-- Boutons -->
-    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:72px">
-      <a href="https://buy.stripe.com/9B63cvb3G8kZ5cGfHwb3q01" target="_blank"
-         class="btn-hero-primary">
-        Commencer — 9€/mois
-      </a>
-      <a href="https://cardiac-qol-ai.streamlit.app" target="_blank"
-         class="btn-hero-secondary">
-        Essayer gratuitement →
-      </a>
-    </div>
-  </div>
-
-  <!-- Stats bar — fond légèrement plus sombre, séparation nette -->
-  <div style="border-top:1px solid rgba(255,255,255,0.06);
-       background:rgba(2,8,16,0.6);backdrop-filter:blur(12px);
-       padding:28px 80px;display:flex;justify-content:center;
-       gap:0;flex-wrap:wrap">
-    <div style="display:flex;align-items:center;gap:32px;flex-wrap:wrap;justify-content:center">
-      <div style="text-align:center;padding:0 32px">
-        <div style="font-size:2rem;font-weight:900;color:#10b981;line-height:1">7</div>
-        <div style="font-size:0.72rem;color:#475569;margin-top:4px;letter-spacing:0.5px">Outils déployés</div>
-      </div>
-      <div style="width:1px;height:40px;background:rgba(255,255,255,0.06)"></div>
-      <div style="text-align:center;padding:0 32px">
-        <div style="font-size:2rem;font-weight:900;color:#3b82f6;line-height:1">31+</div>
-        <div style="font-size:0.72rem;color:#475569;margin-top:4px;letter-spacing:0.5px">Publications indexées</div>
-      </div>
-      <div style="width:1px;height:40px;background:rgba(255,255,255,0.06)"></div>
-      <div style="text-align:center;padding:0 32px">
-        <div style="font-size:2rem;font-weight:900;color:#8b5cf6;line-height:1">5 800+</div>
-        <div style="font-size:0.72rem;color:#475569;margin-top:4px;letter-spacing:0.5px">Échantillons analysés</div>
-      </div>
-      <div style="width:1px;height:40px;background:rgba(255,255,255,0.06)"></div>
-      <div style="text-align:center;padding:0 32px">
-        <div style="font-size:2rem;font-weight:900;color:#f59e0b;line-height:1">248+</div>
-        <div style="font-size:0.72rem;color:#475569;margin-top:4px;letter-spacing:0.5px">Citations Google Scholar</div>
-      </div>
-    </div>
-  </div>
-</div>
-""", unsafe_allow_html=True)
+_hero_html = (
+    '<div style="background:linear-gradient(170deg,#020c1e 0%,#031525 45%,#020b18 100%);'
+    'padding:100px 80px 0;position:relative;overflow:hidden;">'
+    '<div style="position:absolute;top:-120px;left:-60px;width:600px;height:600px;'
+    'background:radial-gradient(ellipse,rgba(16,185,129,0.07) 0%,transparent 65%);'
+    'pointer-events:none"></div>'
+    '<div style="position:absolute;top:-80px;right:-80px;width:500px;height:500px;'
+    'background:radial-gradient(ellipse,rgba(59,130,246,0.06) 0%,transparent 65%);'
+    'pointer-events:none"></div>'
+    '<div style="max-width:860px;margin:0 auto;text-align:center;position:relative;z-index:1">'
+    f'<div style="margin-bottom:28px">{_logo_big}</div>'
+    '<div style="display:inline-flex;align-items:center;gap:8px;'
+    'background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.22);'
+    'color:#10b981;border-radius:100px;padding:7px 20px;'
+    'font-size:0.72rem;font-weight:700;letter-spacing:2.5px;'
+    'text-transform:uppercase;margin-bottom:32px">'
+    '&#128302; Recherche &amp; Clinique &middot; Open Source'
+    '</div>'
+    '<div style="font-size:clamp(2.8rem,6vw,4.8rem);font-weight:900;color:#f8fafc;'
+    'line-height:1.04;letter-spacing:-2.5px;margin-bottom:24px">'
+    "L'IA au service des<br>"
+    '<span style="background:linear-gradient(135deg,#10b981 0%,#34d399 50%,#3b82f6 100%);'
+    '-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">'
+    'M&eacute;decins &amp; Chercheurs'
+    '</span></div>'
+    '<div style="font-size:1.1rem;color:#64748b;line-height:1.8;max-width:640px;margin:0 auto 40px">'
+    'Des outils IA con&ccedil;us par un chercheur en bioinformatique m&eacute;dicale &mdash; '
+    'pour la d&eacute;cision clinique, l&rsquo;analyse multi-omique et la recherche translationnelle. '
+    '<strong style="color:#94a3b8">Enti&egrave;rement en fran&ccedil;ais.</strong>'
+    '</div>'
+    '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:44px">'
+    '<span class="hero-tag">&#129302; Claude AI</span>'
+    '<span class="hero-tag">&#129516; Multi-omique</span>'
+    '<span class="hero-tag">&#128202; 7 outils d&eacute;ploy&eacute;s</span>'
+    '<span class="hero-tag">&#128218; PRISMA &middot; Preprints 2026</span>'
+    '<span class="hero-tag">&#127467;&#127479; 100&nbsp;% fran&ccedil;ais</span>'
+    '<span class="hero-tag">&#128275; Open Source</span>'
+    '</div>'
+    '<div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:72px">'
+    '<a href="https://buy.stripe.com/9B63cvb3G8kZ5cGfHwb3q01" target="_blank" class="btn-hero-primary">'
+    'Commencer &mdash; 9&euro;/mois'
+    '</a>'
+    '<a href="https://cardiac-qol-ai.streamlit.app" target="_blank" class="btn-hero-secondary">'
+    'Essayer gratuitement &rarr;'
+    '</a>'
+    '</div>'
+    '</div>'
+    '<div style="border-top:1px solid rgba(255,255,255,0.06);'
+    'background:rgba(2,8,16,0.6);backdrop-filter:blur(12px);'
+    'padding:28px 80px;display:flex;justify-content:center;flex-wrap:wrap">'
+    '<div style="display:flex;align-items:center;gap:32px;flex-wrap:wrap;justify-content:center">'
+    '<div style="text-align:center;padding:0 32px">'
+    '<div style="font-size:2rem;font-weight:900;color:#10b981;line-height:1">7</div>'
+    '<div style="font-size:0.72rem;color:#475569;margin-top:4px">Outils d&eacute;ploy&eacute;s</div>'
+    '</div>'
+    '<div style="width:1px;height:40px;background:rgba(255,255,255,0.06)"></div>'
+    '<div style="text-align:center;padding:0 32px">'
+    '<div style="font-size:2rem;font-weight:900;color:#3b82f6;line-height:1">31+</div>'
+    '<div style="font-size:0.72rem;color:#475569;margin-top:4px">Publications index&eacute;es</div>'
+    '</div>'
+    '<div style="width:1px;height:40px;background:rgba(255,255,255,0.06)"></div>'
+    '<div style="text-align:center;padding:0 32px">'
+    '<div style="font-size:2rem;font-weight:900;color:#8b5cf6;line-height:1">5&nbsp;800+</div>'
+    '<div style="font-size:0.72rem;color:#475569;margin-top:4px">&Eacute;chantillons analys&eacute;s</div>'
+    '</div>'
+    '<div style="width:1px;height:40px;background:rgba(255,255,255,0.06)"></div>'
+    '<div style="text-align:center;padding:0 32px">'
+    '<div style="font-size:2rem;font-weight:900;color:#f59e0b;line-height:1">248+</div>'
+    '<div style="font-size:0.72rem;color:#475569;margin-top:4px">Citations Google Scholar</div>'
+    '</div>'
+    '</div>'
+    '</div>'
+    '</div>'
+)
+st.markdown(_hero_html, unsafe_allow_html=True)
 
 st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
 
@@ -557,60 +532,47 @@ st.markdown("<div id='about'></div>", unsafe_allow_html=True)
 _photo_src = f"data:image/jpeg;base64,{_PHOTO_B64}" if _PHOTO_B64 else ""
 
 if _photo_src:
-    _photo_card_about = f"""
-    <div style="text-align:center">
-      <div style="position:relative;display:inline-block">
-        <!-- Pill gradient border -->
-        <div style="border-radius:999px;
-             background:linear-gradient(160deg,#10b981 0%,#3b82f6 50%,#8b5cf6 100%);
-             padding:3px;
-             box-shadow:0 0 48px rgba(16,185,129,0.18),0 24px 64px rgba(0,0,0,0.55)">
-          <div style="border-radius:999px;overflow:hidden;background:#03080f">
-            <img src="{_photo_src}" style="width:260px;display:block;
-                 height:340px;object-fit:cover;object-position:50% 18%">
-          </div>
-        </div>
-        <!-- Badge Fondateur centré en haut -->
-        <div style="position:absolute;top:18px;left:50%;transform:translateX(-50%);
-             background:rgba(3,8,15,0.88);backdrop-filter:blur(16px);
-             border:1px solid rgba(16,185,129,0.45);color:#10b981;
-             border-radius:100px;padding:5px 16px;white-space:nowrap;
-             font-size:0.67rem;font-weight:700;letter-spacing:2px;text-transform:uppercase">
-          ● Fondateur &amp; CEO
-        </div>
-      </div>
-      <!-- Nom & titre sous la photo -->
-      <div style="margin-top:18px">
-        <div style="font-size:1rem;font-weight:800;color:#f1f5f9;letter-spacing:-0.3px">
-          Dr. Mamadou Lamine TALL
-        </div>
-        <div style="font-size:0.76rem;font-weight:600;color:#34d399;margin-top:5px">
-          PhD Bioinformatique · Aix-Marseille 2020
-        </div>
-      </div>
-    </div>"""
-    _photo_card_team = f"""
-    <div style="text-align:center">
-      <div style="position:relative;display:inline-block">
-        <!-- Pill gradient border amber/red/violet -->
-        <div style="border-radius:999px;
-             background:linear-gradient(160deg,#f59e0b 0%,#ef4444 50%,#8b5cf6 100%);
-             padding:3px;
-             box-shadow:0 0 40px rgba(245,158,11,0.15),0 20px 60px rgba(0,0,0,0.5)">
-          <div style="border-radius:999px;overflow:hidden;background:#03080f">
-            <img src="{_photo_src}" style="width:240px;display:block;
-                 height:316px;object-fit:cover;object-position:50% 18%">
-          </div>
-        </div>
-      </div>
-      <!-- Nom & titre sous la photo -->
-      <div style="margin-top:16px">
-        <div style="font-size:0.95rem;font-weight:800;color:#f1f5f9">Dr. Mamadou Lamine TALL</div>
-        <div style="font-size:0.72rem;color:#f59e0b;margin-top:4px;font-weight:700;letter-spacing:0.8px">
-          PhD · Aix-Marseille · 2020
-        </div>
-      </div>
-    </div>"""
+    _photo_card_about = (
+        '<div style="text-align:center">'
+        '<div style="position:relative;display:inline-block">'
+        '<div style="border-radius:999px;'
+        'background:linear-gradient(160deg,#10b981 0%,#3b82f6 50%,#8b5cf6 100%);'
+        'padding:3px;box-shadow:0 0 48px rgba(16,185,129,0.18),0 24px 64px rgba(0,0,0,0.55)">'
+        '<div style="border-radius:999px;overflow:hidden;background:#03080f">'
+        f'<img src="{_photo_src}" style="width:260px;display:block;'
+        'height:340px;object-fit:cover;object-position:50% 18%">'
+        '</div></div>'
+        '<div style="position:absolute;top:18px;left:50%;transform:translateX(-50%);'
+        'background:rgba(3,8,15,0.88);backdrop-filter:blur(16px);'
+        'border:1px solid rgba(16,185,129,0.45);color:#10b981;'
+        'border-radius:100px;padding:5px 16px;white-space:nowrap;'
+        'font-size:0.67rem;font-weight:700;letter-spacing:2px;text-transform:uppercase">'
+        '&#9679; Fondateur &amp; CEO'
+        '</div></div>'
+        '<div style="margin-top:18px">'
+        '<div style="font-size:1rem;font-weight:800;color:#f1f5f9;letter-spacing:-0.3px">'
+        'Dr. Mamadou Lamine TALL'
+        '</div>'
+        '<div style="font-size:0.76rem;font-weight:600;color:#34d399;margin-top:5px">'
+        'PhD Bioinformatique &middot; Aix-Marseille 2020'
+        '</div></div></div>'
+    )
+    _photo_card_team = (
+        '<div style="text-align:center">'
+        '<div style="position:relative;display:inline-block">'
+        '<div style="border-radius:999px;'
+        'background:linear-gradient(160deg,#f59e0b 0%,#ef4444 50%,#8b5cf6 100%);'
+        'padding:3px;box-shadow:0 0 40px rgba(245,158,11,0.15),0 20px 60px rgba(0,0,0,0.5)">'
+        '<div style="border-radius:999px;overflow:hidden;background:#03080f">'
+        f'<img src="{_photo_src}" style="width:240px;display:block;'
+        'height:316px;object-fit:cover;object-position:50% 18%">'
+        '</div></div></div>'
+        '<div style="margin-top:16px">'
+        '<div style="font-size:0.95rem;font-weight:800;color:#f1f5f9">Dr. Mamadou Lamine TALL</div>'
+        '<div style="font-size:0.72rem;color:#f59e0b;margin-top:4px;font-weight:700;letter-spacing:0.8px">'
+        'PhD &middot; Aix-Marseille &middot; 2020'
+        '</div></div></div>'
+    )
 else:
     _fallback = '<div style="height:380px;background:linear-gradient(135deg,#071628,#0d1829);display:flex;align-items:center;justify-content:center;font-size:5rem">👤</div>'
     _photo_card_about = _fallback
