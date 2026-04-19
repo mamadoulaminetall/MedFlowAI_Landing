@@ -5,6 +5,7 @@ Dr. Mamadou Lamine TALL · PhD Bioinformatique
 """
 
 import streamlit as st
+import streamlit.components.v1 as components
 import os
 
 # ── Chargement des assets base64
@@ -53,53 +54,76 @@ p, li { color: #94a3b8; }
 a { text-decoration: none; }
 
 /* ── NAV ── */
+html { scroll-behavior: smooth; }
 .nav {
     position: sticky; top: 0; z-index: 999;
-    background: rgba(3,8,15,0.92);
-    backdrop-filter: blur(32px) saturate(200%);
-    -webkit-backdrop-filter: blur(32px) saturate(200%);
-    border-bottom: 1px solid rgba(16,185,129,0.15);
-    box-shadow: 0 1px 0 rgba(16,185,129,0.08), 0 8px 32px rgba(0,0,0,0.4);
+    background: rgba(4,10,22,0.78);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    box-shadow: 0 2px 40px rgba(0,0,0,0.5), 0 1px 0 rgba(16,185,129,0.12);
     padding: 0 48px;
     display: flex; align-items: center;
     justify-content: space-between;
-    height: 68px;
+    height: 64px;
+    position: relative;
 }
-/* Ligne accent verte en bas */
 .nav::after {
     content: "";
     position: absolute; bottom: 0; left: 0;
-    width: 100%; height: 1px;
-    background: linear-gradient(90deg, transparent 0%, rgba(16,185,129,0.5) 30%, rgba(59,130,246,0.4) 70%, transparent 100%);
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(16,185,129,0.6) 25%,
+        rgba(59,130,246,0.5) 55%,
+        rgba(139,92,246,0.4) 80%,
+        transparent 100%);
+    box-shadow: 0 0 12px rgba(16,185,129,0.25);
 }
 .nav-logo {
-    display: flex; align-items: center; gap: 12px;
-    padding: 6px 16px 6px 0;
-    border-right: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; gap: 10px;
+    padding-right: 20px;
+    border-right: 1px solid rgba(255,255,255,0.08);
 }
-.nav-brand {
-    font-size: 1.3rem; font-weight: 900; letter-spacing: -0.8px;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
+.nav-badge {
+    font-size: 0.58rem; font-weight: 700; letter-spacing: 1.5px;
+    color: #10b981; background: rgba(16,185,129,0.12);
+    border: 1px solid rgba(16,185,129,0.25);
+    border-radius: 5px; padding: 2px 7px; text-transform: uppercase;
 }
-.nav-brand span {
-    background: linear-gradient(135deg, #10b981, #34d399);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-.nav-links { display: flex; gap: 28px; padding: 0 32px; }
+.nav-links { display: flex; gap: 4px; padding: 0 28px; }
 .nav-links a {
-    color: #4b5e78; font-size: 0.82rem; font-weight: 500;
-    transition: color 0.2s; letter-spacing: 0.3px;
+    color: #8ba3c1;
+    font-size: 0.82rem; font-weight: 500;
+    letter-spacing: 0.3px;
+    padding: 6px 13px; border-radius: 8px;
+    transition: all 0.18s;
     position: relative;
+    text-decoration: none;
 }
-.nav-links a:hover { color: #cbd5e1; }
+.nav-links a:hover {
+    color: #f1f5f9;
+    background: rgba(255,255,255,0.07);
+}
+.nav-links a::after {
+    content: "";
+    position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%);
+    width: 0; height: 2px; border-radius: 2px;
+    background: linear-gradient(90deg, #10b981, #3b82f6);
+    transition: width 0.2s;
+}
+.nav-links a:hover::after { width: 60%; }
 .nav-cta {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    color: white; padding: 9px 24px; border-radius: 10px;
-    font-weight: 700; font-size: 0.82rem; letter-spacing: 0.2px;
-    box-shadow: 0 4px 20px rgba(16,185,129,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
+    background: linear-gradient(135deg, #10b981 0%, #0ea472 100%);
+    color: white; padding: 9px 22px; border-radius: 10px;
+    font-weight: 700; font-size: 0.8rem; letter-spacing: 0.3px;
+    box-shadow: 0 4px 20px rgba(16,185,129,0.35), inset 0 1px 0 rgba(255,255,255,0.18);
+    transition: all 0.2s; white-space: nowrap;
+    border: 1px solid rgba(16,185,129,0.4);
+}
+.nav-cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 28px rgba(16,185,129,0.45);
 }
 
 /* ── HERO ── */
@@ -422,21 +446,26 @@ st.markdown(f"""
 <div class="nav">
   <div class="nav-logo">
     {LOGO_IMG}
-    <div style="font-size:0.62rem;font-weight:600;color:#1e4d3a;
-         background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.18);
-         border-radius:6px;padding:2px 8px;letter-spacing:1.5px;text-transform:uppercase;
-         margin-left:8px">v2.0</div>
+    <span class="nav-badge">v2.0</span>
   </div>
-  <div class="nav-links">
-    <a href="#about">À propos</a>
-    <a href="#roadmap">Projets</a>
-    <a href="#publications">Publications</a>
-    <a href="#equipe">Équipe</a>
-    <a href="#contact">Contact</a>
-    <a href="#legal">Mentions légales</a>
-  </div>
-  <a href="https://buy.stripe.com/9B63cvb3G8kZ5cGfHwb3q01" target="_blank" class="nav-cta">Accès complet — 9€/mois</a>
+  <nav class="nav-links">
+    <a href="#about"     onclick="navTo('about');return false;">&#192; propos</a>
+    <a href="#roadmap"   onclick="navTo('roadmap');return false;">Projets</a>
+    <a href="#publications" onclick="navTo('publications');return false;">Publications</a>
+    <a href="#equipe"    onclick="navTo('equipe');return false;">&Eacute;quipe</a>
+    <a href="#contact"   onclick="navTo('contact');return false;">Contact</a>
+    <a href="#legal"     onclick="navTo('legal');return false;">Mentions l&eacute;gales</a>
+  </nav>
+  <a href="https://buy.stripe.com/9B63cvb3G8kZ5cGfHwb3q01" target="_blank" class="nav-cta">
+    Acc&egrave;s complet &mdash; 9&euro;/mois
+  </a>
 </div>
+<script>
+function navTo(id) {{
+  var el = document.getElementById(id);
+  if (el) {{ el.scrollIntoView({{behavior:'smooth', block:'start'}}); }}
+}}
+</script>
 """, unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────────
