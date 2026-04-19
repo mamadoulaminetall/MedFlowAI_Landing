@@ -534,28 +534,57 @@ st.markdown(
     '<a class="nav-link" href="#legal" onclick="navTo(\'legal\');return false;">Mentions l&eacute;gales</a>'
     '</div>'
 
-    '</div></div>'
-    '<script>'
-    'var _drops=["nd-projets","nd-publications","nd-equipe"];'
-    'function navTo(id){'
-    '  var el=document.getElementById(id);'
-    '  if(el)el.scrollIntoView({behavior:"smooth",block:"start"});'
-    '  document.querySelectorAll(".nav-link").forEach(function(a){a.style.background="";a.style.color="#8ba3c1";});'
-    '  var hit=document.querySelector(".nav-link[href=\'#"+id+"\']");'
-    '  if(hit){hit.style.background="rgba(16,185,129,0.12)";hit.style.color="#f1f5f9";}'
-    '}'
-    'function tDrop(id){'
-    '  _drops.forEach(function(d){var el=document.getElementById(d);if(el&&d!==id)el.style.display="none";});'
-    '  var drop=document.getElementById(id);'
-    '  if(drop)drop.style.display=(drop.style.display==="block"?"none":"block");'
-    '}'
-    'function closeDrops(){'
-    '  _drops.forEach(function(d){var el=document.getElementById(d);if(el)el.style.display="none";});'
-    '}'
-    'document.addEventListener("click",function(e){if(!e.target.closest(".nav-item"))closeDrops();});'
-    '</script>',
+    '</div></div>',
     unsafe_allow_html=True
 )
+components.html("""
+<script>
+(function(){
+  var p = window.parent.document;
+  var _drops = ["nd-projets","nd-publications","nd-equipe"];
+  function navTo(id){
+    var el = p.getElementById(id);
+    if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
+    p.querySelectorAll(".nav-link").forEach(function(a){
+      a.style.background=""; a.style.color="#8ba3c1";
+    });
+    var hit = p.querySelector(".nav-link[href='#"+id+"']");
+    if(hit){ hit.style.background="rgba(16,185,129,0.12)"; hit.style.color="#f1f5f9"; }
+  }
+  function tDrop(id){
+    _drops.forEach(function(d){
+      var el=p.getElementById(d); if(el && d!==id) el.style.display="none";
+    });
+    var drop = p.getElementById(id);
+    if(drop) drop.style.display = (drop.style.display==="block" ? "none" : "block");
+  }
+  function closeDrops(){
+    _drops.forEach(function(d){ var el=p.getElementById(d); if(el) el.style.display="none"; });
+  }
+  p.querySelectorAll(".nav-link").forEach(function(a){
+    a.addEventListener("click", function(e){
+      var href = this.getAttribute("href");
+      var id = href && href.startsWith("#") ? href.slice(1) : null;
+      if(id) { e.preventDefault(); navTo(id); }
+    });
+  });
+  p.querySelectorAll("[onclick]").forEach(function(el){
+    var oc = el.getAttribute("onclick")||"";
+    if(oc.includes("tDrop")){
+      var m = oc.match(/tDrop\\('([^']+)'\\)/);
+      if(m){ el.addEventListener("click", function(e){ e.preventDefault(); tDrop(m[1]); }); }
+    }
+    if(oc.includes("navTo") && !oc.includes("tDrop")){
+      var m2 = oc.match(/navTo\\('([^']+)'\\)/);
+      if(m2){ el.addEventListener("click", function(e){ e.preventDefault(); navTo(m2[1]); closeDrops(); }); }
+    }
+  });
+  p.addEventListener("click", function(e){
+    if(!e.target.closest(".nav-item")) closeDrops();
+  });
+})();
+</script>
+""", height=0)
 
 # ─────────────────────────────────────────────────────────────────
 # HERO — full-width centered + stats bar
