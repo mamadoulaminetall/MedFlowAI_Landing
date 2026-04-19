@@ -5,7 +5,6 @@ Dr. Mamadou Lamine TALL · PhD Bioinformatique
 """
 
 import streamlit as st
-import streamlit.components.v1 as components
 import os
 
 # ── Chargement des assets base64
@@ -699,291 +698,178 @@ with col_about_text:
 st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────────
-# ROADMAP — Tous les projets GitHub interconnectés
+# ÉCOSYSTÈME — Roadmap + Outils en vue "planètes"
 # ─────────────────────────────────────────────────────────────────
 st.markdown("<div id='roadmap'></div>", unsafe_allow_html=True)
-st.markdown("""
-<div class="section section-alt">
-  <div style="text-align:center;margin-bottom:56px">
-    <div class="section-eyebrow" style="color:#3b82f6;text-align:center">GitHub · Roadmap</div>
-    <div class="section-h2" style="text-align:center;font-size:2.8rem">Tous les projets</div>
-    <div style="color:#475569;font-size:0.95rem;max-width:580px;margin:0 auto;line-height:1.7">
-      De la recherche fondamentale aux outils cliniques déployés —
-      chaque projet est open source et interconnecté dans l'écosystème MedFlow AI.
-    </div>
-  </div>
-""", unsafe_allow_html=True)
 
-# ── DIAGRAMME MERMAID ROADMAP
-_node = lambda w, text: f"<div style='min-width:{w}px;padding:5px 10px;text-align:center;line-height:1.5'>{text}</div>"
-
-_A = _node(200, "🎓 <b>Thèse · 2020</b><br/>Bioinformatique · Aix-Marseille")
-_B = _node(190, "🦠 <b>Microbiome</b><br/>Cancer · 824 échantillons")
-_C = _node(200, "💓 <b>Réinnervation</b><br/>VFC/HRV · Preprint 2026")
-_D = _node(190, "🧬 <b>MYOomics</b><br/>RNA-seq · scRNA-seq · Myopathies")
-_E = _node(190, "📊 <b>Scores Cliniques</b><br/>15 scores validés")
-_F = _node(190, "🫀 <b>QoL Cardiac</b><br/>Qualité de vie · 600 patients")
-_G = _node(190, "📝 <b>Générateur CR</b><br/>Compte-rendu IA · Export PDF")
-_H = _node(220, "🚀 <b>MedFlow AI</b><br/>Plateforme SaaS · 7 outils déployés")
-_I = _node(210, "📈 <b>Vision 2026+</b><br/>PhyMedExp · MYOccitanie · Expansion")
-
-components.html(f"""
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<style>
-  * {{ box-sizing: border-box; margin: 0; padding: 0; }}
-  html, body {{ width: 100%; background: transparent; overflow-x: hidden; }}
-  body {{ font-family: 'Inter', -apple-system, sans-serif; padding: 4px 0 8px; }}
-  #diagram {{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-  }}
-  #diagram svg {{
-    display: block;
-    max-width: 100%;
-    height: auto;
-  }}
-</style>
-</head>
-<body>
-<div id="diagram" class="mermaid">
-%%{{init: {{
-  "theme": "base",
-  "themeVariables": {{
-    "background": "#060d1a",
-    "primaryColor": "#0d1f3c",
-    "primaryTextColor": "#f1f5f9",
-    "primaryBorderColor": "#10b981",
-    "lineColor": "#10b981",
-    "secondaryColor": "#071628",
-    "tertiaryColor": "#0a1628",
-    "nodeTextColor": "#f1f5f9",
-    "edgeLabelBackground": "#060d1a",
-    "fontFamily": "Inter, -apple-system, sans-serif",
-    "fontSize": "13px"
-  }},
-  "flowchart": {{
-    "htmlLabels": true,
-    "curve": "basis",
-    "padding": 20,
-    "nodeSpacing": 44,
-    "rankSpacing": 68,
-    "useMaxWidth": true
-  }}
-}}}}%%
-flowchart TD
-    A(["{_A}"])
-    A --> B(["{_B}"])
-    A --> C(["{_C}"])
-    A --> D(["{_D}"])
-    B --> E(["{_E}"])
-    C --> F(["{_F}"])
-    D --> G(["{_G}"])
-    E --> H(["{_H}"])
-    F --> H
-    G --> H
-    H --> I(["{_I}"])
-
-    style A fill:#0d1f3c,stroke:#f59e0b,stroke-width:2.5px,color:#fef3c7
-    style B fill:#071e14,stroke:#10b981,stroke-width:2px,color:#d1fae5
-    style C fill:#071428,stroke:#3b82f6,stroke-width:2px,color:#dbeafe
-    style D fill:#120d2a,stroke:#8b5cf6,stroke-width:2px,color:#ede9fe
-    style E fill:#071428,stroke:#60a5fa,stroke-width:1.5px,color:#bfdbfe
-    style F fill:#1a0a0a,stroke:#ef4444,stroke-width:1.5px,color:#fecaca
-    style G fill:#071e24,stroke:#06b6d4,stroke-width:1.5px,color:#cffafe
-    style H fill:#052e18,stroke:#10b981,stroke-width:3.5px,color:#ecfdf5
-    style I fill:#12092a,stroke:#8b5cf6,stroke-width:2.5px,color:#ede9fe
-</div>
-<script type="module">
-  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-  mermaid.initialize({{ startOnLoad: true, securityLevel: 'loose' }});
-  mermaid.run().then(() => {{
-    const svg = document.querySelector('#diagram svg');
-    if (svg) {{
-      svg.removeAttribute('width');
-      svg.removeAttribute('height');
-      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-      svg.style.width = '100%';
-      svg.style.height = 'auto';
-    }}
-  }});
-</script>
-</body>
-</html>
-""", height=780, scrolling=False)
-
-# ── OUTILS CLINIQUES DÉPLOYÉS
-st.markdown("""
-  <div style="margin-bottom:32px">
-    <span class="rm-category-label"
-          style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25);color:#10b981">
-      ⚡ Outils Cliniques Déployés
-    </span>
-  </div>
-""", unsafe_allow_html=True)
-
-clinical_tools = [
-    {
-        "icon": "🫀", "color": "#ef4444",
-        "title": "QoL Cardiac",
-        "desc": "Qualité de vie patient cardiaque. 4 questionnaires, percentiles sur 600 patients.",
-        "badge": "Gratuit", "badge_color": "rgba(16,185,129,0.15)", "badge_text": "#10b981",
-        "url": "https://cardiac-qol-ai.streamlit.app",
-        "github": "https://github.com/mamadoulaminetall/cardiac-qol-ai",
-    },
-    {
-        "icon": "📊", "color": "#3b82f6",
-        "title": "Scores Cliniques",
-        "desc": "15 scores validés : CHA₂DS₂-VASc, HEART, qSOFA, Glasgow, NIHSS...",
-        "badge": "Gratuit", "badge_color": "rgba(16,185,129,0.15)", "badge_text": "#10b981",
-        "url": "https://clinia-scores.streamlit.app",
-        "github": "https://github.com/mamadoulaminetall/clinia-scores",
-    },
-    {
-        "icon": "📝", "color": "#06b6d4",
-        "title": "Générateur CR IA",
-        "desc": "Données cliniques → compte-rendu structuré en français → Export PDF.",
-        "badge": "9€/mois", "badge_color": "rgba(59,130,246,0.12)", "badge_text": "#60a5fa",
-        "url": "https://clinia-cr.streamlit.app",
-        "github": "https://github.com/mamadoulaminetall/clinia-cr",
-    },
-    {
-        "icon": "📚", "color": "#8b5cf6",
-        "title": "Revue Littérature IA",
-        "desc": "PubMed + Claude → synthèse evidence-based avec grade de recommandation.",
-        "badge": "9€/mois", "badge_color": "rgba(59,130,246,0.12)", "badge_text": "#60a5fa",
-        "url": "https://clinia-review.streamlit.app",
-        "github": "https://github.com/mamadoulaminetall/clinia-review",
-    },
-    {
-        "icon": "📈", "color": "#10b981",
-        "title": "Biostatistiques",
-        "desc": "Upload CSV → t-test, ANOVA, Kaplan-Meier → graphiques publication-ready.",
-        "badge": "9€/mois", "badge_color": "rgba(59,130,246,0.12)", "badge_text": "#60a5fa",
-        "url": "https://clinia-biostat.streamlit.app",
-        "github": "https://github.com/mamadoulaminetall/clinia-biostat",
-    },
-    {
-        "icon": "💓", "color": "#3b82f6",
-        "title": "Réinnervation IA",
-        "desc": "IA prédictive VFC/HRV post-transplantation cardiaque. Revue PRISMA 2026.",
-        "badge": "Gratuit", "badge_color": "rgba(16,185,129,0.15)", "badge_text": "#10b981",
-        "url": "https://reinnervationaiapp.streamlit.app",
-        "github": "https://github.com/mamadoulaminetall/reinnervation_ai_app",
-    },
-    {
-        "icon": "🧬", "color": "#8b5cf6",
-        "title": "MYOomics",
-        "desc": "RNA-seq, scRNA-seq, ML pour biomarqueurs diagnostiques des myopathies.",
-        "badge": "Gratuit", "badge_color": "rgba(16,185,129,0.15)", "badge_text": "#10b981",
-        "url": "https://myoomics.streamlit.app",
-        "github": "https://github.com/mamadoulaminetall/myoomics",
-    },
+# ── Données outils cliniques
+_eco_tools = [
+    {"icon": "🫀", "color": "#ef4444", "title": "QoL Cardiac",
+     "desc": "4 questionnaires · percentiles · 600 patients",
+     "badge": "Gratuit", "bc": "rgba(16,185,129,0.15)", "bt": "#10b981",
+     "url": "https://cardiac-qol-ai.streamlit.app"},
+    {"icon": "📊", "color": "#3b82f6", "title": "Scores Cliniques",
+     "desc": "15 scores : CHA₂DS₂-VASc, HEART, qSOFA, Glasgow…",
+     "badge": "Gratuit", "bc": "rgba(16,185,129,0.15)", "bt": "#10b981",
+     "url": "https://clinia-scores.streamlit.app"},
+    {"icon": "💓", "color": "#60a5fa", "title": "Réinnervation IA",
+     "desc": "VFC/HRV prédictif post-transplantation · AUC 0.961",
+     "badge": "Gratuit", "bc": "rgba(16,185,129,0.15)", "bt": "#10b981",
+     "url": "https://reinnervationaiapp.streamlit.app"},
+    {"icon": "📈", "color": "#10b981", "title": "Biostatistiques",
+     "desc": "CSV → t-test, ANOVA, Kaplan-Meier · graphiques publi.",
+     "badge": "9€/mois", "bc": "rgba(59,130,246,0.12)", "bt": "#60a5fa",
+     "url": "https://clinia-biostat.streamlit.app"},
+    {"icon": "📝", "color": "#06b6d4", "title": "Générateur CR IA",
+     "desc": "Données cliniques → CR structuré → Export PDF",
+     "badge": "9€/mois", "bc": "rgba(59,130,246,0.12)", "bt": "#60a5fa",
+     "url": "https://clinia-cr.streamlit.app"},
+    {"icon": "📚", "color": "#8b5cf6", "title": "Revue Littérature IA",
+     "desc": "PubMed + Claude → synthèse evidence-based",
+     "badge": "9€/mois", "bc": "rgba(59,130,246,0.12)", "bt": "#60a5fa",
+     "url": "https://clinia-review.streamlit.app"},
+    {"icon": "🧬", "color": "#a78bfa", "title": "MYOomics",
+     "desc": "RNA-seq · scRNA-seq · ML · myopathies",
+     "badge": "Gratuit", "bc": "rgba(16,185,129,0.15)", "bt": "#10b981",
+     "url": "https://myoomics.streamlit.app"},
 ]
 
-cols_ct = st.columns(4, gap="medium")
-for i, t in enumerate(clinical_tools):
-    with cols_ct[i % 4]:
-        st.markdown(f"""
-        <div class="rm-card" style="border-color:rgba({
-            '239,68,68' if t['color']=='#ef4444' else
-            '59,130,246' if t['color']=='#3b82f6' else
-            '6,182,212' if t['color']=='#06b6d4' else
-            '139,92,246' if t['color']=='#8b5cf6' else
-            '16,185,129'
-        },0.25)">
-          <div class="rm-icon-wrap" style="background:{t['color']}18">{t['icon']}</div>
-          <div class="rm-card-title">{t['title']}</div>
-          <div class="rm-card-desc">{t['desc']}</div>
-          <span class="rm-badge" style="background:{t['badge_color']};color:{t['badge_text']}">{t['badge']}</span>
-          <div style="display:flex;gap:8px;margin-top:14px">
-            <a href="{t['url']}" target="_blank" class="rm-link"
-               style="background:{t['color']};color:white;padding:7px 14px;
-               border-radius:7px;font-size:0.76rem;font-weight:700">
-               Ouvrir ↗
-            </a>
-            <a href="{t['github']}" target="_blank" class="rm-link"
-               style="border:1px solid rgba(255,255,255,0.08);color:#64748b;
-               padding:7px 14px;border-radius:7px;font-size:0.76rem">
-               GitHub
-            </a>
-          </div>
-        </div>
-        """, unsafe_allow_html=True)
+_left_eco  = _eco_tools[:4]   # QoL, Scores, Réinnervation, Biostat
+_right_eco = _eco_tools[4:]   # Générateur CR, Revue, MYOomics
 
-# ── PROJETS RECHERCHE
-st.markdown("<div style='height:48px'></div>", unsafe_allow_html=True)
-st.markdown("""
-  <div style="margin-bottom:32px">
-    <span class="rm-category-label"
-          style="background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.25);color:#a78bfa">
-      🔬 Projets de Recherche GitHub
-    </span>
-  </div>
-""", unsafe_allow_html=True)
+def _eco_card(t, side):
+    """Compact planet card — left cards face right, right cards face left."""
+    icon_order = "row-reverse" if side == "left" else "row"
+    txt_align  = "right" if side == "left" else "left"
+    acc_border = (
+        f"border-right:2px solid {t['color']}55" if side == "left"
+        else f"border-left:2px solid {t['color']}55"
+    )
+    return (
+        f'<div style="background:#060e1e;border:1px solid rgba(255,255,255,0.07);'
+        f'border-radius:14px;padding:14px 16px;{acc_border};'
+        'transition:transform 0.2s,box-shadow 0.2s">'
+        f'<div style="display:flex;align-items:center;gap:10px;flex-direction:{icon_order}">'
+        f'<div style="width:40px;height:40px;border-radius:11px;flex-shrink:0;'
+        f'background:{t["color"]}18;display:flex;align-items:center;'
+        f'justify-content:center;font-size:1.3rem">{t["icon"]}</div>'
+        f'<div style="flex:1;text-align:{txt_align}">'
+        f'<div style="font-size:0.86rem;font-weight:800;color:#f1f5f9;margin-bottom:2px">{t["title"]}</div>'
+        f'<div style="font-size:0.71rem;color:#4b6280;line-height:1.4;margin-bottom:6px">{t["desc"]}</div>'
+        f'<div style="display:flex;gap:6px;justify-content:{"flex-end" if side=="left" else "flex-start"};'
+        'flex-wrap:wrap;align-items:center">'
+        f'<span style="background:{t["bc"]};color:{t["bt"]};border-radius:5px;'
+        f'padding:2px 8px;font-size:0.67rem;font-weight:700">{t["badge"]}</span>'
+        f'<a href="{t["url"]}" target="_blank" style="color:{t["color"]};font-size:0.71rem;'
+        'font-weight:700;text-decoration:none">Ouvrir ↗</a>'
+        '</div>'
+        '</div>'
+        '</div>'
+        '</div>'
+    )
 
-research_tools = [
-    {
-        "icon": "🦠", "color": "#10b981",
-        "title": "Microbiome & Cancer",
-        "desc": "Diagnostic précoce cancer par microbiome. 824 échantillons, ML + 16S rRNA.",
-        "badge": "GitHub", "badge_color": "rgba(16,185,129,0.12)", "badge_text": "#34d399",
-        "github": "https://github.com/mamadoulaminetall/microbiome_diagnostic_cancer_precoce",
-    },
-    {
-        "icon": "🧩", "color": "#f59e0b",
-        "title": "CNV Detection",
-        "desc": "Pipeline détection CNV depuis VCF. Nextflow + Docker + visualisation interactive.",
-        "badge": "GitHub", "badge_color": "rgba(245,158,11,0.12)", "badge_text": "#fbbf24",
-        "github": "https://github.com/mamadoulaminetall/D-tection-de-CNV-et-Visualisation-Interactive-",
-    },
-    {
-        "icon": "❤️", "color": "#ef4444",
-        "title": "QoL Cardiac Research",
-        "desc": "Méta-analyse PRISMA 15 études, 600 patients. Référence de l'outil QoL Cardiac.",
-        "badge": "Preprint", "badge_color": "rgba(239,68,68,0.12)", "badge_text": "#f87171",
-        "github": "https://github.com/mamadoulaminetall/cardiac-qol-ai",
-    },
-    {
-        "icon": "🫀", "color": "#3b82f6",
-        "title": "Réinnervation Cardiaque",
-        "desc": "Revue systématique VFC + plateforme IA prédictive. Preprint en soumission.",
-        "badge": "Preprint 2026", "badge_color": "rgba(59,130,246,0.12)", "badge_text": "#60a5fa",
-        "github": "https://github.com/mamadoulaminetall/reinnervation_ai_app",
-    },
-    {
-        "icon": "🧬", "color": "#8b5cf6",
-        "title": "MYOomics Project",
-        "desc": "Méta-analyse multi-omique myopathies. RNA-seq + scRNA-seq + ML. Preprint en soumission.",
-        "badge": "Preprint 2026", "badge_color": "rgba(139,92,246,0.12)", "badge_text": "#a78bfa",
-        "github": "https://github.com/mamadoulaminetall/MYOomics_Project",
-    },
+_left_cards_html  = "".join(_eco_card(t, "left")  for t in _left_eco)
+_right_cards_html = "".join(_eco_card(t, "right") for t in _right_eco)
+
+# ── Centre : timeline solaire
+_timeline_steps = [
+    ("#f59e0b", "🎓", "Thèse 2020",      "Bioinformatique · AMU"),
+    ("#10b981", "🦠", "Recherche",        "Microbiome · Génomique"),
+    ("#3b82f6", "💓", "Cardiologie 2025", "Réinnervation · QoL"),
+    ("#10b981", "🚀", "MedFlow AI",       "7 outils SaaS déployés"),
+    ("#8b5cf6", "🌟", "Vision 2026+",     "PhyMedExp · MYOccitanie"),
 ]
 
-cols_rt = st.columns(3, gap="medium")
-for i, t in enumerate(research_tools):
-    with cols_rt[i % 3]:
-        st.markdown(f"""
-        <div class="rm-card" style="border-color:rgba(139,92,246,0.15)">
-          <div class="rm-icon-wrap" style="background:{t['color']}18">{t['icon']}</div>
-          <div class="rm-card-title">{t['title']}</div>
-          <div class="rm-card-desc">{t['desc']}</div>
-          <span class="rm-badge" style="background:{t['badge_color']};color:{t['badge_text']}">{t['badge']}</span>
-          <div style="margin-top:14px">
-            <a href="{t['github']}" target="_blank" class="rm-link"
-               style="border:1px solid rgba(255,255,255,0.1);color:#94a3b8;
-               padding:7px 16px;border-radius:7px;font-size:0.78rem;font-weight:600">
-               Voir sur GitHub ↗
-            </a>
-          </div>
-        </div>
-        """, unsafe_allow_html=True)
+_tl_html = ""
+for idx, (col, ico, lbl, sub) in enumerate(_timeline_steps):
+    is_sun = "🚀" in ico
+    sz     = "60px" if is_sun else "46px"
+    fsz    = "1.5rem" if is_sun else "1.1rem"
+    glow   = (f"box-shadow:0 0 28px {col}88,0 0 56px {col}44;"
+              if is_sun else f"box-shadow:0 0 10px {col}55;")
+    bw     = "3px" if is_sun else "2px"
+    conn   = (
+        f'<div style="width:2px;height:28px;background:linear-gradient({col}55,transparent);'
+        'margin:2px auto"></div>'
+        if idx < len(_timeline_steps) - 1 else ""
+    )
+    _tl_html += (
+        '<div style="display:flex;flex-direction:column;align-items:center">'
+        f'<div style="width:{sz};height:{sz};border-radius:50%;'
+        f'background:{col}15;border:{bw} solid {col};{glow}'
+        f'display:flex;align-items:center;justify-content:center;font-size:{fsz}">'
+        f'{ico}</div>'
+        '<div style="text-align:center;margin-top:5px;margin-bottom:2px">'
+        f'<div style="font-size:{"0.88rem" if is_sun else "0.76rem"};'
+        f'font-weight:{"900" if is_sun else "700"};'
+        f'color:{"#f1f5f9" if is_sun else "#cbd5e1"}">{lbl}</div>'
+        f'<div style="font-size:0.67rem;color:#4b6280">{sub}</div>'
+        '</div>'
+        + conn +
+        '</div>'
+    )
 
-st.markdown("</div>", unsafe_allow_html=True)
+_center_col = (
+    '<div style="display:flex;flex-direction:column;align-items:center;padding:20px 18px;'
+    'background:linear-gradient(180deg,rgba(16,185,129,0.04) 0%,'
+    'rgba(59,130,246,0.06) 50%,rgba(139,92,246,0.04) 100%);'
+    'border:1px solid rgba(255,255,255,0.07);border-radius:24px;'
+    'box-shadow:0 0 60px rgba(16,185,129,0.06),0 0 120px rgba(59,130,246,0.04)">'
+    + _tl_html +
+    '</div>'
+)
+
+# ── Ellipses SVG déco (fond)
+_svg_orbits = (
+    '<svg style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);'
+    'width:95%;height:95%;pointer-events:none;z-index:0;opacity:0.6" '
+    'viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet">'
+    '<ellipse cx="500" cy="250" rx="470" ry="210" '
+    'stroke="rgba(16,185,129,0.07)" stroke-width="1" stroke-dasharray="10,6" fill="none"/>'
+    '<ellipse cx="500" cy="250" rx="340" ry="150" '
+    'stroke="rgba(59,130,246,0.07)" stroke-width="1" stroke-dasharray="7,5" fill="none"/>'
+    '</svg>'
+)
+
+# ── Section complète
+_galaxy_html = (
+    '<div class="section section-alt" style="padding-bottom:64px">'
+
+    # Header
+    '<div style="text-align:center;margin-bottom:52px">'
+    '<div class="section-eyebrow" style="color:#3b82f6;text-align:center">'
+    'Roadmap &middot; Outils &middot; GitHub</div>'
+    '<div class="section-h2" style="text-align:center">'
+    '&Eacute;cosyst&egrave;me MedFlow AI</div>'
+    '<div style="color:#475569;font-size:0.95rem;max-width:560px;'
+    'margin:0 auto;line-height:1.7">'
+    'De la recherche fondamentale aux outils cliniques d&eacute;ploy&eacute;s &mdash; '
+    'chaque projet est interconnect&eacute; dans l&rsquo;&eacute;cosyst&egrave;me MedFlow AI.'
+    '</div>'
+    '</div>'
+
+    # Galaxy grid
+    '<div style="position:relative">'
+    + _svg_orbits +
+    '<div style="display:grid;grid-template-columns:1fr 260px 1fr;gap:20px;'
+    'align-items:center;position:relative;z-index:1">'
+
+    # Left planets
+    f'<div style="display:flex;flex-direction:column;gap:13px">{_left_cards_html}</div>'
+
+    # Center sun/timeline
+    f'<div>{_center_col}</div>'
+
+    # Right planets
+    f'<div style="display:flex;flex-direction:column;gap:13px">{_right_cards_html}</div>'
+
+    '</div>'
+    '</div>'
+
+    '</div>'
+)
+
+st.markdown(_galaxy_html, unsafe_allow_html=True)
 st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────────
@@ -1092,45 +978,62 @@ publications = [
     },
 ]
 
+# ── Grille de boxes verticales ──
+_pub_cards_html = (
+    '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:8px">'
+)
 for pub in publications:
     tags_html = "".join(
-        f'<span style="background:#0f172a;color:#475569;border-radius:6px;'
-        f'padding:3px 10px;font-size:0.72rem;margin:2px;display:inline-block">{t}</span>'
+        '<span style="background:#0a1628;color:#475569;border-radius:5px;'
+        'padding:2px 9px;font-size:0.68rem;margin:2px 2px 0 0;display:inline-block;'
+        'border:1px solid rgba(255,255,255,0.05)">' + t + '</span>'
         for t in pub["tags"]
     )
-    st.markdown(f"""
-    <div class="pub-card" style="border-color:{pub['color']}">
-      <div class="pub-type" style="color:{pub['color']}">{pub['type']}</div>
-      <div class="pub-title">{pub['title']}</div>
-      <div class="pub-meta">{pub['meta']}</div>
-      <div class="pub-abstract">{pub['abstract']}</div>
-      <div style="margin-bottom:14px">{tags_html}</div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <a href="{pub['url']}" target="_blank" class="pub-link"
-           style="color:{pub['color']};border-color:{pub['color']}44">
-           {pub['url_label']}
-        </a>
-        <a href="{pub['github']}" target="_blank" class="pub-link"
-           style="color:#475569;border-color:rgba(255,255,255,0.08)">
-           GitHub ↗
-        </a>
-      </div>
-    </div>
-    """, unsafe_allow_html=True)
+    _pub_cards_html += (
+        '<div style="display:flex;flex-direction:column;background:#060e1e;'
+        'border:1px solid rgba(255,255,255,0.06);border-radius:16px;overflow:hidden;'
+        'transition:transform 0.2s,box-shadow 0.2s">'
 
-# ── PUBLICATIONS PEER-REVIEWED
-st.markdown("""
-<div style="margin-top:48px;padding-top:48px;border-top:1px solid rgba(255,255,255,0.05)">
-  <div style="display:flex;align-items:center;gap:16px;margin-bottom:32px">
-    <span style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);
-          color:#60a5fa;border-radius:8px;padding:5px 16px;font-size:0.75rem;font-weight:700;
-          letter-spacing:2px;text-transform:uppercase">
-      📄 Publications Peer-Reviewed · IHU Méditerranée Infection · Aix-Marseille
-    </span>
-    <span style="color:#475569;font-size:0.82rem">Google Scholar · ID : qJaCV7MAAAAJ</span>
-  </div>
-</div>
-""", unsafe_allow_html=True)
+        # Bande colorée en haut
+        f'<div style="height:4px;background:{pub["color"]};flex-shrink:0"></div>'
+
+        # Corps
+        '<div style="padding:24px 22px;display:flex;flex-direction:column;flex:1;gap:12px">'
+
+        # Type badge
+        f'<span style="display:inline-block;background:{pub["color"]}18;color:{pub["color"]};'
+        'border-radius:6px;padding:4px 12px;font-size:0.68rem;font-weight:700;'
+        f'letter-spacing:1.5px;text-transform:uppercase;align-self:flex-start">{pub["type"]}</span>'
+
+        # Titre
+        f'<div style="font-size:0.95rem;font-weight:800;color:#f1f5f9;line-height:1.45">{pub["title"]}</div>'
+
+        # Méta
+        f'<div style="font-size:0.73rem;color:#4b6280;line-height:1.5">{pub["meta"]}</div>'
+
+        # Abstract (tronqué)
+        f'<div style="font-size:0.78rem;color:#64748b;line-height:1.6;flex:1">{pub["abstract"][:260]}…</div>'
+
+        # Tags
+        f'<div style="margin-top:auto;padding-top:10px">{tags_html}</div>'
+
+        # Boutons
+        '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">'
+        f'<a href="{pub["url"]}" target="_blank" style="display:inline-block;'
+        f'border:1px solid {pub["color"]}55;color:{pub["color"]};'
+        'border-radius:7px;padding:6px 16px;font-size:0.75rem;font-weight:700;'
+        f'text-decoration:none">{pub["url_label"]}</a>'
+        f'<a href="{pub["github"]}" target="_blank" style="display:inline-block;'
+        'border:1px solid rgba(255,255,255,0.08);color:#475569;'
+        'border-radius:7px;padding:6px 16px;font-size:0.75rem;font-weight:600;'
+        'text-decoration:none">GitHub ↗</a>'
+        '</div>'
+
+        '</div>'  # fin corps
+        '</div>'  # fin card
+    )
+_pub_cards_html += '</div>'
+st.markdown(_pub_cards_html, unsafe_allow_html=True)
 
 peer_reviewed = [
     # ─ Tri par citations décroissantes ─
@@ -1240,67 +1143,6 @@ peer_reviewed = [
      "https://scholar.google.com/citations?user=qJaCV7MAAAAJ&hl=fr"),
 ]
 
-# Affichage compact en grille 2 colonnes — tout dans un seul st.markdown
-grid_html = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px">'
-
-for cit, color, title, authors, journal, year, url in peer_reviewed:
-    first_auth = "★ " in title
-    clean_title = title.replace("★ ", "")
-    fa_badge = '<span style="background:rgba(239,68,68,0.12);color:#f87171;border-radius:4px;padding:1px 8px;font-size:0.68rem;font-weight:700;margin-right:6px">1er auteur</span>' if first_auth else ""
-    grid_html += f"""
-    <div style="background:#080f1e;border:1px solid rgba(255,255,255,0.05);
-         border-left:3px solid {color};border-radius:10px;padding:16px 18px">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
-        <div style="flex:1">{fa_badge}
-          <span style="font-size:0.88rem;font-weight:700;color:#e2e8f0;line-height:1.4">{clean_title}</span>
-        </div>
-        <span style="background:{color}22;color:{color};border-radius:6px;
-              padding:3px 10px;font-size:0.75rem;font-weight:800;margin-left:12px;white-space:nowrap">
-          {cit} cit.
-        </span>
-      </div>
-      <div style="font-size:0.75rem;color:#475569;margin-bottom:4px">{authors}</div>
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <span style="font-size:0.75rem;color:#475569;font-style:italic">{journal} · {year}</span>
-        <a href="{url}" target="_blank"
-           style="color:{color};font-size:0.72rem;font-weight:600;white-space:nowrap;margin-left:8px">
-           Voir →
-        </a>
-      </div>
-    </div>"""
-
-grid_html += "</div>"
-st.markdown(grid_html, unsafe_allow_html=True)
-
-# Stats globales
-total_cit = sum(int(c) for c, *_ in peer_reviewed)
-st.markdown(f"""
-<div style="margin-top:24px;background:#0d1829;border-radius:12px;padding:20px 28px;
-     border:1px solid rgba(255,255,255,0.06);display:flex;gap:40px;flex-wrap:wrap;align-items:center">
-  <div>
-    <span style="font-size:1.8rem;font-weight:900;color:#3b82f6">{len(peer_reviewed) + 5}</span>
-    <span style="color:#475569;font-size:0.82rem;margin-left:8px">Publications totales</span>
-  </div>
-  <div>
-    <span style="font-size:1.8rem;font-weight:900;color:#10b981">{total_cit}+</span>
-    <span style="color:#475569;font-size:0.82rem;margin-left:8px">Citations totales</span>
-  </div>
-  <div>
-    <span style="font-size:1.8rem;font-weight:900;color:#8b5cf6">8</span>
-    <span style="color:#475569;font-size:0.82rem;margin-left:8px">Publications 1er auteur</span>
-  </div>
-  <div>
-    <span style="font-size:1.8rem;font-weight:900;color:#f59e0b">2019–2026</span>
-    <span style="color:#475569;font-size:0.82rem;margin-left:8px">Période d'activité</span>
-  </div>
-  <a href="https://scholar.google.com/citations?user=qJaCV7MAAAAJ&hl=fr" target="_blank"
-     style="background:#1e3a5f;color:#60a5fa;padding:10px 22px;border-radius:8px;
-     font-weight:700;font-size:0.85rem;margin-left:auto">
-     Voir sur Google Scholar ↗
-  </a>
-</div>
-""", unsafe_allow_html=True)
-
 st.markdown("</div>", unsafe_allow_html=True)
 st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
 
@@ -1383,6 +1225,85 @@ with col_team_info:
       </div>
     </div>
     """, unsafe_allow_html=True)
+
+st.markdown("</div>", unsafe_allow_html=True)
+st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
+
+# ─────────────────────────────────────────────────────────────────
+# PUBLICATIONS PEER-REVIEWED (après Fondateur)
+# ─────────────────────────────────────────────────────────────────
+st.markdown("""
+<div class="section" style="background:#030810">
+  <div class="section-eyebrow" style="color:#3b82f6">IHU M&eacute;diterran&eacute;e Infection &middot; Aix-Marseille</div>
+  <div class="section-h2">Publications Peer-Reviewed</div>
+  <div style="display:flex;align-items:center;gap:16px;margin-bottom:32px;flex-wrap:wrap">
+    <span style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);
+          color:#60a5fa;border-radius:8px;padding:5px 16px;font-size:0.75rem;font-weight:700;
+          letter-spacing:2px;text-transform:uppercase">
+      📄 29+ publications index&eacute;es · G&eacute;nomique &middot; M&eacute;tagenomique &middot; Microbiome
+    </span>
+    <span style="color:#475569;font-size:0.82rem">Google Scholar · ID : qJaCV7MAAAAJ</span>
+  </div>
+""", unsafe_allow_html=True)
+
+# Grille 2 colonnes
+_pr_grid = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px">'
+for cit, color, title, authors, journal, year, url in peer_reviewed:
+    first_auth = "★ " in title
+    clean_title = title.replace("★ ", "")
+    fa_badge = ('<span style="background:rgba(239,68,68,0.12);color:#f87171;border-radius:4px;'
+                'padding:1px 8px;font-size:0.68rem;font-weight:700;margin-right:6px">1er auteur</span>'
+                if first_auth else "")
+    _pr_grid += (
+        f'<div style="background:#080f1e;border:1px solid rgba(255,255,255,0.05);'
+        f'border-left:3px solid {color};border-radius:10px;padding:16px 18px">'
+        '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">'
+        f'<div style="flex:1">{fa_badge}'
+        f'<span style="font-size:0.88rem;font-weight:700;color:#e2e8f0;line-height:1.4">{clean_title}</span>'
+        '</div>'
+        f'<span style="background:{color}22;color:{color};border-radius:6px;'
+        'padding:3px 10px;font-size:0.75rem;font-weight:800;margin-left:12px;white-space:nowrap">'
+        f'{cit} cit.</span>'
+        '</div>'
+        f'<div style="font-size:0.75rem;color:#475569;margin-bottom:4px">{authors}</div>'
+        '<div style="display:flex;justify-content:space-between;align-items:center">'
+        f'<span style="font-size:0.75rem;color:#475569;font-style:italic">{journal} · {year}</span>'
+        f'<a href="{url}" target="_blank" style="color:{color};font-size:0.72rem;'
+        f'font-weight:600;white-space:nowrap;margin-left:8px">Voir →</a>'
+        '</div>'
+        '</div>'
+    )
+_pr_grid += '</div>'
+st.markdown(_pr_grid, unsafe_allow_html=True)
+
+# Stats globales
+_total_cit = sum(int(c) for c, *_ in peer_reviewed)
+st.markdown(f"""
+<div style="margin-top:24px;background:#0d1829;border-radius:12px;padding:20px 28px;
+     border:1px solid rgba(255,255,255,0.06);display:flex;gap:40px;flex-wrap:wrap;align-items:center">
+  <div>
+    <span style="font-size:1.8rem;font-weight:900;color:#3b82f6">{len(peer_reviewed) + 5}</span>
+    <span style="color:#475569;font-size:0.82rem;margin-left:8px">Publications totales</span>
+  </div>
+  <div>
+    <span style="font-size:1.8rem;font-weight:900;color:#10b981">{_total_cit}+</span>
+    <span style="color:#475569;font-size:0.82rem;margin-left:8px">Citations totales</span>
+  </div>
+  <div>
+    <span style="font-size:1.8rem;font-weight:900;color:#8b5cf6">8</span>
+    <span style="color:#475569;font-size:0.82rem;margin-left:8px">Publications 1er auteur</span>
+  </div>
+  <div>
+    <span style="font-size:1.8rem;font-weight:900;color:#f59e0b">2019–2026</span>
+    <span style="color:#475569;font-size:0.82rem;margin-left:8px">P&eacute;riode d'activit&eacute;</span>
+  </div>
+  <a href="https://scholar.google.com/citations?user=qJaCV7MAAAAJ&hl=fr" target="_blank"
+     style="background:#1e3a5f;color:#60a5fa;padding:10px 22px;border-radius:8px;
+     font-weight:700;font-size:0.85rem;margin-left:auto">
+     Voir sur Google Scholar ↗
+  </a>
+</div>
+""", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
 st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
