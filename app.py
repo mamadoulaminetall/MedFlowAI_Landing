@@ -91,34 +91,66 @@ html { scroll-behavior: smooth; }
     border: 1px solid rgba(16,185,129,0.25);
     border-radius: 5px; padding: 2px 7px; text-transform: uppercase;
 }
-.nav-links { display: flex; gap: 4px; padding: 0 28px; }
-.nav-links a {
+.nav-links {
+    display: flex; gap: 2px;
+    position: absolute; left: 50%; transform: translateX(-50%);
+}
+.nav-item { position: relative; }
+.nav-item > a {
     color: #8ba3c1;
-    font-size: 0.82rem; font-weight: 500;
-    letter-spacing: 0.3px;
-    padding: 6px 13px; border-radius: 8px;
-    transition: all 0.18s;
-    position: relative;
-    text-decoration: none;
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.3px;
+    padding: 7px 14px; border-radius: 8px;
+    transition: all 0.18s; position: relative;
+    text-decoration: none; display: flex; align-items: center; gap: 5px;
+    white-space: nowrap; cursor: pointer;
 }
-.nav-links a:hover {
-    color: #f1f5f9;
-    background: rgba(255,255,255,0.07);
+.nav-item > a:hover { color: #f1f5f9; background: rgba(255,255,255,0.07); }
+.nav-item > a.active {
+    color: #f1f5f9; background: rgba(16,185,129,0.12);
+    border: 1px solid rgba(16,185,129,0.22);
 }
-.nav-links a::after {
-    content: "";
-    position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%);
-    width: 0; height: 2px; border-radius: 2px;
-    background: linear-gradient(90deg, #10b981, #3b82f6);
-    transition: width 0.2s;
+.nav-chevron {
+    font-size: 0.6rem; opacity: 0.55; transition: transform 0.2s;
+    display: inline-block;
 }
-.nav-links a:hover::after { width: 60%; }
-.nav-links a.active {
-    color: #f1f5f9;
-    background: rgba(16,185,129,0.12);
-    border: 1px solid rgba(16,185,129,0.25);
+.nav-item.open > a .nav-chevron { transform: rotate(180deg); }
+.nav-item.open > a { color: #f1f5f9; background: rgba(255,255,255,0.07); }
+.nav-dropdown {
+    display: none;
+    position: absolute; top: calc(100% + 10px); left: 50%;
+    transform: translateX(-50%);
+    min-width: 210px;
+    background: rgba(4,10,24,0.97);
+    backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px; padding: 8px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.05) inset;
+    z-index: 99999;
+    animation: dropFade 0.15s ease;
 }
-.nav-links a.active::after { width: 60%; }
+@keyframes dropFade {
+    from { opacity:0; transform: translateX(-50%) translateY(-6px); }
+    to   { opacity:1; transform: translateX(-50%) translateY(0); }
+}
+.nav-item.open .nav-dropdown { display: block; }
+.nav-dropdown-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 12px; border-radius: 9px;
+    color: #8ba3c1; font-size: 0.8rem; font-weight: 500;
+    text-decoration: none; cursor: pointer;
+    transition: all 0.15s;
+}
+.nav-dropdown-item:hover {
+    background: rgba(255,255,255,0.07); color: #f1f5f9;
+}
+.nav-dropdown-icon {
+    width: 30px; height: 30px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; flex-shrink: 0;
+}
+.nav-dropdown-divider {
+    height: 1px; background: rgba(255,255,255,0.07); margin: 6px 4px;
+}
 
 /* ── HERO ── */
 .hero {
@@ -443,22 +475,88 @@ st.markdown(f"""
     <span class="nav-badge">v2.0</span>
   </div>
   <nav class="nav-links">
-    <a href="#about"     onclick="navTo('about');return false;">&#192; propos</a>
-    <a href="#roadmap"   onclick="navTo('roadmap');return false;">Projets</a>
-    <a href="#publications" onclick="navTo('publications');return false;">Publications</a>
-    <a href="#equipe"    onclick="navTo('equipe');return false;">&Eacute;quipe</a>
-    <a href="#contact"   onclick="navTo('contact');return false;">Contact</a>
-    <a href="#legal"     onclick="navTo('legal');return false;">Mentions l&eacute;gales</a>
+
+    <div class="nav-item" data-id="about">
+      <a href="#about" onclick="navTo('about');return false;">&#192; propos</a>
+    </div>
+
+    <div class="nav-item" data-id="projets">
+      <a href="#" onclick="toggleDrop('projets');return false;">
+        Projets <span class="nav-chevron">&#9660;</span>
+      </a>
+      <div class="nav-dropdown">
+        <a class="nav-dropdown-item" onclick="navTo('roadmap');closeDrops();return false;">
+          <span class="nav-dropdown-icon" style="background:rgba(16,185,129,0.12);color:#10b981">&#127758;</span>
+          <span><strong style="display:block;color:#f1f5f9;font-size:0.82rem">Ecosyst&egrave;me</strong><span style="color:#64748b;font-size:0.72rem">Roadmap &amp; outils</span></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="nav-item" data-id="publications">
+      <a href="#" onclick="toggleDrop('publications');return false;">
+        Publications <span class="nav-chevron">&#9660;</span>
+      </a>
+      <div class="nav-dropdown">
+        <a class="nav-dropdown-item" onclick="navTo('publications');closeDrops();return false;">
+          <span class="nav-dropdown-icon" style="background:rgba(59,130,246,0.12);color:#3b82f6">&#128196;</span>
+          <span><strong style="display:block;color:#f1f5f9;font-size:0.82rem">Travaux scientifiques</strong><span style="color:#64748b;font-size:0.72rem">5 projets cl&eacute;s</span></span>
+        </a>
+        <div class="nav-dropdown-divider"></div>
+        <a class="nav-dropdown-item" onclick="navTo('equipe');closeDrops();return false;">
+          <span class="nav-dropdown-icon" style="background:rgba(139,92,246,0.12);color:#8b5cf6">&#127963;</span>
+          <span><strong style="display:block;color:#f1f5f9;font-size:0.82rem">Peer-Reviewed</strong><span style="color:#64748b;font-size:0.72rem">IHU M&eacute;diterran&eacute;e</span></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="nav-item" data-id="equipe">
+      <a href="#" onclick="toggleDrop('equipe');return false;">
+        &Eacute;quipe <span class="nav-chevron">&#9660;</span>
+      </a>
+      <div class="nav-dropdown">
+        <a class="nav-dropdown-item" onclick="navTo('equipe');closeDrops();return false;">
+          <span class="nav-dropdown-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b">&#128105;&#8205;&#128300;</span>
+          <span><strong style="display:block;color:#f1f5f9;font-size:0.82rem">Fondateur</strong><span style="color:#64748b;font-size:0.72rem">Dr. M.L. TALL</span></span>
+        </a>
+        <div class="nav-dropdown-divider"></div>
+        <a class="nav-dropdown-item" onclick="navTo('contact');closeDrops();return false;">
+          <span class="nav-dropdown-icon" style="background:rgba(16,185,129,0.12);color:#10b981">&#9993;</span>
+          <span><strong style="display:block;color:#f1f5f9;font-size:0.82rem">Contact</strong><span style="color:#64748b;font-size:0.72rem">Nous &eacute;crire</span></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="nav-item" data-id="contact">
+      <a href="#contact" onclick="navTo('contact');return false;">Contact</a>
+    </div>
+
+    <div class="nav-item" data-id="legal">
+      <a href="#legal" onclick="navTo('legal');return false;">Mentions l&eacute;gales</a>
+    </div>
+
   </nav>
 </div>
 <script>
 function navTo(id) {{
   var el = document.getElementById(id);
   if (el) {{ el.scrollIntoView({{behavior:'smooth', block:'start'}}); }}
-  document.querySelectorAll('.nav-links a').forEach(function(a){{ a.classList.remove('active'); }});
-  var clicked = document.querySelector('.nav-links a[href="#'+id+'"]');
-  if (clicked) {{ clicked.classList.add('active'); }}
+  document.querySelectorAll('.nav-item > a').forEach(function(a){{ a.classList.remove('active'); }});
+  var item = document.querySelector('.nav-item[data-id="'+id+'"] > a');
+  if (item) {{ item.classList.add('active'); }}
 }}
+function toggleDrop(id) {{
+  document.querySelectorAll('.nav-item').forEach(function(it){{
+    if (it.dataset.id !== id) it.classList.remove('open');
+  }});
+  var item = document.querySelector('.nav-item[data-id="'+id+'"]');
+  if (item) {{ item.classList.toggle('open'); }}
+}}
+function closeDrops() {{
+  document.querySelectorAll('.nav-item').forEach(function(it){{ it.classList.remove('open'); }});
+}}
+document.addEventListener('click', function(e){{
+  if (!e.target.closest('.nav-item')) {{ closeDrops(); }}
+}});
 </script>
 """, unsafe_allow_html=True)
 
