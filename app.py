@@ -113,18 +113,12 @@ html { scroll-behavior: smooth; }
     transition: width 0.2s;
 }
 .nav-links a:hover::after { width: 60%; }
-.nav-cta {
-    background: linear-gradient(135deg, #10b981 0%, #0ea472 100%);
-    color: white; padding: 9px 22px; border-radius: 10px;
-    font-weight: 700; font-size: 0.8rem; letter-spacing: 0.3px;
-    box-shadow: 0 4px 20px rgba(16,185,129,0.35), inset 0 1px 0 rgba(255,255,255,0.18);
-    transition: all 0.2s; white-space: nowrap;
-    border: 1px solid rgba(16,185,129,0.4);
+.nav-links a.active {
+    color: #f1f5f9;
+    background: rgba(16,185,129,0.12);
+    border: 1px solid rgba(16,185,129,0.25);
 }
-.nav-cta:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 8px 28px rgba(16,185,129,0.45);
-}
+.nav-links a.active::after { width: 60%; }
 
 /* ── HERO ── */
 .hero {
@@ -456,14 +450,14 @@ st.markdown(f"""
     <a href="#contact"   onclick="navTo('contact');return false;">Contact</a>
     <a href="#legal"     onclick="navTo('legal');return false;">Mentions l&eacute;gales</a>
   </nav>
-  <a href="https://buy.stripe.com/9B63cvb3G8kZ5cGfHwb3q01" target="_blank" class="nav-cta">
-    Acc&egrave;s complet &mdash; 9&euro;/mois
-  </a>
 </div>
 <script>
 function navTo(id) {{
   var el = document.getElementById(id);
   if (el) {{ el.scrollIntoView({{behavior:'smooth', block:'start'}}); }}
+  document.querySelectorAll('.nav-links a').forEach(function(a){{ a.classList.remove('active'); }});
+  var clicked = document.querySelector('.nav-links a[href="#'+id+'"]');
+  if (clicked) {{ clicked.classList.add('active'); }}
 }}
 </script>
 """, unsafe_allow_html=True)
