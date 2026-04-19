@@ -468,97 +468,94 @@ html { scroll-behavior: smooth; }
 # ─────────────────────────────────────────────────────────────────
 # NAV
 # ─────────────────────────────────────────────────────────────────
-st.markdown(f"""
-<div class="nav">
-  <div class="nav-logo">
-    {LOGO_IMG}
-    <span class="nav-badge">v2.0</span>
-  </div>
-  <nav class="nav-links">
+_nd = (
+    "display:none;position:absolute;top:calc(100% + 10px);left:50%;"
+    "transform:translateX(-50%);min-width:200px;"
+    "background:rgba(4,10,24,0.97);backdrop-filter:blur(24px);"
+    "border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:8px;"
+    "box-shadow:0 24px 64px rgba(0,0,0,0.6);z-index:99999;"
+)
+_da = (
+    "display:block;padding:9px 14px;border-radius:9px;color:#8ba3c1;"
+    "font-size:0.8rem;font-weight:500;text-decoration:none;cursor:pointer;white-space:nowrap;"
+)
+_hover_on  = "this.style.background='rgba(255,255,255,0.07)';this.style.color='#f1f5f9';"
+_hover_off = "this.style.background='transparent';this.style.color='#8ba3c1';"
+_div_sep   = '<div style="height:1px;background:rgba(255,255,255,0.07);margin:4px 6px"></div>'
+st.markdown(
+    '<div class="nav">'
+    f'<div class="nav-logo">{LOGO_IMG}<span class="nav-badge">v2.0</span></div>'
+    '<div class="nav-links">'
 
-    <div class="nav-item" data-id="about">
-      <a href="#about" onclick="navTo('about');return false;">&#192; propos</a>
-    </div>
+    '<div class="nav-item">'
+    '<a class="nav-link" href="#about" onclick="navTo(\'about\');return false;">&#192;&nbsp;propos</a>'
+    '</div>'
 
-    <div class="nav-item" data-id="projets">
-      <a href="#" onclick="toggleDrop('projets');return false;">
-        Projets <span class="nav-chevron">&#9660;</span>
-      </a>
-      <div class="nav-dropdown">
-        <a class="nav-dropdown-item" onclick="navTo('roadmap');closeDrops();return false;">
-          <span class="nav-dropdown-icon" style="background:rgba(16,185,129,0.12);color:#10b981">&#127758;</span>
-          <span><strong style="display:block;color:#f1f5f9;font-size:0.82rem">Ecosyst&egrave;me</strong><span style="color:#64748b;font-size:0.72rem">Roadmap &amp; outils</span></span>
-        </a>
-      </div>
-    </div>
+    '<div class="nav-item" id="ni-projets">'
+    '<a class="nav-link" href="#" onclick="tDrop(\'nd-projets\');return false;">'
+    'Projets &#9660;</a>'
+    f'<div id="nd-projets" style="{_nd}">'
+    f'<a style="{_da}" onmouseover="{_hover_on}" onmouseout="{_hover_off}"'
+    ' onclick="navTo(\'roadmap\');closeDrops();return false;">'
+    '&#127758; Ecosyst&egrave;me &mdash; Roadmap &amp; outils</a>'
+    '</div></div>'
 
-    <div class="nav-item" data-id="publications">
-      <a href="#" onclick="toggleDrop('publications');return false;">
-        Publications <span class="nav-chevron">&#9660;</span>
-      </a>
-      <div class="nav-dropdown">
-        <a class="nav-dropdown-item" onclick="navTo('publications');closeDrops();return false;">
-          <span class="nav-dropdown-icon" style="background:rgba(59,130,246,0.12);color:#3b82f6">&#128196;</span>
-          <span><strong style="display:block;color:#f1f5f9;font-size:0.82rem">Travaux scientifiques</strong><span style="color:#64748b;font-size:0.72rem">5 projets cl&eacute;s</span></span>
-        </a>
-        <div class="nav-dropdown-divider"></div>
-        <a class="nav-dropdown-item" onclick="navTo('equipe');closeDrops();return false;">
-          <span class="nav-dropdown-icon" style="background:rgba(139,92,246,0.12);color:#8b5cf6">&#127963;</span>
-          <span><strong style="display:block;color:#f1f5f9;font-size:0.82rem">Peer-Reviewed</strong><span style="color:#64748b;font-size:0.72rem">IHU M&eacute;diterran&eacute;e</span></span>
-        </a>
-      </div>
-    </div>
+    '<div class="nav-item" id="ni-publications">'
+    '<a class="nav-link" href="#" onclick="tDrop(\'nd-publications\');return false;">'
+    'Publications &#9660;</a>'
+    f'<div id="nd-publications" style="{_nd}">'
+    f'<a style="{_da}" onmouseover="{_hover_on}" onmouseout="{_hover_off}"'
+    ' onclick="navTo(\'publications\');closeDrops();return false;">'
+    '&#128196; Travaux scientifiques</a>'
+    + _div_sep +
+    f'<a style="{_da}" onmouseover="{_hover_on}" onmouseout="{_hover_off}"'
+    ' onclick="navTo(\'equipe\');closeDrops();return false;">'
+    '&#127963; Peer-Reviewed &mdash; IHU M&eacute;diterran&eacute;e</a>'
+    '</div></div>'
 
-    <div class="nav-item" data-id="equipe">
-      <a href="#" onclick="toggleDrop('equipe');return false;">
-        &Eacute;quipe <span class="nav-chevron">&#9660;</span>
-      </a>
-      <div class="nav-dropdown">
-        <a class="nav-dropdown-item" onclick="navTo('equipe');closeDrops();return false;">
-          <span class="nav-dropdown-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b">&#128105;&#8205;&#128300;</span>
-          <span><strong style="display:block;color:#f1f5f9;font-size:0.82rem">Fondateur</strong><span style="color:#64748b;font-size:0.72rem">Dr. M.L. TALL</span></span>
-        </a>
-        <div class="nav-dropdown-divider"></div>
-        <a class="nav-dropdown-item" onclick="navTo('contact');closeDrops();return false;">
-          <span class="nav-dropdown-icon" style="background:rgba(16,185,129,0.12);color:#10b981">&#9993;</span>
-          <span><strong style="display:block;color:#f1f5f9;font-size:0.82rem">Contact</strong><span style="color:#64748b;font-size:0.72rem">Nous &eacute;crire</span></span>
-        </a>
-      </div>
-    </div>
+    '<div class="nav-item" id="ni-equipe">'
+    '<a class="nav-link" href="#" onclick="tDrop(\'nd-equipe\');return false;">'
+    '&Eacute;quipe &#9660;</a>'
+    f'<div id="nd-equipe" style="{_nd}">'
+    f'<a style="{_da}" onmouseover="{_hover_on}" onmouseout="{_hover_off}"'
+    ' onclick="navTo(\'equipe\');closeDrops();return false;">'
+    '&#128105; Fondateur &mdash; Dr. M.L. TALL</a>'
+    + _div_sep +
+    f'<a style="{_da}" onmouseover="{_hover_on}" onmouseout="{_hover_off}"'
+    ' onclick="navTo(\'contact\');closeDrops();return false;">'
+    '&#9993; Contact &mdash; Nous &eacute;crire</a>'
+    '</div></div>'
 
-    <div class="nav-item" data-id="contact">
-      <a href="#contact" onclick="navTo('contact');return false;">Contact</a>
-    </div>
+    '<div class="nav-item">'
+    '<a class="nav-link" href="#contact" onclick="navTo(\'contact\');return false;">Contact</a>'
+    '</div>'
 
-    <div class="nav-item" data-id="legal">
-      <a href="#legal" onclick="navTo('legal');return false;">Mentions l&eacute;gales</a>
-    </div>
+    '<div class="nav-item">'
+    '<a class="nav-link" href="#legal" onclick="navTo(\'legal\');return false;">Mentions l&eacute;gales</a>'
+    '</div>'
 
-  </nav>
-</div>
-<script>
-function navTo(id) {{
-  var el = document.getElementById(id);
-  if (el) {{ el.scrollIntoView({{behavior:'smooth', block:'start'}}); }}
-  document.querySelectorAll('.nav-item > a').forEach(function(a){{ a.classList.remove('active'); }});
-  var item = document.querySelector('.nav-item[data-id="'+id+'"] > a');
-  if (item) {{ item.classList.add('active'); }}
-}}
-function toggleDrop(id) {{
-  document.querySelectorAll('.nav-item').forEach(function(it){{
-    if (it.dataset.id !== id) it.classList.remove('open');
-  }});
-  var item = document.querySelector('.nav-item[data-id="'+id+'"]');
-  if (item) {{ item.classList.toggle('open'); }}
-}}
-function closeDrops() {{
-  document.querySelectorAll('.nav-item').forEach(function(it){{ it.classList.remove('open'); }});
-}}
-document.addEventListener('click', function(e){{
-  if (!e.target.closest('.nav-item')) {{ closeDrops(); }}
-}});
-</script>
-""", unsafe_allow_html=True)
+    '</div></div>'
+    '<script>'
+    'var _drops=["nd-projets","nd-publications","nd-equipe"];'
+    'function navTo(id){'
+    '  var el=document.getElementById(id);'
+    '  if(el)el.scrollIntoView({behavior:"smooth",block:"start"});'
+    '  document.querySelectorAll(".nav-link").forEach(function(a){a.style.background="";a.style.color="#8ba3c1";});'
+    '  var hit=document.querySelector(".nav-link[href=\'#"+id+"\']");'
+    '  if(hit){hit.style.background="rgba(16,185,129,0.12)";hit.style.color="#f1f5f9";}'
+    '}'
+    'function tDrop(id){'
+    '  _drops.forEach(function(d){var el=document.getElementById(d);if(el&&d!==id)el.style.display="none";});'
+    '  var drop=document.getElementById(id);'
+    '  if(drop)drop.style.display=(drop.style.display==="block"?"none":"block");'
+    '}'
+    'function closeDrops(){'
+    '  _drops.forEach(function(d){var el=document.getElementById(d);if(el)el.style.display="none";});'
+    '}'
+    'document.addEventListener("click",function(e){if(!e.target.closest(".nav-item"))closeDrops();});'
+    '</script>',
+    unsafe_allow_html=True
+)
 
 # ─────────────────────────────────────────────────────────────────
 # HERO — full-width centered + stats bar
