@@ -882,7 +882,7 @@ _eco_tools = [
     {"icon": "🫀", "color": "#f43f5e", "title": "CardioSurg AI",
      "desc": "EuroSCORE II + ML · complications post-op · timing valvulaire · CR opératoire",
      "badge": "Nouveau", "bc": "rgba(244,63,94,0.15)", "bt": "#f43f5e",
-     "url": "https://cardiosurgai.streamlit.app"},
+     "url": "https://cardiosurg-ai.streamlit.app"},
 ]
 
 _left_eco  = _eco_tools[:4]   # QoL, Scores, Réinnervation, Biostat
