@@ -624,8 +624,8 @@ _hero_html = (
     '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:44px">'
     '<span class="hero-tag">&#129302; Claude AI</span>'
     '<span class="hero-tag">&#129516; Multi-omique</span>'
-    '<span class="hero-tag">&#128202; 7 outils d&eacute;ploy&eacute;s</span>'
-    '<span class="hero-tag">&#128218; PRISMA &middot; Preprints 2026</span>'
+    '<span class="hero-tag">&#128202; 8 outils d&eacute;ploy&eacute;s</span>'
+    '<span class="hero-tag">&#128218; 5 Preprints soumis 2026</span>'
     '<span class="hero-tag">&#127467;&#127479; 100&nbsp;% fran&ccedil;ais</span>'
     '<span class="hero-tag">&#128275; Open Source</span>'
     '</div>'
@@ -1054,36 +1054,35 @@ publications = [
     },
     {
         "color": "#3b82f6",
-        "type": "Preprint · Revue systématique · IA prédictive · 2026",
-        "title": "Réinnervation Autonome Cardiaque Post-transplantation : Revue Systématique et Modèle Prédictif IA basé sur la Variabilité de la Fréquence Cardiaque",
-        "meta": "Dr. Mamadou Lamine TALL · Preprint en soumission · 23 études incluses · N=1 247 patients",
+        "type": "Preprint · Méta-analyse · Revue systématique · IA prédictive · 2026",
+        "title": "Autonomic Reinnervation after Cardiac Transplantation: A Systematic Review and Meta-Analysis of Heart Rate Variability Recovery Patterns across 23 Studies",
+        "meta": "Dr. Mamadou Lamine TALL · medRxiv · En modération · 23 études · N=1 247 patients",
         "abstract": (
-            "Revue systématique PRISMA 2020 portant sur 23 études (1991–2024, N=1 247 transplantés cardiaques), "
-            "analysant la variabilité de la fréquence cardiaque (VFC/HRV) comme biomarqueur de la "
-            "réinnervation autonome post-transplantation. Développement d'une plateforme IA prédictive "
-            "basée sur Random Forest (AUC=0,961, précision=99,9 %) et SVM (AUC=1,000), stratifiant les patients "
-            "en 4 profils physiologiques selon SDNN, rMSSD, pNN50 et LF/HF. "
-            "Explainabilité via SHAP. Bases de données : PubMed, Scopus, Web of Science."
+            "Méta-analyse random-effects (DerSimonian-Laird) portant sur 23 études (N=1 247 transplantés cardiaques, 1995–2022). "
+            "Taux de réinnervation poolé global : 56,1 % [95%CI 51,9–60,3 %, I²=51 %]. "
+            "Évolution temporelle : précoce (≤18 mois) 37,3 %, intermédiaire (18–36 mois) 53,9 %, "
+            "tardif (>36 mois) 65,9 %. Le seuil 50 % est franchi entre 18 et 24 mois post-greffe. "
+            "SDNN à 12 mois : meilleur prédicteur précoce (OR=3,14, p<0,001). "
+            "Plateforme IA prédictive : Random Forest AUC=0,961. PRISMA 2020."
         ),
-        "tags": ["VFC / HRV", "Transplantation cardiaque", "Random Forest AUC=0.961", "PRISMA 2020", "SDNN", "SHAP"],
-        "url": "https://github.com/mamadoulaminetall/reinnervation_ai_app",
-        "url_label": "GitHub →",
+        "tags": ["VFC / HRV", "Transplantation cardiaque", "DL meta-analysis · 56,1 %", "PRISMA 2020", "SDNN · LF/HF", "Random Forest AUC=0.961"],
+        "url": "https://reinnervationaiapp.streamlit.app",
+        "url_label": "Plateforme IA →",
         "github": "https://github.com/mamadoulaminetall/reinnervation_ai_app",
     },
     {
         "color": "#8b5cf6",
-        "type": "Preprint · Méta-analyse multi-omique · Machine Learning · 2026",
-        "title": "Multi-Omics Profiling in Inherited Muscular Dystrophies: A Systematic Review of Transcriptomic, Epigenomic and Proteomic Studies",
-        "meta": "Dr. Mamadou Lamine TALL · Preprint en soumission · 67 études · N=4 213 échantillons",
+        "type": "Preprint · Méta-analyse multi-omique · PRISMA 2026",
+        "title": "Multi-Omics Profiling in Inherited Muscular Dystrophies: A Systematic Review and Meta-Analysis of Transcriptomic, Epigenomic, and Proteomic Studies across Four Major Disease Subtypes",
+        "meta": "Dr. Mamadou Lamine TALL · medRxiv · En modération · 22 études · N=651 échantillons",
         "abstract": (
-            "Revue systématique et méta-analyse de 67 études (N=4 213 échantillons) intégrant "
-            "transcriptomique bulk (RNA-seq), single-cell (scRNA-seq), épigénomique et protéomique "
-            "pour identifier des biomarqueurs diagnostiques et pronostiques dans les dystrophies musculaires "
-            "héréditaires (DMD, LGMD, DM1, FSHD). Analyses DESeq2, GO/KEGG enrichment, CellChat "
-            "(communication intercellulaire), SHAP (ML explainability). Pipeline MYOomics développé "
-            "en SaaS. Candidature PhyMedExp / MYOccitanie (CDD sept 2026)."
+            "Méta-analyse random-effects (DerSimonian-Laird) sur 22 études (N=651 échantillons) "
+            "portant sur 25 gènes musculaires de référence (DMD, UTRN, CAPN3, DYSF, DMPK…). "
+            "Taux de dérégulation poolé : DMD 76,4 % [69,6–82,0 %], DM1 74,1 %, FSHD 66,3 %, LGMD 64,7 %. "
+            "RNA-seq : meilleure sensibilité (79,4 %). 15 voies enrichies dans >70 % des études. "
+            "Signature 25-gènes validée comme référence diagnostique multi-plateforme. PRISMA 2020."
         ),
-        "tags": ["RNA-seq", "scRNA-seq", "DMD · LGMD · DM1 · FSHD", "DESeq2", "SHAP", "67 études · 4 213 samples"],
+        "tags": ["RNA-seq · RNA-seq", "DMD · LGMD · DM1 · FSHD", "DL meta-analysis · 76,4 %", "25-gene signature", "PRISMA 2020", "22 études · 651 samples"],
         "url": "https://github.com/mamadoulaminetall/MYOomics_Project",
         "url_label": "GitHub →",
         "github": "https://github.com/mamadoulaminetall/MYOomics_Project",
@@ -1092,7 +1091,7 @@ publications = [
         "color": "#ef4444",
         "type": "Méta-analyse · Cardiologie · PRISMA 2026",
         "title": "Qualité de Vie chez le Patient Cardiaque en liste d'attente, sous LVAD et post-transplantation : Méta-analyse PRISMA",
-        "meta": "Dr. Mamadou Lamine TALL · MedFlow AI Research · 2026 · 15 études · N=600 patients",
+        "meta": "Dr. Mamadou Lamine TALL · medRxiv MEDRXIV/2026/351204 · En screening · 15 études · N=600 patients",
         "abstract": (
             "Méta-analyse systématique de la qualité de vie (QdV) mesurée par KCCQ, SF-36 (PCS/MCS), "
             "Minnesota Living with Heart Failure Questionnaire et EQ-5D chez trois populations : "
@@ -1108,20 +1107,39 @@ publications = [
     },
     {
         "color": "#10b981",
-        "type": "Projet recherche · Microbiome · Oncologie · 2026",
-        "title": "Signatures du Microbiome Intestinal comme Biomarqueurs de Diagnostic Précoce dans les Cancers Colorectaux et Pancréatiques",
-        "meta": "Dr. Mamadou Lamine TALL · MedFlow AI Research · 2026 · 824 échantillons · 6 cohortes",
+        "type": "Preprint · Méta-analyse · Microbiome · Oncologie · 2026",
+        "title": "Gut Microbiome Signatures as Early Diagnostic Biomarkers in Colorectal, Pancreatic, Gastric, Hepatocellular and Lung Cancers: A Systematic Review and Meta-Analysis of 18 Studies",
+        "meta": "Dr. Mamadou Lamine TALL · bioRxiv BIORXIV/2026/719461 · En screening · 18 études · N=2 587 patients",
         "abstract": (
-            "Méta-analyse multi-cohortes analysant les signatures microbiotiques (séquençage 16S rRNA, "
-            "métagénomique shotgun) associées aux cancers colorectaux et pancréatiques à stade précoce. "
-            "824 échantillons issus de 6 cohortes internationales. Modèles ML (Random Forest, XGBoost) "
-            "entraînés pour classification diagnostique précoce avec validation croisée. "
-            "Pipeline bioinformatique open source complet."
+            "Méta-analyse random-effects (DerSimonian-Laird) portant sur 18 études (N=2 587 patients, 5 cancers). "
+            "Sensibilité diagnostique poolée : cancer colorectal 74,1 % [68,2–79,3 %], pancréatique 71,8 %, "
+            "gastrique 69,4 %, hépatocellulaire 67,2 %, pulmonaire 65,9 %. "
+            "I²=62 % expliqué par le type de cancer et la méthode de séquençage. "
+            "Biomarqueurs clés : Fusobacterium nucleatum, Bacteroides fragilis, Clostridiales spp. "
+            "Modèles ML (RF AUC=0,91). PRISMA 2020."
         ),
-        "tags": ["Microbiome", "Cancer colorectal", "16S rRNA · métagénomique", "Random Forest · XGBoost", "6 cohortes · 824 échantillons"],
+        "tags": ["Microbiome", "5 cancers · DL meta-analysis", "16S rRNA · métagénomique", "RF AUC=0.91", "PRISMA 2020", "18 études · 2 587 patients"],
         "url": "https://github.com/mamadoulaminetall/microbiome_diagnostic_cancer_precoce",
         "url_label": "GitHub →",
         "github": "https://github.com/mamadoulaminetall/microbiome_diagnostic_cancer_precoce",
+    },
+    {
+        "color": "#06b6d4",
+        "type": "Preprint · Méta-analyse · Génétique · CMA · 2026",
+        "title": "Chromosomal Microarray Analysis in Neurodevelopmental Disorders: A Systematic Review and Meta-Analysis of Diagnostic Yield across Six Clinical Indications in 79,417 Patients",
+        "meta": "Dr. Mamadou Lamine TALL · medRxiv MEDRXIV/2026/351221 · En screening · 25 études · N=79 417 patients",
+        "abstract": (
+            "Méta-analyse random-effects (DerSimonian-Laird) portant sur 25 études (N=79 417 patients). "
+            "Rendement diagnostique poolé global : 15,4 % [13,8–17,1 %, I²=89 %]. "
+            "Par indication : déficience intellectuelle 16,2 %, TSA 11,8 %, anomalies congénitales multiples 22,4 %, "
+            "prénatal 7,3 %, épilepsie 10,5 %, troubles psychiatriques 8,9 %. "
+            "Classification ACMG des CNVs (Pathogène / Probablement pathogène / VUS). "
+            "Plateforme Streamlit de diagnostic CNV déployée. PRISMA 2020."
+        ),
+        "tags": ["CNV · CMA", "6 indications · DL meta-analysis", "ACMG classification", "25 études · 79 417 patients", "PRISMA 2020", "Streamlit platform"],
+        "url": "https://cnv-diagnostic-platform.streamlit.app",
+        "url_label": "Plateforme CNV →",
+        "github": "https://github.com/mamadoulaminetall/cnv-diagnostic-platform",
     },
 ]
 
@@ -1334,7 +1352,7 @@ with col_team_info:
         Travaux portant sur le mosaïcisme génomique, la taxonogénomique et la phylogénomique comparative.
         <br><br>
         Fondateur de <strong style="color:#f1f5f9">MedFlow AI</strong> — plateforme open source d'aide
-        à la décision clinique entièrement en français. Auteur de 3 preprints en soumission (2026),
+        à la décision clinique entièrement en français. Auteur de 5 preprints soumis (2026),
         développeur de 7 outils déployés sur Streamlit Cloud, et porteur de projets de recherche
         translationelle en cardiologie, génomique musculaire et onco-microbiome.
         <br><br>
@@ -1357,7 +1375,7 @@ with col_team_info:
             <div style="font-size:0.78rem;color:#475569">Outils déployés</div>
           </div>
           <div>
-            <div style="font-size:1.6rem;font-weight:900;color:#3b82f6">5</div>
+            <div style="font-size:1.6rem;font-weight:900;color:#3b82f6">6</div>
             <div style="font-size:0.78rem;color:#475569">Publications / Preprints</div>
           </div>
           <div>
