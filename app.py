@@ -624,7 +624,7 @@ _hero_html = (
     '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:44px">'
     '<span class="hero-tag">&#129302; Claude AI</span>'
     '<span class="hero-tag">&#129516; Multi-omique</span>'
-    '<span class="hero-tag">&#128202; 9 outils d&eacute;ploy&eacute;s</span>'
+    '<span class="hero-tag">&#128202; 10 outils d&eacute;ploy&eacute;s</span>'
     '<span class="hero-tag">&#128218; 5 Preprints soumis 2026</span>'
     '<span class="hero-tag">&#127467;&#127479; 100&nbsp;% fran&ccedil;ais</span>'
     '<span class="hero-tag">&#128275; Open Source</span>'
@@ -643,7 +643,7 @@ _hero_html = (
     'padding:28px 80px;display:flex;justify-content:center;flex-wrap:wrap">'
     '<div style="display:flex;align-items:center;gap:32px;flex-wrap:wrap;justify-content:center">'
     '<div style="text-align:center;padding:0 32px">'
-    '<div style="font-size:2rem;font-weight:900;color:#10b981;line-height:1">9</div>'
+    '<div style="font-size:2rem;font-weight:900;color:#10b981;line-height:1">10</div>'
     '<div style="font-size:0.72rem;color:#475569;margin-top:4px">Outils d&eacute;ploy&eacute;s</div>'
     '</div>'
     '<div style="width:1px;height:40px;background:rgba(255,255,255,0.06)"></div>'
@@ -739,7 +739,7 @@ with col_about_photo:
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px">
         <div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.12);
              border-radius:14px;padding:14px 16px;text-align:center">
-          <div style="font-size:1.6rem;font-weight:900;color:#10b981;line-height:1">9</div>
+          <div style="font-size:1.6rem;font-weight:900;color:#10b981;line-height:1">10</div>
           <div style="font-size:0.7rem;color:#475569;margin-top:3px">Outils déployés</div>
         </div>
         <div style="background:rgba(59,130,246,0.06);border:1px solid rgba(59,130,246,0.12);
@@ -883,6 +883,10 @@ _eco_tools = [
      "desc": "EuroSCORE II + ML · complications post-op · timing valvulaire · CR opératoire",
      "badge": "Nouveau", "bc": "rgba(244,63,94,0.15)", "bt": "#f43f5e",
      "url": "https://cardiosurg-ai.streamlit.app"},
+    {"icon": "🧬", "color": "#06b6d4", "title": "AMR-AI",
+     "desc": "Hyper-méta-analyse AMR · scanner molécules exception · ESKAPE · score ML",
+     "badge": "Nouveau", "bc": "rgba(6,182,212,0.15)", "bt": "#06b6d4",
+     "url": "https://amr-ai.streamlit.app"},
 ]
 
 _left_eco  = _eco_tools[:4]   # QoL, Scores, Réinnervation, Biostat
@@ -1357,7 +1361,7 @@ with col_team_info:
         <br><br>
         Fondateur de <strong style="color:#f1f5f9">MedFlow AI</strong> — plateforme open source d'aide
         à la décision clinique entièrement en français. Auteur de 5 preprints soumis (2026),
-        développeur de 9 outils déployés sur Streamlit Cloud, et porteur de projets de recherche
+        développeur de 10 outils déployés sur Streamlit Cloud, et porteur de projets de recherche
         translationelle en cardiologie, génomique musculaire et onco-microbiome.
         <br><br>
         <strong style="color:#f1f5f9">Domaines d'expertise :</strong>
