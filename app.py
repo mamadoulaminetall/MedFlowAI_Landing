@@ -1077,140 +1077,142 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 components.html("""
-<div style="background:linear-gradient(160deg,#03080f 0%,#040d1a 100%);padding:0 48px 0">
-  <div style="max-width:860px;margin:0 auto">
-    <svg viewBox="0 0 860 420" xmlns="http://www.w3.org/2000/svg"
-         style="width:100%;height:auto;display:block">
-      <defs>
-        <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-          <path d="M0,0 L0,6 L8,3 z" fill="#334155"/>
-        </marker>
-        <marker id="arr-cyan" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-          <path d="M0,0 L0,6 L8,3 z" fill="#06b6d4"/>
-        </marker>
-        <marker id="arr-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-          <path d="M0,0 L0,6 L8,3 z" fill="#10b981"/>
-        </marker>
-        <filter id="glow-cyan">
-          <feGaussianBlur stdDeviation="3" result="blur"/>
-          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#03080f; }
+  .wrap { background:linear-gradient(160deg,#03080f 0%,#040d1a 100%);
+          padding:8px 0 8px; display:flex; justify-content:center; }
 
-      <!-- Fond -->
-      <rect width="860" height="420" rx="16" fill="#060e1e" stroke="rgba(6,182,212,0.15)" stroke-width="1"/>
+  #bloc-clinician { opacity:0; animation:fadeScale .5s ease-out 1s   forwards; }
+  #bloc-agent     { opacity:0; animation:fadeScale .6s cubic-bezier(.34,1.56,.64,1) 2s forwards; }
+  #bloc-response  { opacity:0; animation:fadeScale .5s ease-out 5s   forwards; }
+  #bloc-db        { opacity:0; animation:fadeUp    .5s ease-out 2.5s forwards; }
+  #tool-1         { opacity:0; animation:fadeLeft  .4s ease-out 3s   forwards; }
+  #tool-2         { opacity:0; animation:fadeLeft  .4s ease-out 3.3s forwards; }
+  #tool-3         { opacity:0; animation:fadeLeft  .4s ease-out 3.6s forwards; }
+  #tool-4         { opacity:0; animation:fadeLeft  .4s ease-out 3.9s forwards; }
 
-      <!-- ── BLOC 1 : Clinicien (gauche) ── -->
-      <rect x="30" y="170" width="140" height="80" rx="12"
-            fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
-      <text x="100" y="196" text-anchor="middle" font-size="22">👨‍⚕️</text>
-      <text x="100" y="218" text-anchor="middle" fill="#f1f5f9" font-size="11" font-weight="700">Clinicien</text>
-      <text x="100" y="234" text-anchor="middle" fill="#475569" font-size="9">Question AMR</text>
+  .aq  { stroke-dasharray:85;  stroke-dashoffset:85;  animation:dl .5s ease-out 1.6s  forwards; }
+  .ar  { stroke-dasharray:120; stroke-dashoffset:120; animation:dl .6s ease-out 4.7s  forwards; }
+  .at1 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .4s ease-out 2.8s  forwards; }
+  .at2 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .4s ease-out 3.1s  forwards; }
+  .at3 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .4s ease-out 3.4s  forwards; }
+  .at4 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .4s ease-out 3.7s  forwards; }
+  .ab1 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .3s ease-out 4.2s  forwards; }
+  .ab2 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .3s ease-out 4.35s forwards; }
+  .ab3 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .3s ease-out 4.5s  forwards; }
+  .ab4 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .3s ease-out 4.65s forwards; }
+  .adb { stroke-dasharray:20;  stroke-dashoffset:20;  animation:dl .3s ease-out 3s    forwards; }
+  #lq  { opacity:0; animation:fi .4s ease-out 2s   forwards; }
+  #ll  { opacity:0; animation:fi .6s ease-out 5.5s forwards; }
 
-      <!-- Flèche → agent -->
-      <line x1="170" y1="210" x2="248" y2="210" stroke="#334155" stroke-width="1.5" marker-end="url(#arr)"/>
-      <text x="209" y="204" text-anchor="middle" fill="#475569" font-size="9">Query</text>
+  #agent-glow    { animation:agGlow 2s ease-in-out 2.5s infinite; }
+  #resp-glow     { animation:rgGlow 2s ease-in-out 5.5s infinite; }
 
-      <!-- ── BLOC 2 : AMR-AI Agent (centre) ── -->
-      <rect x="250" y="140" width="200" height="140" rx="14"
-            fill="#060e1e" stroke="#06b6d4" stroke-width="2" filter="url(#glow-cyan)"/>
-      <rect x="250" y="140" width="200" height="38" rx="14" fill="rgba(6,182,212,0.12)"/>
-      <rect x="250" y="164" width="200" height="14" fill="rgba(6,182,212,0.12)"/>
-      <text x="350" y="163" text-anchor="middle" fill="#06b6d4" font-size="10" font-weight="700"
-            letter-spacing="1">AMR-AI AGENT</text>
-      <text x="350" y="196" text-anchor="middle" font-size="20">🤖</text>
-      <text x="350" y="218" text-anchor="middle" fill="#f1f5f9" font-size="11" font-weight="700">Claude Haiku</text>
-      <text x="350" y="234" text-anchor="middle" fill="#475569" font-size="9">Anthropic API · Tool Use</text>
-      <text x="350" y="253" text-anchor="middle" fill="#334155" font-size="8">Agent Loop · stop_reason</text>
-      <text x="350" y="266" text-anchor="middle" fill="#334155" font-size="8">tool_use → end_turn</text>
+  @keyframes agGlow  { 0%,100%{filter:drop-shadow(0 0 6px rgba(6,182,212,.6))}  50%{filter:drop-shadow(0 0 20px rgba(6,182,212,.95))} }
+  @keyframes rgGlow  { 0%,100%{filter:drop-shadow(0 0 4px rgba(16,185,129,.5))} 50%{filter:drop-shadow(0 0 16px rgba(16,185,129,.9))} }
+  @keyframes fadeScale { from{opacity:0;transform:scale(.85)} to{opacity:1;transform:scale(1)} }
+  @keyframes fadeLeft  { from{opacity:0;transform:translateX(16px)} to{opacity:1;transform:translateX(0)} }
+  @keyframes fadeUp    { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fi        { from{opacity:0} to{opacity:1} }
+  @keyframes dl        { to{stroke-dashoffset:0} }
+</style>
+<div class="wrap">
+<svg viewBox="0 0 920 450" xmlns="http://www.w3.org/2000/svg"
+     style="width:100%;max-width:920px;height:auto;display:block">
+  <defs>
+    <marker id="arr"   markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#334155"/></marker>
+    <marker id="acyan" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#06b6d4"/></marker>
+    <marker id="agreen"markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#10b981"/></marker>
+    <filter id="gc" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="gg" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
 
-      <!-- ── Flèches outils (vers droite) ── -->
-      <line x1="450" y1="185" x2="528" y2="120" stroke="#06b6d4" stroke-width="1.5"
-            stroke-dasharray="4,3" marker-end="url(#arr-cyan)"/>
-      <line x1="450" y1="200" x2="528" y2="210" stroke="#06b6d4" stroke-width="1.5"
-            stroke-dasharray="4,3" marker-end="url(#arr-cyan)"/>
-      <line x1="450" y1="220" x2="528" y2="300" stroke="#06b6d4" stroke-width="1.5"
-            stroke-dasharray="4,3" marker-end="url(#arr-cyan)"/>
-      <line x1="450" y1="195" x2="528" y2="35" stroke="#06b6d4" stroke-width="1.5"
-            stroke-dasharray="4,3" marker-end="url(#arr-cyan)"/>
+  <rect width="920" height="450" rx="16" fill="#060e1e" stroke="rgba(6,182,212,0.18)" stroke-width="1.5"/>
+  <text x="460" y="443" text-anchor="middle" fill="rgba(6,182,212,0.16)" font-size="9" font-family="monospace" letter-spacing="2">MEDFLOW AI &middot; amr-ai.streamlit.app</text>
 
-      <!-- ── BLOC 3 : 4 Outils ── -->
-      <!-- Tool 1 -->
-      <rect x="530" y="18" width="160" height="50" rx="10"
-            fill="#0f172a" stroke="rgba(139,92,246,0.5)" stroke-width="1.5"/>
-      <text x="545" y="40" fill="#8b5cf6" font-size="13">🔬</text>
-      <text x="565" y="40" fill="#f1f5f9" font-size="10" font-weight="700">search_trials()</text>
-      <text x="565" y="55" fill="#475569" font-size="8">97 essais · 58 000+ pts</text>
+  <g id="bloc-clinician">
+    <rect x="32" y="185" width="148" height="80" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+    <text x="106" y="211" text-anchor="middle" font-size="22">&#x1F468;&#x200D;&#x2695;&#xFE0F;</text>
+    <text x="106" y="233" text-anchor="middle" fill="#f1f5f9" font-size="11" font-weight="700" font-family="sans-serif">Clinicien</text>
+    <text x="106" y="249" text-anchor="middle" fill="#475569" font-size="9" font-family="sans-serif">Question AMR</text>
+  </g>
 
-      <!-- Tool 2 -->
-      <rect x="530" y="88" width="160" height="50" rx="10"
-            fill="#0f172a" stroke="rgba(16,185,129,0.5)" stroke-width="1.5"/>
-      <text x="545" y="110" fill="#10b981" font-size="13">💊</text>
-      <text x="565" y="110" fill="#f1f5f9" font-size="10" font-weight="700">score_molecule()</text>
-      <text x="565" y="125" fill="#475569" font-size="8">Score E · 33 molécules</text>
+  <line class="aq" x1="180" y1="225" x2="262" y2="225" stroke="#334155" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text id="lq" x="221" y="219" text-anchor="middle" fill="#475569" font-size="9" font-family="sans-serif">Query</text>
 
-      <!-- Tool 3 -->
-      <rect x="530" y="190" width="160" height="50" rx="10"
-            fill="#0f172a" stroke="rgba(239,68,68,0.5)" stroke-width="1.5"/>
-      <text x="545" y="212" fill="#ef4444" font-size="13">🦠</text>
-      <text x="565" y="212" fill="#f1f5f9" font-size="10" font-weight="700">get_resistance_profile()</text>
-      <text x="565" y="227" fill="#475569" font-size="8">ESKAPE · gènes · mécanismes</text>
+  <g id="bloc-agent">
+    <rect id="agent-glow" x="264" y="155" width="210" height="145" rx="14" fill="#060e1e" stroke="#06b6d4" stroke-width="2.5" filter="url(#gc)"/>
+    <rect x="264" y="155" width="210" height="40" rx="14" fill="rgba(6,182,212,0.14)"/>
+    <rect x="264" y="181" width="210" height="14" fill="rgba(6,182,212,0.14)"/>
+    <text x="369" y="178" text-anchor="middle" fill="#06b6d4" font-size="10" font-weight="700" font-family="sans-serif" letter-spacing="1.5">AMR-AI AGENT</text>
+    <text x="369" y="212" text-anchor="middle" font-size="20">&#x1F916;</text>
+    <text x="369" y="234" text-anchor="middle" fill="#f1f5f9" font-size="12" font-weight="700" font-family="sans-serif">Claude Haiku</text>
+    <text x="369" y="250" text-anchor="middle" fill="#475569" font-size="9" font-family="monospace">Anthropic API &middot; Tool Use</text>
+    <text x="369" y="270" text-anchor="middle" fill="#334155" font-size="8" font-family="monospace">Agent Loop &middot; stop_reason</text>
+    <text x="369" y="282" text-anchor="middle" fill="#334155" font-size="8" font-family="monospace">tool_use &#x2192; end_turn</text>
+  </g>
 
-      <!-- Tool 4 -->
-      <rect x="530" y="278" width="160" height="50" rx="10"
-            fill="#0f172a" stroke="rgba(249,115,22,0.5)" stroke-width="1.5"/>
-      <text x="545" y="300" fill="#f97316" font-size="13">📊</text>
-      <text x="565" y="300" fill="#f1f5f9" font-size="10" font-weight="700">compare_compounds()</text>
-      <text x="565" y="315" fill="#475569" font-size="8">Top-N · exception score</text>
+  <line class="at1" x1="474" y1="205" x2="556" y2="48"  stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#acyan)"/>
+  <line class="at2" x1="474" y1="200" x2="556" y2="138" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#acyan)"/>
+  <line class="at3" x1="474" y1="215" x2="556" y2="228" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#acyan)"/>
+  <line class="at4" x1="474" y1="230" x2="556" y2="318" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#acyan)"/>
 
-      <!-- ── Flèches retour outils → agent ── -->
-      <line x1="528" y1="43" x2="450" y2="185" stroke="#10b981" stroke-width="1"
-            stroke-dasharray="3,3" marker-end="url(#arr-green)"/>
-      <line x1="528" y1="113" x2="450" y2="200" stroke="#10b981" stroke-width="1"
-            stroke-dasharray="3,3" marker-end="url(#arr-green)"/>
-      <line x1="528" y1="215" x2="450" y2="220" stroke="#10b981" stroke-width="1"
-            stroke-dasharray="3,3" marker-end="url(#arr-green)"/>
-      <line x1="528" y1="303" x2="450" y2="225" stroke="#10b981" stroke-width="1"
-            stroke-dasharray="3,3" marker-end="url(#arr-green)"/>
+  <g id="tool-1">
+    <rect x="558" y="28"  width="172" height="50" rx="10" fill="#0f172a" stroke="rgba(139,92,246,0.6)" stroke-width="1.5"/>
+    <text x="574" y="51" fill="#8b5cf6" font-size="14">&#x1F52C;</text>
+    <text x="596" y="51" fill="#f1f5f9" font-size="10" font-weight="700" font-family="monospace">search_trials()</text>
+    <text x="596" y="66" fill="#475569" font-size="8" font-family="sans-serif">97 essais &middot; 58 000+ pts</text>
+  </g>
+  <g id="tool-2">
+    <rect x="558" y="118" width="172" height="50" rx="10" fill="#0f172a" stroke="rgba(16,185,129,0.6)" stroke-width="1.5"/>
+    <text x="574" y="141" fill="#10b981" font-size="14">&#x1F48A;</text>
+    <text x="596" y="141" fill="#f1f5f9" font-size="10" font-weight="700" font-family="monospace">score_molecule()</text>
+    <text x="596" y="156" fill="#475569" font-size="8" font-family="sans-serif">Score E &middot; 33 mol&#233;cules</text>
+  </g>
+  <g id="tool-3">
+    <rect x="558" y="208" width="172" height="50" rx="10" fill="#0f172a" stroke="rgba(239,68,68,0.6)" stroke-width="1.5"/>
+    <text x="574" y="231" fill="#ef4444" font-size="14">&#x1F9A0;</text>
+    <text x="596" y="228" fill="#f1f5f9" font-size="10" font-weight="700" font-family="monospace">get_resistance_profile()</text>
+    <text x="596" y="243" fill="#475569" font-size="8" font-family="sans-serif">ESKAPE &middot; g&#232;nes &middot; m&#233;canismes</text>
+  </g>
+  <g id="tool-4">
+    <rect x="558" y="298" width="172" height="50" rx="10" fill="#0f172a" stroke="rgba(249,115,22,0.6)" stroke-width="1.5"/>
+    <text x="574" y="321" fill="#f97316" font-size="14">&#x1F4CA;</text>
+    <text x="596" y="321" fill="#f1f5f9" font-size="10" font-weight="700" font-family="monospace">compare_compounds()</text>
+    <text x="596" y="336" fill="#475569" font-size="8" font-family="sans-serif">Top-N &middot; exception score</text>
+  </g>
 
-      <!-- ── Flèche → Réponse ── -->
-      <line x1="170" y1="220" x2="248" y2="220" stroke="#334155" stroke-width="0"/>
-      <line x1="170" y1="240" x2="235" y2="340" stroke="#334155" stroke-width="0"/>
-      <line x1="250" y1="280" x2="160" y2="330" stroke="#10b981" stroke-width="2"
-            marker-end="url(#arr-green)"/>
+  <line class="ab1" x1="556" y1="53"  x2="476" y2="200" stroke="#10b981" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#agreen)"/>
+  <line class="ab2" x1="556" y1="143" x2="476" y2="210" stroke="#10b981" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#agreen)"/>
+  <line class="ab3" x1="556" y1="233" x2="476" y2="225" stroke="#10b981" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#agreen)"/>
+  <line class="ab4" x1="556" y1="323" x2="476" y2="235" stroke="#10b981" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#agreen)"/>
 
-      <!-- ── BLOC 4 : Réponse clinique ── -->
-      <rect x="30" y="340" width="200" height="60" rx="12"
-            fill="#0f172a" stroke="rgba(16,185,129,0.4)" stroke-width="1.5"/>
-      <text x="130" y="362" text-anchor="middle" fill="#10b981" font-size="10" font-weight="700">
-        ✦ Recommandation Clinique
-      </text>
-      <text x="130" y="378" text-anchor="middle" fill="#475569" font-size="8">
-        Stratégie · Molécules · Preuves
-      </text>
-      <text x="130" y="392" text-anchor="middle" fill="#475569" font-size="8">
-        k études · N patients · Mortalité
-      </text>
+  <g id="bloc-db">
+    <rect x="752" y="160" width="140" height="130" rx="10" fill="#060e1e" stroke="rgba(59,130,246,0.4)" stroke-width="1.5"/>
+    <text x="822" y="182" text-anchor="middle" fill="#3b82f6" font-size="10" font-weight="700" font-family="sans-serif">&#x1F4BE; Donn&#233;es</text>
+    <text x="822" y="202" text-anchor="middle" fill="#475569" font-size="8" font-family="monospace">molecules_db.csv</text>
+    <text x="822" y="217" text-anchor="middle" fill="#475569" font-size="8" font-family="monospace">eskape_pathogens.csv</text>
+    <text x="822" y="232" text-anchor="middle" fill="#475569" font-size="8" font-family="monospace">meta_analytic_estimates</text>
+    <text x="822" y="247" text-anchor="middle" fill="#475569" font-size="8" font-family="monospace">studies_registry.csv</text>
+    <line class="adb" x1="752" y1="225" x2="732" y2="225" stroke="rgba(59,130,246,0.5)" stroke-width="1.5" stroke-dasharray="3,3" marker-end="url(#arr)"/>
+  </g>
 
-      <!-- ── Label loop ── -->
-      <text x="350" y="400" text-anchor="middle" fill="#1e3a5f" font-size="9" font-style="italic">
-        Agent Loop : LLM → tool_use → résultats → end_turn → réponse
-      </text>
+  <line class="ar" x1="264" y1="295" x2="168" y2="355" stroke="#10b981" stroke-width="2" marker-end="url(#agreen)" filter="url(#gg)"/>
 
-      <!-- ── Base de données label ── -->
-      <rect x="710" y="150" width="130" height="120" rx="10"
-            fill="#060e1e" stroke="rgba(59,130,246,0.3)" stroke-width="1.5"/>
-      <text x="775" y="172" text-anchor="middle" fill="#3b82f6" font-size="10" font-weight="700">💾 Données</text>
-      <text x="775" y="192" text-anchor="middle" fill="#475569" font-size="8">molecules_db.csv</text>
-      <text x="775" y="207" text-anchor="middle" fill="#475569" font-size="8">eskape_pathogens.csv</text>
-      <text x="775" y="222" text-anchor="middle" fill="#475569" font-size="8">meta_analytic_estimates.csv</text>
-      <text x="775" y="237" text-anchor="middle" fill="#475569" font-size="8">studies_registry.csv</text>
-      <line x1="710" y1="210" x2="692" y2="210" stroke="rgba(59,130,246,0.4)" stroke-width="1.5"
-            stroke-dasharray="3,3" marker-end="url(#arr)"/>
-    </svg>
-  </div>
+  <g id="bloc-response">
+    <rect id="resp-glow" x="32" y="362" width="220" height="66" rx="12" fill="#0f172a" stroke="rgba(16,185,129,0.55)" stroke-width="1.5" filter="url(#gg)"/>
+    <text x="142" y="384" text-anchor="middle" fill="#10b981" font-size="10" font-weight="700" font-family="sans-serif">&#x2736; Recommandation Clinique</text>
+    <text x="142" y="400" text-anchor="middle" fill="#475569" font-size="8" font-family="sans-serif">Strat&#233;gie &middot; Mol&#233;cules &middot; Preuves</text>
+    <text x="142" y="415" text-anchor="middle" fill="#475569" font-size="8" font-family="sans-serif">k &#233;tudes &middot; N patients &middot; Mortalit&#233;</text>
+  </g>
+
+  <text id="ll" x="380" y="440" text-anchor="middle" fill="rgba(6,182,212,0.28)" font-size="9" font-style="italic" font-family="monospace">
+    Agent Loop : LLM &#x2192; tool_use &#x2192; r&#233;sultats &#x2192; end_turn &#x2192; r&#233;ponse
+  </text>
+</svg>
 </div>
-""", height=440)
+""", height=468)
 
 st.markdown("""
 <div style="background:linear-gradient(160deg,#040d1a 0%,#03080f 100%);
