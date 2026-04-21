@@ -695,12 +695,11 @@ _TSET = (
   + _TBTN("#", "rgba(236,72,153,0.1)",  "rgba(236,72,153,0.3)",  "#f472b6", "🧩", "CNV Diagnostic IA",   "medRxiv")
   + _SEP
 )
-st.markdown(
-    '<div class="ticker-wrap"><div class="ticker-track">'
-    + _TSET * 2 +
-    '</div></div>',
-    unsafe_allow_html=True
-)
+_TICKER_HTML = '<div class="ticker-wrap"><div class="ticker-track">' + _TSET * 2 + '</div></div>'
+def _ticker_sep():
+    st.markdown(_TICKER_HTML, unsafe_allow_html=True)
+
+_ticker_sep()
 
 # ─────────────────────────────────────────────────────────────────
 # HERO — full-width centered + stats bar
@@ -783,45 +782,10 @@ _hero_html = (
 )
 st.markdown(_hero_html, unsafe_allow_html=True)
 
-# ── TICKER ──────────────────────────────────────────────────────
-_TICKER_ITEMS = [
-    ("🤖", "AMR-AI Agent",         "#06b6d4", "Agent IA",    "https://amr-ai.streamlit.app"),
-    ("❤️", "QoL Cardiac",          "#ef4444", "Méta-analyse","https://cardiac-qol-ai.streamlit.app"),
-    ("🧬", "CNV Diagnostic",       "#8b5cf6", "Méta-analyse","#"),
-    ("🦠", "Microbiome Cancer",    "#10b981", "bioRxiv","#"),
-    ("🔬", "MYOomics",             "#3b82f6", "SaaS","#"),
-    ("💓", "Réinnervation Cardiaque","#f43f5e","medRxiv","#"),
-    ("📊", "Score SOFA IA",        "#f97316", "Outil","#"),
-    ("🧠", "Bioinformatique Méd.", "#a78bfa", "Recherche","#"),
-    ("🏥", "Décision Clinique",    "#06b6d4", "IA","#"),
-    ("📈", "Meta-Analytics",       "#10b981", "58 000+ pts","#"),
-]
-
-def _ticker_item(icon, name, color, badge, url):
-    return (
-        f'<a class="ticker-item" href="{url}" target="_blank">'
-        f'<span class="ti-icon">{icon}</span>'
-        f'<span class="ti-name">{name}</span>'
-        f'<span class="ti-badge" style="background:rgba(255,255,255,0.05);'
-        f'border:1px solid {color}44;color:{color}">{badge}</span>'
-        f'</a>'
-        f'<span class="ticker-sep">·</span>'
-    )
-
-_items_html = "".join(_ticker_item(*t) for t in _TICKER_ITEMS)
-_ticker_html = (
-    '<div class="ticker-wrap">'
-    '<div class="ticker-track">'
-    + _items_html * 2 +   # double pour loop seamless
-    '</div></div>'
-)
-st.markdown(_ticker_html, unsafe_allow_html=True)
-
-st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
-
 # ─────────────────────────────────────────────────────────────────
 # ABOUT — Mission + Photo fondateur
 # ─────────────────────────────────────────────────────────────────
+_ticker_sep()
 st.markdown("<div id='about'></div>", unsafe_allow_html=True)
 
 # ── PHOTO src inline — blocs pré-construits pour éviter les conditionnels dans f-string ──
@@ -992,11 +956,10 @@ with col_about_text:
     </div>
     """, unsafe_allow_html=True)
 
-st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
-
 # ─────────────────────────────────────────────────────────────────
 # ÉCOSYSTÈME — Roadmap + Outils en vue "planètes"
 # ─────────────────────────────────────────────────────────────────
+_ticker_sep()
 st.markdown("<div id='roadmap'></div>", unsafe_allow_html=True)
 
 # ── Données outils cliniques
@@ -1175,11 +1138,10 @@ _galaxy_html = (
 )
 
 st.markdown(_galaxy_html, unsafe_allow_html=True)
-st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
-
 # ─────────────────────────────────────────────────────────────────
 # AMR-AI AGENT — Section dédiée + diagramme SVG
 # ─────────────────────────────────────────────────────────────────
+_ticker_sep()
 st.markdown("<div id='agent'></div>", unsafe_allow_html=True)
 st.markdown("""
 <div style="background:linear-gradient(160deg,#03080f 0%,#040d1a 60%,#03080f 100%);
@@ -1384,11 +1346,10 @@ st.markdown("""
   </div>
 </div>
 """, unsafe_allow_html=True)
-st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
-
 # ─────────────────────────────────────────────────────────────────
 # PUBLICATIONS
 # ─────────────────────────────────────────────────────────────────
+_ticker_sep()
 st.markdown("<div id='publications'></div>", unsafe_allow_html=True)
 st.markdown("""
 <div class="section" style="background:#030810">
@@ -1676,11 +1637,10 @@ peer_reviewed = [
 ]
 
 st.markdown("</div>", unsafe_allow_html=True)
-st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
-
 # ─────────────────────────────────────────────────────────────────
 # ÉQUIPE — Fondateur + photo
 # ─────────────────────────────────────────────────────────────────
+_ticker_sep()
 st.markdown("<div id='equipe'></div>", unsafe_allow_html=True)
 st.markdown("""
 <div class="section section-alt" style="text-align:center;background:#040c1c">
@@ -1759,8 +1719,6 @@ with col_team_info:
     """, unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
-st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
-
 # ─────────────────────────────────────────────────────────────────
 # PUBLICATIONS PEER-REVIEWED (après Fondateur)
 # ─────────────────────────────────────────────────────────────────
@@ -1838,11 +1796,10 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
-st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
-
 # ─────────────────────────────────────────────────────────────────
 # CONTACT
 # ─────────────────────────────────────────────────────────────────
+_ticker_sep()
 st.markdown("<div id='contact'></div>", unsafe_allow_html=True)
 st.markdown("""
 <div class="section" style="background:#030c18">
@@ -1951,11 +1908,10 @@ with c6:
     """, unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
-st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
-
 # ─────────────────────────────────────────────────────────────────
 # MENTIONS LÉGALES
 # ─────────────────────────────────────────────────────────────────
+_ticker_sep()
 st.markdown("<div id='legal'></div>", unsafe_allow_html=True)
 st.markdown("""
 <div class="legal-section">
@@ -2030,6 +1986,7 @@ st.markdown("</div>", unsafe_allow_html=True)
 # ─────────────────────────────────────────────────────────────────
 # FOOTER
 # ─────────────────────────────────────────────────────────────────
+_ticker_sep()
 st.markdown(f"""
 <div class="footer">
   <div>
