@@ -47,6 +47,16 @@ st.markdown("""
 [data-testid="stMainBlockContainer"] { padding: 0 !important; max-width: 100% !important; }
 .block-container { padding: 0 !important; max-width: 100% !important; }
 
+/* ── Cache iframe vide du script nav ── */
+iframe[height="0"] { display: none !important; }
+div:has(> div > iframe[height="0"]) {
+    height: 0 !important; overflow: hidden !important;
+    margin: 0 !important; padding: 0 !important;
+}
+[data-testid="stCustomComponentV1"]:has(> iframe[height="0"]) {
+    height: 0 !important; overflow: hidden !important;
+}
+
 /* ── BASE ── */
 body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
 h1,h2,h3 { color: #f1f5f9; }
