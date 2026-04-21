@@ -233,44 +233,52 @@ html { scroll-behavior: smooth; }
 
 /* ── TICKER ── */
 .ticker-wrap {
-    width: 100%; overflow: hidden;
-    background: linear-gradient(90deg,#030810,#040d1a 30%,#040d1a 70%,#030810);
-    border-top: 1px solid rgba(255,255,255,0.05);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    padding: 14px 0;
-    position: relative;
+    background: linear-gradient(90deg, #020c1e 0%, #031525 50%, #020c1e 100%);
+    border-top: 1px solid rgba(6,182,212,0.12);
+    border-bottom: 1px solid rgba(6,182,212,0.12);
+    overflow: hidden; position: relative;
+    height: 46px; display: flex; align-items: center;
 }
 .ticker-wrap::before, .ticker-wrap::after {
-    content: ''; position: absolute; top: 0; width: 120px; height: 100%; z-index: 2; pointer-events: none;
+    content: ""; position: absolute; top: 0; bottom: 0;
+    width: 80px; z-index: 2; pointer-events: none;
 }
-.ticker-wrap::before { left: 0;  background: linear-gradient(90deg,#030810,transparent); }
-.ticker-wrap::after  { right: 0; background: linear-gradient(-90deg,#030810,transparent); }
+.ticker-wrap::before { left: 0;  background: linear-gradient(90deg, #020c1e, transparent); }
+.ticker-wrap::after  { right: 0; background: linear-gradient(-90deg, #020c1e, transparent); }
 .ticker-track {
-    display: flex; gap: 0;
-    width: max-content;
-    animation: tickerScroll 38s linear infinite;
+    display: flex; align-items: center;
+    animation: ticker-scroll 40s linear infinite;
+    white-space: nowrap;
 }
-.ticker-track:hover { animation-play-state: paused; }
-@keyframes tickerScroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
+.ticker-wrap:hover .ticker-track { animation-play-state: paused; }
+@keyframes ticker-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.t-btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 6px 16px; border-radius: 100px;
+    font-size: 0.75rem; font-weight: 600;
+    text-decoration: none; cursor: pointer;
+    transition: all 0.2s ease; border: 1px solid;
+    margin: 0 8px; flex-shrink: 0;
+}
+.t-btn:hover { transform: translateY(-1px); filter: brightness(1.2); }
+.t-sep {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    flex-shrink: 0; margin: 0 4px;
 }
 .ticker-item {
     display: inline-flex; align-items: center; gap: 8px;
-    padding: 6px 20px;
-    margin: 0 6px;
+    padding: 6px 20px; margin: 0 6px;
     background: rgba(255,255,255,0.03);
     border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 100px;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: background 0.2s, border-color 0.2s;
+    border-radius: 100px; white-space: nowrap;
+    cursor: pointer; transition: background 0.2s, border-color 0.2s;
     text-decoration: none;
 }
-.ticker-item:hover {
-    background: rgba(6,182,212,0.08);
-    border-color: rgba(6,182,212,0.3);
-}
+.ticker-item:hover { background: rgba(6,182,212,0.08); border-color: rgba(6,182,212,0.3); }
 .ticker-item .ti-icon { font-size: 14px; }
 .ticker-item .ti-name { font-size: 0.8rem; font-weight: 600; color: #cbd5e1; }
 .ticker-item .ti-badge {
@@ -671,149 +679,28 @@ components.html("""
 # ─────────────────────────────────────────────────────────────────
 # TICKER STRIP — défilement continu projets & outils
 # ─────────────────────────────────────────────────────────────────
-st.markdown("""
-<style>
-.ticker-wrap {
-  background: linear-gradient(90deg, #020c1e 0%, #031525 50%, #020c1e 100%);
-  border-top: 1px solid rgba(6,182,212,0.12);
-  border-bottom: 1px solid rgba(6,182,212,0.12);
-  padding: 0;
-  overflow: hidden;
-  position: relative;
-  height: 46px;
-  display: flex;
-  align-items: center;
-}
-.ticker-wrap::before, .ticker-wrap::after {
-  content: "";
-  position: absolute;
-  top: 0; bottom: 0;
-  width: 80px;
-  z-index: 2;
-  pointer-events: none;
-}
-.ticker-wrap::before { left: 0;  background: linear-gradient(90deg, #020c1e, transparent); }
-.ticker-wrap::after  { right: 0; background: linear-gradient(-90deg, #020c1e, transparent); }
-
-.ticker-track {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  animation: ticker-scroll 40s linear infinite;
-  white-space: nowrap;
-}
-.ticker-wrap:hover .ticker-track { animation-play-state: paused; }
-
-@keyframes ticker-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.t-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 6px 16px;
-  border-radius: 100px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border: 1px solid;
-  margin: 0 8px;
-  flex-shrink: 0;
-}
-.t-btn:hover { transform: translateY(-1px); filter: brightness(1.2); }
-
-.t-sep {
-  width: 4px; height: 4px; border-radius: 50%;
-  background: rgba(255,255,255,0.12);
-  flex-shrink: 0;
-  margin: 0 4px;
-}
-</style>
-
-<div class="ticker-wrap">
-  <div class="ticker-track" id="ticker">
-
-    <!-- ── SET 1 ── -->
-    <a class="t-btn" href="https://amr-ai.streamlit.app" target="_blank"
-       style="background:rgba(6,182,212,0.12);border-color:rgba(6,182,212,0.35);color:#06b6d4;">
-      🤖 AMR-AI Agent <span style="font-size:0.65rem;opacity:0.7">LIVE</span>
-    </a>
-    <div class="t-sep"></div>
-    <a class="t-btn" href="#"
-       style="background:rgba(139,92,246,0.1);border-color:rgba(139,92,246,0.3);color:#a78bfa;">
-      🧬 MYOomics SaaS <span style="font-size:0.65rem;opacity:0.7">Beta</span>
-    </a>
-    <div class="t-sep"></div>
-    <a class="t-btn" href="#"
-       style="background:rgba(59,130,246,0.1);border-color:rgba(59,130,246,0.3);color:#60a5fa;">
-      🫀 Réinnervation Cardiaque <span style="font-size:0.65rem;opacity:0.7">preprint</span>
-    </a>
-    <div class="t-sep"></div>
-    <a class="t-btn" href="#"
-       style="background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.3);color:#34d399;">
-      📊 QoL Cardiac IA <span style="font-size:0.65rem;opacity:0.7">Streamlit</span>
-    </a>
-    <div class="t-sep"></div>
-    <a class="t-btn" href="#"
-       style="background:rgba(249,115,22,0.1);border-color:rgba(249,115,22,0.3);color:#fb923c;">
-      🦠 Microbiome Cancer <span style="font-size:0.65rem;opacity:0.7">bioRxiv</span>
-    </a>
-    <div class="t-sep"></div>
-    <a class="t-btn" href="#"
-       style="background:rgba(236,72,153,0.1);border-color:rgba(236,72,153,0.3);color:#f472b6;">
-      🧩 CNV Diagnostic IA <span style="font-size:0.65rem;opacity:0.7">medRxiv</span>
-    </a>
-    <div class="t-sep"></div>
-    <span style="display:inline-flex;align-items:center;gap:6px;padding:0 16px;
-                 font-size:0.7rem;color:rgba(6,182,212,0.4);letter-spacing:2px;font-weight:700;">
-      · · · MEDFLOW AI · OUTILS IA CLINIQUES · OPEN SOURCE · · ·
-    </span>
-    <div class="t-sep"></div>
-
-    <!-- ── SET 2 (clone pour boucle seamless) ── -->
-    <a class="t-btn" href="https://amr-ai.streamlit.app" target="_blank"
-       style="background:rgba(6,182,212,0.12);border-color:rgba(6,182,212,0.35);color:#06b6d4;">
-      🤖 AMR-AI Agent <span style="font-size:0.65rem;opacity:0.7">LIVE</span>
-    </a>
-    <div class="t-sep"></div>
-    <a class="t-btn" href="#"
-       style="background:rgba(139,92,246,0.1);border-color:rgba(139,92,246,0.3);color:#a78bfa;">
-      🧬 MYOomics SaaS <span style="font-size:0.65rem;opacity:0.7">Beta</span>
-    </a>
-    <div class="t-sep"></div>
-    <a class="t-btn" href="#"
-       style="background:rgba(59,130,246,0.1);border-color:rgba(59,130,246,0.3);color:#60a5fa;">
-      🫀 Réinnervation Cardiaque <span style="font-size:0.65rem;opacity:0.7">preprint</span>
-    </a>
-    <div class="t-sep"></div>
-    <a class="t-btn" href="#"
-       style="background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.3);color:#34d399;">
-      📊 QoL Cardiac IA <span style="font-size:0.65rem;opacity:0.7">Streamlit</span>
-    </a>
-    <div class="t-sep"></div>
-    <a class="t-btn" href="#"
-       style="background:rgba(249,115,22,0.1);border-color:rgba(249,115,22,0.3);color:#fb923c;">
-      🦠 Microbiome Cancer <span style="font-size:0.65rem;opacity:0.7">bioRxiv</span>
-    </a>
-    <div class="t-sep"></div>
-    <a class="t-btn" href="#"
-       style="background:rgba(236,72,153,0.1);border-color:rgba(236,72,153,0.3);color:#f472b6;">
-      🧩 CNV Diagnostic IA <span style="font-size:0.65rem;opacity:0.7">medRxiv</span>
-    </a>
-    <div class="t-sep"></div>
-    <span style="display:inline-flex;align-items:center;gap:6px;padding:0 16px;
-                 font-size:0.7rem;color:rgba(6,182,212,0.4);letter-spacing:2px;font-weight:700;">
-      · · · MEDFLOW AI · OUTILS IA CLINIQUES · OPEN SOURCE · · ·
-    </span>
-    <div class="t-sep"></div>
-
-  </div>
-</div>
-""", unsafe_allow_html=True)
+_TBTN = lambda href, bg, bc, color, icon, label, badge: (
+    f'<a class="t-btn" href="{href}" target="_blank" '
+    f'style="background:{bg};border-color:{bc};color:{color};">'
+    f'{icon} {label} <span style="font-size:0.65rem;opacity:0.7">{badge}</span></a>'
+    '<div class="t-sep"></div>'
+)
+_SEP = '<span style="display:inline-flex;align-items:center;gap:6px;padding:0 16px;font-size:0.7rem;color:rgba(6,182,212,0.4);letter-spacing:2px;font-weight:700;">&middot;&middot;&middot; MEDFLOW AI &middot; OUTILS IA CLINIQUES &middot; OPEN SOURCE &middot;&middot;&middot;</span><div class="t-sep"></div>'
+_TSET = (
+    _TBTN("https://amr-ai.streamlit.app",  "rgba(6,182,212,0.12)",  "rgba(6,182,212,0.35)",  "#06b6d4", "🤖", "AMR-AI Agent",         "LIVE")
+  + _TBTN("#", "rgba(139,92,246,0.1)",  "rgba(139,92,246,0.3)",  "#a78bfa", "🧬", "MYOomics SaaS",        "Beta")
+  + _TBTN("#", "rgba(59,130,246,0.1)",  "rgba(59,130,246,0.3)",  "#60a5fa", "🫀", "R&eacute;innervation", "preprint")
+  + _TBTN("#", "rgba(16,185,129,0.1)",  "rgba(16,185,129,0.3)",  "#34d399", "📊", "QoL Cardiac IA",       "Streamlit")
+  + _TBTN("#", "rgba(249,115,22,0.1)",  "rgba(249,115,22,0.3)",  "#fb923c", "🦠", "Microbiome Cancer",    "bioRxiv")
+  + _TBTN("#", "rgba(236,72,153,0.1)",  "rgba(236,72,153,0.3)",  "#f472b6", "🧩", "CNV Diagnostic IA",   "medRxiv")
+  + _SEP
+)
+st.markdown(
+    '<div class="ticker-wrap"><div class="ticker-track">'
+    + _TSET * 2 +
+    '</div></div>',
+    unsafe_allow_html=True
+)
 
 # ─────────────────────────────────────────────────────────────────
 # HERO — full-width centered + stats bar
