@@ -209,12 +209,65 @@ html { scroll-behavior: smooth; }
     transition: transform 0.2s, box-shadow 0.2s;
 }
 .btn-hero-secondary {
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.04);
     color: #94a3b8; padding: 14px 34px; border-radius: 14px;
     font-weight: 600; font-size: 0.9rem;
     backdrop-filter: blur(8px);
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
 }
+.btn-hero-secondary:hover {
+    border-color: rgba(6,182,212,0.5); color: #06b6d4;
+    background: rgba(6,182,212,0.06);
+}
+
+/* ── TICKER ── */
+.ticker-wrap {
+    width: 100%; overflow: hidden;
+    background: linear-gradient(90deg,#030810,#040d1a 30%,#040d1a 70%,#030810);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: 14px 0;
+    position: relative;
+}
+.ticker-wrap::before, .ticker-wrap::after {
+    content: ''; position: absolute; top: 0; width: 120px; height: 100%; z-index: 2; pointer-events: none;
+}
+.ticker-wrap::before { left: 0;  background: linear-gradient(90deg,#030810,transparent); }
+.ticker-wrap::after  { right: 0; background: linear-gradient(-90deg,#030810,transparent); }
+.ticker-track {
+    display: flex; gap: 0;
+    width: max-content;
+    animation: tickerScroll 38s linear infinite;
+}
+.ticker-track:hover { animation-play-state: paused; }
+@keyframes tickerScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+.ticker-item {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 20px;
+    margin: 0 6px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 100px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    text-decoration: none;
+}
+.ticker-item:hover {
+    background: rgba(6,182,212,0.08);
+    border-color: rgba(6,182,212,0.3);
+}
+.ticker-item .ti-icon { font-size: 14px; }
+.ticker-item .ti-name { font-size: 0.8rem; font-weight: 600; color: #cbd5e1; }
+.ticker-item .ti-badge {
+    font-size: 0.65rem; font-weight: 700; padding: 2px 8px;
+    border-radius: 100px; letter-spacing: 0.5px;
+}
+.ticker-sep { color: rgba(255,255,255,0.1); font-size: 18px; margin: 0 8px; align-self: center; }
 
 /* ── LOGO BOX ── */
 .logo-box {
@@ -685,6 +738,40 @@ _hero_html = (
     '</div>'
 )
 st.markdown(_hero_html, unsafe_allow_html=True)
+
+# ── TICKER ──────────────────────────────────────────────────────
+_TICKER_ITEMS = [
+    ("🤖", "AMR-AI Agent",         "#06b6d4", "Agent IA",    "https://amr-ai.streamlit.app"),
+    ("❤️", "QoL Cardiac",          "#ef4444", "Méta-analyse","https://cardiac-qol-ai.streamlit.app"),
+    ("🧬", "CNV Diagnostic",       "#8b5cf6", "Méta-analyse","#"),
+    ("🦠", "Microbiome Cancer",    "#10b981", "bioRxiv","#"),
+    ("🔬", "MYOomics",             "#3b82f6", "SaaS","#"),
+    ("💓", "Réinnervation Cardiaque","#f43f5e","medRxiv","#"),
+    ("📊", "Score SOFA IA",        "#f97316", "Outil","#"),
+    ("🧠", "Bioinformatique Méd.", "#a78bfa", "Recherche","#"),
+    ("🏥", "Décision Clinique",    "#06b6d4", "IA","#"),
+    ("📈", "Meta-Analytics",       "#10b981", "58 000+ pts","#"),
+]
+
+def _ticker_item(icon, name, color, badge, url):
+    return (
+        f'<a class="ticker-item" href="{url}" target="_blank">'
+        f'<span class="ti-icon">{icon}</span>'
+        f'<span class="ti-name">{name}</span>'
+        f'<span class="ti-badge" style="background:rgba(255,255,255,0.05);'
+        f'border:1px solid {color}44;color:{color}">{badge}</span>'
+        f'</a>'
+        f'<span class="ticker-sep">·</span>'
+    )
+
+_items_html = "".join(_ticker_item(*t) for t in _TICKER_ITEMS)
+_ticker_html = (
+    '<div class="ticker-wrap">'
+    '<div class="ticker-track">'
+    + _items_html * 2 +   # double pour loop seamless
+    '</div></div>'
+)
+st.markdown(_ticker_html, unsafe_allow_html=True)
 
 st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
 
