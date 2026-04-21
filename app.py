@@ -622,7 +622,7 @@ _hero_html = (
     '<strong style="color:#94a3b8">Enti&egrave;rement en fran&ccedil;ais.</strong>'
     '</div>'
     '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:44px">'
-    '<span class="hero-tag">&#129302; Claude AI</span>'
+    '<span class="hero-tag" style="background:rgba(6,182,212,0.15);border-color:rgba(6,182,212,0.4);color:#06b6d4">&#129302; 1er Agent IA Clinique</span>'
     '<span class="hero-tag">&#129516; Multi-omique</span>'
     '<span class="hero-tag">&#128202; 10 outils d&eacute;ploy&eacute;s</span>'
     '<span class="hero-tag">&#128218; 5 Preprints soumis 2026</span>'
@@ -883,9 +883,9 @@ _eco_tools = [
      "desc": "EuroSCORE II + ML · complications post-op · timing valvulaire · CR opératoire",
      "badge": "Nouveau", "bc": "rgba(244,63,94,0.15)", "bt": "#f43f5e",
      "url": "https://cardiosurg-ai.streamlit.app"},
-    {"icon": "🧬", "color": "#06b6d4", "title": "AMR-AI",
-     "desc": "Hyper-méta-analyse AMR · scanner molécules exception · ESKAPE · score ML",
-     "badge": "Nouveau", "bc": "rgba(6,182,212,0.15)", "bt": "#06b6d4",
+    {"icon": "🤖", "color": "#06b6d4", "title": "AMR-AI Agent",
+     "desc": "1er agent IA clinique · 97 essais · 58 000+ patients · recommandations AMR en temps réel",
+     "badge": "🚀 Agent IA", "bc": "rgba(6,182,212,0.18)", "bt": "#06b6d4",
      "url": "https://amr-ai.streamlit.app"},
 ]
 
@@ -931,7 +931,7 @@ _timeline_steps = [
     ("#f59e0b", "🎓", "Thèse 2020",      "Bioinformatique · AMU"),
     ("#10b981", "🦠", "Recherche",        "Microbiome · Génomique"),
     ("#3b82f6", "💓", "Cardiologie 2025", "Réinnervation · QoL"),
-    ("#10b981", "🚀", "MedFlow AI",       "7 outils SaaS déployés"),
+    ("#06b6d4", "🤖", "Agent IA 2026",    "AMR-AI · 1er agent clinique"),
     ("#8b5cf6", "🌟", "Vision 2026+",     "PhyMedExp · MYOccitanie"),
 ]
 
