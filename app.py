@@ -1052,11 +1052,10 @@ st.markdown("<div class='block-sep'></div>", unsafe_allow_html=True)
 st.markdown("<div id='agent'></div>", unsafe_allow_html=True)
 st.markdown("""
 <div style="background:linear-gradient(160deg,#03080f 0%,#040d1a 60%,#03080f 100%);
-    padding:80px 48px;border-top:1px solid rgba(6,182,212,0.15);
-    border-bottom:1px solid rgba(6,182,212,0.1)">
+    padding:80px 48px 40px;border-top:1px solid rgba(6,182,212,0.15)">
 
   <!-- Header -->
-  <div style="text-align:center;margin-bottom:52px">
+  <div style="text-align:center;margin-bottom:40px">
     <div style="display:inline-flex;align-items:center;gap:8px;
         background:rgba(6,182,212,0.08);border:1px solid rgba(6,182,212,0.25);
         color:#06b6d4;border-radius:100px;padding:6px 18px;
@@ -1074,9 +1073,12 @@ st.markdown("""
       et génère des recommandations thérapeutiques AMR en temps réel — propulsé par Claude Haiku.
     </p>
   </div>
+</div>
+""", unsafe_allow_html=True)
 
-  <!-- Diagramme SVG -->
-  <div style="max-width:860px;margin:0 auto 52px">
+components.html("""
+<div style="background:linear-gradient(160deg,#03080f 0%,#040d1a 100%);padding:0 48px 0">
+  <div style="max-width:860px;margin:0 auto">
     <svg viewBox="0 0 860 420" xmlns="http://www.w3.org/2000/svg"
          style="width:100%;height:auto;display:block">
       <defs>
@@ -1207,6 +1209,12 @@ st.markdown("""
             stroke-dasharray="3,3" marker-end="url(#arr)"/>
     </svg>
   </div>
+</div>
+""", height=440)
+
+st.markdown("""
+<div style="background:linear-gradient(160deg,#040d1a 0%,#03080f 100%);
+    padding:40px 48px 80px;border-bottom:1px solid rgba(6,182,212,0.1)">
 
   <!-- Stats row -->
   <div style="display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-bottom:40px">
