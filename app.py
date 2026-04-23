@@ -1176,39 +1176,54 @@ components.html("""
   .wrap { background:linear-gradient(160deg,#03080f 0%,#040d1a 100%);
           padding:8px 0 8px; display:flex; justify-content:center; }
 
-  #bloc-clinician { opacity:0; animation:fadeScale .5s ease-out 1s   forwards; }
-  #bloc-agent     { opacity:0; animation:fadeScale .6s cubic-bezier(.34,1.56,.64,1) 2s forwards; }
-  #bloc-response  { opacity:0; animation:fadeScale .5s ease-out 5s   forwards; }
-  #bloc-db        { opacity:0; animation:fadeUp    .5s ease-out 2.5s forwards; }
-  #tool-1         { opacity:0; animation:fadeLeft  .4s ease-out 3s   forwards; }
-  #tool-2         { opacity:0; animation:fadeLeft  .4s ease-out 3.3s forwards; }
-  #tool-3         { opacity:0; animation:fadeLeft  .4s ease-out 3.6s forwards; }
-  #tool-4         { opacity:0; animation:fadeLeft  .4s ease-out 3.9s forwards; }
+  /* ── Entrée (une seule fois) ── */
+  #bloc-clinician { opacity:0; animation:fadeScale .5s ease-out .6s   forwards; }
+  #bloc-agent     { opacity:0; animation:fadeScale .6s cubic-bezier(.34,1.56,.64,1) 1.2s forwards; }
+  #bloc-response  { opacity:0; animation:fadeScale .5s ease-out 3.8s  forwards; }
+  #bloc-db        { opacity:0; animation:fadeUp    .5s ease-out 1.6s  forwards; }
+  #tool-1         { opacity:0; animation:fadeLeft  .4s ease-out 2s    forwards; }
+  #tool-2         { opacity:0; animation:fadeLeft  .4s ease-out 2.25s forwards; }
+  #tool-3         { opacity:0; animation:fadeLeft  .4s ease-out 2.5s  forwards; }
+  #tool-4         { opacity:0; animation:fadeLeft  .4s ease-out 2.75s forwards; }
 
-  .aq  { stroke-dasharray:85;  stroke-dashoffset:85;  animation:dl .5s ease-out 1.6s  forwards; }
-  .ar  { stroke-dasharray:120; stroke-dashoffset:120; animation:dl .6s ease-out 4.7s  forwards; }
-  .at1 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .4s ease-out 2.8s  forwards; }
-  .at2 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .4s ease-out 3.1s  forwards; }
-  .at3 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .4s ease-out 3.4s  forwards; }
-  .at4 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .4s ease-out 3.7s  forwards; }
-  .ab1 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .3s ease-out 4.2s  forwards; }
-  .ab2 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .3s ease-out 4.35s forwards; }
-  .ab3 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .3s ease-out 4.5s  forwards; }
-  .ab4 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .3s ease-out 4.65s forwards; }
-  .adb { stroke-dasharray:20;  stroke-dashoffset:20;  animation:dl .3s ease-out 3s    forwards; }
-  #lq  { opacity:0; animation:fi .4s ease-out 2s   forwards; }
-  #ll  { opacity:0; animation:fi .6s ease-out 5.5s forwards; }
+  .aq  { stroke-dasharray:85;  stroke-dashoffset:85;  animation:dl .5s ease-out 1s    forwards; }
+  .ar  { stroke-dasharray:120; stroke-dashoffset:120; animation:dl .6s ease-out 3.4s  forwards; }
+  .at1 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .4s ease-out 1.8s  forwards; }
+  .at2 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .4s ease-out 2.0s  forwards; }
+  .at3 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .4s ease-out 2.2s  forwards; }
+  .at4 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .4s ease-out 2.4s  forwards; }
+  .ab1 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .3s ease-out 3.0s  forwards; }
+  .ab2 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .3s ease-out 3.1s  forwards; }
+  .ab3 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .3s ease-out 3.2s  forwards; }
+  .ab4 { stroke-dasharray:115; stroke-dashoffset:115; animation:dl .3s ease-out 3.3s  forwards; }
+  .adb { stroke-dasharray:20;  stroke-dashoffset:20;  animation:dl .3s ease-out 1.8s  forwards; }
+  #lq  { opacity:0; animation:fi .4s ease-out 1.2s  forwards; }
+  #ll  { opacity:0; animation:fi .6s ease-out 4.2s  forwards; }
 
-  #agent-glow    { animation:agGlow 2s ease-in-out 2.5s infinite; }
-  #resp-glow     { animation:rgGlow 2s ease-in-out 5.5s infinite; }
+  /* ── Glows continus ── */
+  #agent-glow { animation:agGlow 2.4s ease-in-out 1.8s infinite; }
+  #resp-glow  { animation:rgGlow 2.4s ease-in-out 4.2s infinite; }
 
-  @keyframes agGlow  { 0%,100%{filter:drop-shadow(0 0 6px rgba(6,182,212,.6))}  50%{filter:drop-shadow(0 0 20px rgba(6,182,212,.95))} }
-  @keyframes rgGlow  { 0%,100%{filter:drop-shadow(0 0 4px rgba(16,185,129,.5))} 50%{filter:drop-shadow(0 0 16px rgba(16,185,129,.9))} }
+  /* ── Pulse séquentiel des outils (boucle 4s décalée) ── */
+  #tool-1 { animation:fadeLeft .4s ease-out 2s forwards, toolPulse 4s ease-in-out 4.5s infinite; }
+  #tool-2 { animation:fadeLeft .4s ease-out 2.25s forwards, toolPulse 4s ease-in-out 5.5s infinite; }
+  #tool-3 { animation:fadeLeft .4s ease-out 2.5s forwards, toolPulse 4s ease-in-out 6.5s infinite; }
+  #tool-4 { animation:fadeLeft .4s ease-out 2.75s forwards, toolPulse 4s ease-in-out 7.5s infinite; }
+
+  /* ── Flux continu (activé par JS après le dessin initial) ── */
+  .flow-active { animation:flow 1.6s linear infinite !important; stroke-dasharray:8 5 !important; }
+  .flow-back   { animation:flow 2s   linear infinite !important; stroke-dasharray:6 6 !important; }
+  .flow-slow   { animation:flow 2.4s linear infinite !important; stroke-dasharray:7 5 !important; }
+
+  @keyframes agGlow    { 0%,100%{filter:drop-shadow(0 0 6px rgba(6,182,212,.6))}  50%{filter:drop-shadow(0 0 22px rgba(6,182,212,1))} }
+  @keyframes rgGlow    { 0%,100%{filter:drop-shadow(0 0 4px rgba(16,185,129,.5))} 50%{filter:drop-shadow(0 0 18px rgba(16,185,129,.95))} }
+  @keyframes toolPulse { 0%,70%,100%{opacity:1;filter:none} 35%{filter:drop-shadow(0 0 10px rgba(255,255,255,.35));opacity:1} }
   @keyframes fadeScale { from{opacity:0;transform:scale(.85)} to{opacity:1;transform:scale(1)} }
   @keyframes fadeLeft  { from{opacity:0;transform:translateX(16px)} to{opacity:1;transform:translateX(0)} }
   @keyframes fadeUp    { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
   @keyframes fi        { from{opacity:0} to{opacity:1} }
   @keyframes dl        { to{stroke-dashoffset:0} }
+  @keyframes flow      { to{stroke-dashoffset:-26} }
 </style>
 <div class="wrap">
 <svg viewBox="0 0 920 450" xmlns="http://www.w3.org/2000/svg"
@@ -1305,6 +1320,23 @@ components.html("""
   </text>
 </svg>
 </div>
+<script>
+// Après le dessin initial (4.2s), on passe en mode flux continu
+setTimeout(function() {
+  // Flèches agent → outils (cyan, flux sortant)
+  ['at1','at2','at3','at4'].forEach(function(c) {
+    document.querySelectorAll('.'+c).forEach(function(el) { el.classList.add('flow-active'); });
+  });
+  // Flèches outils → agent (vert, flux retour)
+  ['ab1','ab2','ab3','ab4'].forEach(function(c) {
+    document.querySelectorAll('.'+c).forEach(function(el) { el.classList.add('flow-back'); });
+  });
+  // Flèche query clinicien → agent
+  document.querySelectorAll('.aq').forEach(function(el) { el.classList.add('flow-slow'); });
+  // Flèche agent → recommandation
+  document.querySelectorAll('.ar').forEach(function(el) { el.classList.add('flow-back'); });
+}, 4400);
+</script>
 """, height=468)
 
 st.markdown("""
