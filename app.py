@@ -1215,9 +1215,17 @@ components.html("""
   .flow-back   { animation:flow 2s   linear infinite !important; stroke-dasharray:6 6 !important; }
   .flow-slow   { animation:flow 2.4s linear infinite !important; stroke-dasharray:7 5 !important; }
 
+  /* ── Animations continues des boîtes (activées par JS) ── */
+  .float-box      { animation:boxFloat  3.5s ease-in-out infinite !important; }
+  .float-box-slow { animation:boxFloat  4.8s ease-in-out 1.4s infinite !important; }
+  .breath-box     { animation:boxBreath 2.8s ease-in-out infinite !important; }
+  .breath-box-alt { animation:boxBreath 3.4s ease-in-out 1.0s infinite !important; }
+
+  @keyframes boxFloat  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+  @keyframes boxBreath { 0%,100%{transform:scale(1) translateY(0)} 50%{transform:scale(1.018) translateY(-2px)} }
   @keyframes agGlow    { 0%,100%{filter:drop-shadow(0 0 6px rgba(6,182,212,.6))}  50%{filter:drop-shadow(0 0 22px rgba(6,182,212,1))} }
   @keyframes rgGlow    { 0%,100%{filter:drop-shadow(0 0 4px rgba(16,185,129,.5))} 50%{filter:drop-shadow(0 0 18px rgba(16,185,129,.95))} }
-  @keyframes toolPulse { 0%,70%,100%{opacity:1;filter:none} 35%{filter:drop-shadow(0 0 10px rgba(255,255,255,.35));opacity:1} }
+  @keyframes toolPulse { 0%,100%{opacity:1;filter:none;transform:translateY(0)} 35%{filter:drop-shadow(0 0 12px rgba(255,255,255,.4));transform:translateY(-4px)} }
   @keyframes fadeScale { from{opacity:0;transform:scale(.85)} to{opacity:1;transform:scale(1)} }
   @keyframes fadeLeft  { from{opacity:0;transform:translateX(16px)} to{opacity:1;transform:translateX(0)} }
   @keyframes fadeUp    { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
@@ -1335,6 +1343,12 @@ setTimeout(function() {
   document.querySelectorAll('.aq').forEach(function(el) { el.classList.add('flow-slow'); });
   // Flèche agent → recommandation
   document.querySelectorAll('.ar').forEach(function(el) { el.classList.add('flow-back'); });
+  // Boîtes principales : float doux
+  document.getElementById('bloc-clinician').classList.add('float-box');
+  document.getElementById('bloc-db').classList.add('float-box-slow');
+  // Agent et Réponse : breathe (scale + montée)
+  document.getElementById('bloc-agent').classList.add('breath-box');
+  document.getElementById('bloc-response').classList.add('breath-box-alt');
 }, 4400);
 </script>
 """, height=468)
