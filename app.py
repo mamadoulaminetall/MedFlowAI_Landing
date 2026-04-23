@@ -301,7 +301,7 @@ html { scroll-behavior: smooth; }
     background: linear-gradient(135deg, #10b981, #34d399);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
-.logo-tagline { font-size: 0.85rem; color: #475569; margin-bottom: 28px; font-style: italic; }
+.logo-tagline { font-size: 0.85rem; color: #64748b; margin-bottom: 28px; font-style: italic; }
 .logo-tools-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
 .logo-tool-icon {
     background: rgba(255,255,255,0.03);
@@ -311,7 +311,7 @@ html { scroll-behavior: smooth; }
     backdrop-filter: blur(8px);
 }
 .logo-tool-icon .icon { font-size: 1.5rem; margin-bottom: 4px; }
-.logo-tool-icon .lbl { font-size: 0.66rem; color: #475569; font-weight: 600; }
+.logo-tool-icon .lbl { font-size: 0.66rem; color: #64748b; font-weight: 600; }
 .logo-banner {
     background: linear-gradient(90deg, #0891b2, #10b981);
     border-radius: 100px; padding: 8px 24px;
@@ -336,7 +336,7 @@ html { scroll-behavior: smooth; }
     font-size: clamp(2.4rem, 4vw, 3.2rem); font-weight: 900; color: #fafafa;
     letter-spacing: -1.5px; line-height: 1.08; margin-bottom: 20px;
 }
-.section-lead { color: #52525b; font-size: 1rem; line-height: 1.8; max-width: 520px; }
+.section-lead { color: #71717a; font-size: 1rem; line-height: 1.8; max-width: 520px; }
 .divider-line { border: none; border-top: 1px solid rgba(255,255,255,0.04); }
 
 /* ── SÉPARATION BLOCS — glow visible ── */
@@ -355,7 +355,7 @@ html { scroll-behavior: smooth; }
 
 /* ── ABOUT STATS ── */
 .about-stat-num { font-size: 2.2rem; font-weight: 900; line-height: 1; }
-.about-stat-lbl { font-size: 0.78rem; color: #475569; margin-top: 5px; letter-spacing: 0.3px; }
+.about-stat-lbl { font-size: 0.78rem; color: #64748b; margin-top: 5px; letter-spacing: 0.3px; }
 
 /* ── PHOTO MODERNE ── */
 .photo-modern-wrap {
@@ -420,7 +420,7 @@ html { scroll-behavior: smooth; }
     font-size: 1.5rem; margin-bottom: 14px;
 }
 .rm-card-title { font-size: 0.92rem; font-weight: 700; color: #f1f5f9; margin-bottom: 6px; }
-.rm-card-desc { font-size: 0.78rem; color: #475569; line-height: 1.65; margin-bottom: 14px; }
+.rm-card-desc { font-size: 0.78rem; color: #64748b; line-height: 1.65; margin-bottom: 14px; }
 .rm-badge { display: inline-block; font-size: 0.68rem; font-weight: 700; border-radius: 6px; padding: 3px 10px; }
 .rm-link { display: block; margin-top: 14px; font-size: 0.76rem; font-weight: 600; }
 .rm-category-label {
@@ -441,7 +441,7 @@ html { scroll-behavior: smooth; }
     text-transform: uppercase; margin-bottom: 8px;
 }
 .pub-title { font-size: 0.97rem; font-weight: 700; color: #f1f5f9; line-height: 1.5; margin-bottom: 6px; }
-.pub-meta { font-size: 0.8rem; color: #475569; margin-bottom: 10px; }
+.pub-meta { font-size: 0.8rem; color: #64748b; margin-bottom: 10px; }
 .pub-abstract { font-size: 0.83rem; color: #64748b; line-height: 1.65; margin-bottom: 12px; }
 .pub-link {
     font-size: 0.8rem; font-weight: 600;
@@ -479,7 +479,7 @@ html { scroll-behavior: smooth; }
     font-size: 1.3rem; flex-shrink: 0;
 }
 .contact-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px;
-    text-transform: uppercase; color: #475569; margin-bottom: 4px; }
+    text-transform: uppercase; color: #64748b; margin-bottom: 4px; }
 .contact-value { font-size: 0.95rem; font-weight: 600; color: #f1f5f9; }
 .contact-sub { font-size: 0.8rem; color: #64748b; margin-top: 2px; }
 
@@ -491,7 +491,7 @@ html { scroll-behavior: smooth; }
     border: 1px solid rgba(255,255,255,0.06); height: 100%;
 }
 .legal-title { font-size: 0.88rem; font-weight: 600; color: #a1a1aa; margin-bottom: 12px; }
-.legal-text { font-size: 0.8rem; color: #52525b; line-height: 1.7; }
+.legal-text { font-size: 0.8rem; color: #71717a; line-height: 1.7; }
 
 /* ── FOOTER ── */
 .footer {
@@ -505,9 +505,9 @@ html { scroll-behavior: smooth; }
     font-size: 1rem; font-weight: 800; color: #fafafa;
 }
 .footer-brand span { color: #10b981; }
-.footer-copy { font-size: 0.75rem; color: #52525b; margin-top: 4px; }
+.footer-copy { font-size: 0.75rem; color: #71717a; margin-top: 4px; }
 .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
-.footer-links a { font-size: 0.75rem; color: #52525b; transition: color 0.2s; }
+.footer-links a { font-size: 0.75rem; color: #71717a; transition: color 0.2s; }
 .footer-links a:hover { color: #a1a1aa; }
 </style>
 """, unsafe_allow_html=True)
@@ -560,21 +560,8 @@ st.markdown(
     '&#128196; Travaux scientifiques</a>'
     + _div_sep +
     f'<a style="{_da}" onmouseover="{_hover_on}" onmouseout="{_hover_off}"'
-    ' onclick="navTo(\'equipe\');closeDrops();return false;">'
+    ' onclick="navTo(\'peer-reviewed\');closeDrops();return false;">'
     '&#127963; Peer-Reviewed &mdash; IHU M&eacute;diterran&eacute;e</a>'
-    '</div></div>'
-
-    '<div class="nav-item" id="ni-equipe">'
-    '<a class="nav-link" href="#" onclick="tDrop(\'nd-equipe\');return false;">'
-    '&Eacute;quipe &#9660;</a>'
-    f'<div id="nd-equipe" style="{_nd}">'
-    f'<a style="{_da}" onmouseover="{_hover_on}" onmouseout="{_hover_off}"'
-    ' onclick="navTo(\'equipe\');closeDrops();return false;">'
-    '&#128105; Fondateur &mdash; Dr. M.L. TALL</a>'
-    + _div_sep +
-    f'<a style="{_da}" onmouseover="{_hover_on}" onmouseout="{_hover_off}"'
-    ' onclick="navTo(\'contact\');closeDrops();return false;">'
-    '&#9993; Contact &mdash; Nous &eacute;crire</a>'
     '</div></div>'
 
     '<div class="nav-item">'
@@ -592,7 +579,7 @@ components.html("""
 <script>
 (function(){
   var p = window.parent.document;
-  var _drops = ["nd-projets","nd-publications","nd-equipe"];
+  var _drops = ["nd-projets","nd-publications"];
 
   function navTo(id){
     var el = p.getElementById(id);
@@ -704,7 +691,7 @@ _hero_html = (
     '-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">'
     'M&eacute;decins &amp; Chercheurs'
     '</span></div>'
-    '<div style="font-size:1.05rem;color:#52525b;line-height:1.75;max-width:520px;margin:0 auto 44px;font-weight:400">'
+    '<div style="font-size:1.05rem;color:#71717a;line-height:1.75;max-width:520px;margin:0 auto 44px;font-weight:400">'
     'Outils IA con&ccedil;us par un chercheur en bioinformatique m&eacute;dicale &mdash; '
     'd&eacute;cision clinique, multi-omique, recherche translationnelle.'
     '</div>'
@@ -729,22 +716,22 @@ _hero_html = (
     '<div style="display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center">'
     '<div style="text-align:center;padding:0 48px">'
     '<div style="font-size:2.4rem;font-weight:900;color:#fafafa;line-height:1;letter-spacing:-1.5px">10</div>'
-    '<div style="font-size:0.72rem;color:#52525b;margin-top:6px;letter-spacing:0.5px;text-transform:uppercase">Outils d&eacute;ploy&eacute;s</div>'
+    '<div style="font-size:0.72rem;color:#71717a;margin-top:6px;letter-spacing:0.5px;text-transform:uppercase">Outils d&eacute;ploy&eacute;s</div>'
     '</div>'
     '<div style="width:1px;height:36px;background:rgba(255,255,255,0.06)"></div>'
     '<div style="text-align:center;padding:0 48px">'
     '<div style="font-size:2.4rem;font-weight:900;color:#fafafa;line-height:1;letter-spacing:-1.5px">31+</div>'
-    '<div style="font-size:0.72rem;color:#52525b;margin-top:6px;letter-spacing:0.5px;text-transform:uppercase">Publications</div>'
+    '<div style="font-size:0.72rem;color:#71717a;margin-top:6px;letter-spacing:0.5px;text-transform:uppercase">Publications</div>'
     '</div>'
     '<div style="width:1px;height:36px;background:rgba(255,255,255,0.06)"></div>'
     '<div style="text-align:center;padding:0 48px">'
     '<div style="font-size:2.4rem;font-weight:900;color:#fafafa;line-height:1;letter-spacing:-1.5px">5 800+</div>'
-    '<div style="font-size:0.72rem;color:#52525b;margin-top:6px;letter-spacing:0.5px;text-transform:uppercase">&Eacute;chantillons analys&eacute;s</div>'
+    '<div style="font-size:0.72rem;color:#71717a;margin-top:6px;letter-spacing:0.5px;text-transform:uppercase">&Eacute;chantillons analys&eacute;s</div>'
     '</div>'
     '<div style="width:1px;height:36px;background:rgba(255,255,255,0.06)"></div>'
     '<div style="text-align:center;padding:0 48px">'
     '<div style="font-size:2.4rem;font-weight:900;color:#fafafa;line-height:1;letter-spacing:-1.5px">248+</div>'
-    '<div style="font-size:0.72rem;color:#52525b;margin-top:6px;letter-spacing:0.5px;text-transform:uppercase">Citations Scholar</div>'
+    '<div style="font-size:0.72rem;color:#71717a;margin-top:6px;letter-spacing:0.5px;text-transform:uppercase">Citations Scholar</div>'
     '</div>'
     '</div>'
     '</div>'
@@ -755,7 +742,6 @@ st.markdown(_hero_html, unsafe_allow_html=True)
 # ─────────────────────────────────────────────────────────────────
 # ABOUT — Mission + Photo fondateur
 # ─────────────────────────────────────────────────────────────────
-_ticker_sep()
 st.markdown("<div id='about'></div>", unsafe_allow_html=True)
 
 # ── PHOTO src inline — blocs pré-construits pour éviter les conditionnels dans f-string ──
@@ -824,22 +810,22 @@ with col_about_photo:
         <div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.12);
              border-radius:14px;padding:14px 16px;text-align:center">
           <div style="font-size:1.6rem;font-weight:900;color:#10b981;line-height:1">10</div>
-          <div style="font-size:0.7rem;color:#475569;margin-top:3px">Outils déployés</div>
+          <div style="font-size:0.7rem;color:#64748b;margin-top:3px">Outils déployés</div>
         </div>
         <div style="background:rgba(59,130,246,0.06);border:1px solid rgba(59,130,246,0.12);
              border-radius:14px;padding:14px 16px;text-align:center">
           <div style="font-size:1.6rem;font-weight:900;color:#3b82f6;line-height:1">31+</div>
-          <div style="font-size:0.7rem;color:#475569;margin-top:3px">Publications</div>
+          <div style="font-size:0.7rem;color:#64748b;margin-top:3px">Publications</div>
         </div>
         <div style="background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.12);
              border-radius:14px;padding:14px 16px;text-align:center">
           <div style="font-size:1.6rem;font-weight:900;color:#8b5cf6;line-height:1">5 800+</div>
-          <div style="font-size:0.7rem;color:#475569;margin-top:3px">Échantillons</div>
+          <div style="font-size:0.7rem;color:#64748b;margin-top:3px">Échantillons</div>
         </div>
         <div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.12);
              border-radius:14px;padding:14px 16px;text-align:center">
           <div style="font-size:1.6rem;font-weight:900;color:#f59e0b;line-height:1">248+</div>
-          <div style="font-size:0.7rem;color:#475569;margin-top:3px">Citations</div>
+          <div style="font-size:0.7rem;color:#64748b;margin-top:3px">Citations</div>
         </div>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
@@ -855,6 +841,10 @@ with col_about_photo:
            style="flex:1;text-align:center;background:rgba(255,255,255,0.04);
            border:1px solid rgba(255,255,255,0.07);color:#64748b;
            border-radius:10px;padding:8px 12px;font-size:0.76rem;font-weight:600">Thèse ↗</a>
+        <a href="https://www.linkedin.com/in/medflow-ia-350531401/" target="_blank"
+           style="flex:1;text-align:center;background:rgba(255,255,255,0.04);
+           border:1px solid rgba(255,255,255,0.07);color:#64748b;
+           border-radius:10px;padding:8px 12px;font-size:0.76rem;font-weight:600">LinkedIn ↗</a>
       </div>
     </div>
     """, unsafe_allow_html=True)
@@ -891,21 +881,21 @@ with col_about_text:
           <div style="width:36px;height:36px;background:rgba(16,185,129,0.12);border-radius:10px;
                display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:12px">🎯</div>
           <div style="font-weight:700;color:#e2e8f0;font-size:0.88rem;margin-bottom:6px">Aide à la décision</div>
-          <div style="color:#475569;font-size:0.78rem;line-height:1.6">Calcul, analyse et alerte au chevet du patient.</div>
+          <div style="color:#64748b;font-size:0.78rem;line-height:1.6">Calcul, analyse et alerte au chevet du patient.</div>
         </div>
         <div style="background:rgba(59,130,246,0.05);border:1px solid rgba(59,130,246,0.12);
              border-radius:16px;padding:20px">
           <div style="width:36px;height:36px;background:rgba(59,130,246,0.12);border-radius:10px;
                display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:12px">📊</div>
           <div style="font-weight:700;color:#e2e8f0;font-size:0.88rem;margin-bottom:6px">Evidence-based</div>
-          <div style="color:#475569;font-size:0.78rem;line-height:1.6">Méta-analyses PRISMA et cohortes validées.</div>
+          <div style="color:#64748b;font-size:0.78rem;line-height:1.6">Méta-analyses PRISMA et cohortes validées.</div>
         </div>
         <div style="background:rgba(139,92,246,0.05);border:1px solid rgba(139,92,246,0.12);
              border-radius:16px;padding:20px">
           <div style="width:36px;height:36px;background:rgba(139,92,246,0.12);border-radius:10px;
                display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:12px">🔓</div>
           <div style="font-weight:700;color:#e2e8f0;font-size:0.88rem;margin-bottom:6px">Open Source</div>
-          <div style="color:#475569;font-size:0.78rem;line-height:1.6">Code public GitHub. Gratuit ou 9€/mois.</div>
+          <div style="color:#64748b;font-size:0.78rem;line-height:1.6">Code public GitHub. Gratuit ou 9€/mois.</div>
         </div>
       </div>
       <div style="background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.12);
@@ -918,7 +908,7 @@ with col_about_text:
         <div style="font-style:italic;color:#cbd5e1;font-size:0.9rem;line-height:1.6;margin-bottom:8px">
           "Études bioinformatiques et biostatistiques des structures mosaïques des génomes microbiens"
         </div>
-        <div style="color:#475569;font-size:0.8rem">
+        <div style="color:#64748b;font-size:0.8rem">
           Aix-Marseille Université · Directeur : Pr. Anthony Levasseur
           · Mots-clés : mosaïcisme génomique, taxonogénomique, phylogénomique
         </div>
@@ -1079,7 +1069,7 @@ _galaxy_html = (
     'Roadmap &middot; Outils &middot; GitHub</div>'
     '<div class="section-h2" style="text-align:center">'
     '&Eacute;cosyst&egrave;me MedFlow AI</div>'
-    '<div style="color:#475569;font-size:0.95rem;max-width:560px;'
+    '<div style="color:#64748b;font-size:0.95rem;max-width:560px;'
     'margin:0 auto;line-height:1.7">'
     'De la recherche fondamentale aux outils cliniques d&eacute;ploy&eacute;s &mdash; '
     'chaque projet est interconnect&eacute; dans l&rsquo;&eacute;cosyst&egrave;me MedFlow AI.'
@@ -1111,7 +1101,6 @@ st.markdown(_galaxy_html, unsafe_allow_html=True)
 # ─────────────────────────────────────────────────────────────────
 # AMR-AI AGENT — Section dédiée + diagramme SVG
 # ─────────────────────────────────────────────────────────────────
-_ticker_sep()
 st.markdown("<div id='agent'></div>", unsafe_allow_html=True)
 st.markdown("""
 <div style="background:#09090b;
@@ -1215,11 +1204,11 @@ components.html("""
     <rect x="32" y="185" width="148" height="80" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
     <text x="106" y="211" text-anchor="middle" font-size="22">&#x1F468;&#x200D;&#x2695;&#xFE0F;</text>
     <text x="106" y="233" text-anchor="middle" fill="#f1f5f9" font-size="11" font-weight="700" font-family="sans-serif">Clinicien</text>
-    <text x="106" y="249" text-anchor="middle" fill="#475569" font-size="9" font-family="sans-serif">Question AMR</text>
+    <text x="106" y="249" text-anchor="middle" fill="#64748b" font-size="9" font-family="sans-serif">Question AMR</text>
   </g>
 
   <line class="aq" x1="180" y1="225" x2="262" y2="225" stroke="#334155" stroke-width="1.5" marker-end="url(#arr)"/>
-  <text id="lq" x="221" y="219" text-anchor="middle" fill="#475569" font-size="9" font-family="sans-serif">Query</text>
+  <text id="lq" x="221" y="219" text-anchor="middle" fill="#64748b" font-size="9" font-family="sans-serif">Query</text>
 
   <g id="bloc-agent">
     <rect id="agent-glow" x="264" y="155" width="210" height="145" rx="14" fill="#111113" stroke="#06b6d4" stroke-width="2.5" filter="url(#gc)"/>
@@ -1228,7 +1217,7 @@ components.html("""
     <text x="369" y="178" text-anchor="middle" fill="#06b6d4" font-size="10" font-weight="700" font-family="sans-serif" letter-spacing="1.5">AMR-AI AGENT</text>
     <text x="369" y="212" text-anchor="middle" font-size="20">&#x1F916;</text>
     <text x="369" y="234" text-anchor="middle" fill="#f1f5f9" font-size="12" font-weight="700" font-family="sans-serif">Claude Haiku</text>
-    <text x="369" y="250" text-anchor="middle" fill="#475569" font-size="9" font-family="monospace">Anthropic API &middot; Tool Use</text>
+    <text x="369" y="250" text-anchor="middle" fill="#64748b" font-size="9" font-family="monospace">Anthropic API &middot; Tool Use</text>
     <text x="369" y="270" text-anchor="middle" fill="#334155" font-size="8" font-family="monospace">Agent Loop &middot; stop_reason</text>
     <text x="369" y="282" text-anchor="middle" fill="#334155" font-size="8" font-family="monospace">tool_use &#x2192; end_turn</text>
   </g>
@@ -1242,25 +1231,25 @@ components.html("""
     <rect x="558" y="28"  width="172" height="50" rx="10" fill="#0f172a" stroke="rgba(139,92,246,0.6)" stroke-width="1.5"/>
     <text x="574" y="51" fill="#8b5cf6" font-size="14">&#x1F52C;</text>
     <text x="596" y="51" fill="#f1f5f9" font-size="10" font-weight="700" font-family="monospace">search_trials()</text>
-    <text x="596" y="66" fill="#475569" font-size="8" font-family="sans-serif">97 essais &middot; 58 000+ pts</text>
+    <text x="596" y="66" fill="#64748b" font-size="8" font-family="sans-serif">97 essais &middot; 58 000+ pts</text>
   </g>
   <g id="tool-2">
     <rect x="558" y="118" width="172" height="50" rx="10" fill="#0f172a" stroke="rgba(16,185,129,0.6)" stroke-width="1.5"/>
     <text x="574" y="141" fill="#10b981" font-size="14">&#x1F48A;</text>
     <text x="596" y="141" fill="#f1f5f9" font-size="10" font-weight="700" font-family="monospace">score_molecule()</text>
-    <text x="596" y="156" fill="#475569" font-size="8" font-family="sans-serif">Score E &middot; 33 mol&#233;cules</text>
+    <text x="596" y="156" fill="#64748b" font-size="8" font-family="sans-serif">Score E &middot; 33 mol&#233;cules</text>
   </g>
   <g id="tool-3">
     <rect x="558" y="208" width="172" height="50" rx="10" fill="#0f172a" stroke="rgba(239,68,68,0.6)" stroke-width="1.5"/>
     <text x="574" y="231" fill="#ef4444" font-size="14">&#x1F9A0;</text>
     <text x="596" y="228" fill="#f1f5f9" font-size="10" font-weight="700" font-family="monospace">get_resistance_profile()</text>
-    <text x="596" y="243" fill="#475569" font-size="8" font-family="sans-serif">ESKAPE &middot; g&#232;nes &middot; m&#233;canismes</text>
+    <text x="596" y="243" fill="#64748b" font-size="8" font-family="sans-serif">ESKAPE &middot; g&#232;nes &middot; m&#233;canismes</text>
   </g>
   <g id="tool-4">
     <rect x="558" y="298" width="172" height="50" rx="10" fill="#0f172a" stroke="rgba(249,115,22,0.6)" stroke-width="1.5"/>
     <text x="574" y="321" fill="#f97316" font-size="14">&#x1F4CA;</text>
     <text x="596" y="321" fill="#f1f5f9" font-size="10" font-weight="700" font-family="monospace">compare_compounds()</text>
-    <text x="596" y="336" fill="#475569" font-size="8" font-family="sans-serif">Top-N &middot; exception score</text>
+    <text x="596" y="336" fill="#64748b" font-size="8" font-family="sans-serif">Top-N &middot; exception score</text>
   </g>
 
   <line class="ab1" x1="556" y1="53"  x2="476" y2="200" stroke="#10b981" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#agreen)"/>
@@ -1271,10 +1260,10 @@ components.html("""
   <g id="bloc-db">
     <rect x="752" y="160" width="140" height="130" rx="10" fill="#111113" stroke="rgba(59,130,246,0.4)" stroke-width="1.5"/>
     <text x="822" y="182" text-anchor="middle" fill="#3b82f6" font-size="10" font-weight="700" font-family="sans-serif">&#x1F4BE; Donn&#233;es</text>
-    <text x="822" y="202" text-anchor="middle" fill="#475569" font-size="8" font-family="monospace">molecules_db.csv</text>
-    <text x="822" y="217" text-anchor="middle" fill="#475569" font-size="8" font-family="monospace">eskape_pathogens.csv</text>
-    <text x="822" y="232" text-anchor="middle" fill="#475569" font-size="8" font-family="monospace">meta_analytic_estimates</text>
-    <text x="822" y="247" text-anchor="middle" fill="#475569" font-size="8" font-family="monospace">studies_registry.csv</text>
+    <text x="822" y="202" text-anchor="middle" fill="#64748b" font-size="8" font-family="monospace">molecules_db.csv</text>
+    <text x="822" y="217" text-anchor="middle" fill="#64748b" font-size="8" font-family="monospace">eskape_pathogens.csv</text>
+    <text x="822" y="232" text-anchor="middle" fill="#64748b" font-size="8" font-family="monospace">meta_analytic_estimates</text>
+    <text x="822" y="247" text-anchor="middle" fill="#64748b" font-size="8" font-family="monospace">studies_registry.csv</text>
     <line class="adb" x1="752" y1="225" x2="732" y2="225" stroke="rgba(59,130,246,0.5)" stroke-width="1.5" stroke-dasharray="3,3" marker-end="url(#arr)"/>
   </g>
 
@@ -1283,8 +1272,8 @@ components.html("""
   <g id="bloc-response">
     <rect id="resp-glow" x="32" y="362" width="220" height="66" rx="12" fill="#0f172a" stroke="rgba(16,185,129,0.55)" stroke-width="1.5" filter="url(#gg)"/>
     <text x="142" y="384" text-anchor="middle" fill="#10b981" font-size="10" font-weight="700" font-family="sans-serif">&#x2736; Recommandation Clinique</text>
-    <text x="142" y="400" text-anchor="middle" fill="#475569" font-size="8" font-family="sans-serif">Strat&#233;gie &middot; Mol&#233;cules &middot; Preuves</text>
-    <text x="142" y="415" text-anchor="middle" fill="#475569" font-size="8" font-family="sans-serif">k &#233;tudes &middot; N patients &middot; Mortalit&#233;</text>
+    <text x="142" y="400" text-anchor="middle" fill="#64748b" font-size="8" font-family="sans-serif">Strat&#233;gie &middot; Mol&#233;cules &middot; Preuves</text>
+    <text x="142" y="415" text-anchor="middle" fill="#64748b" font-size="8" font-family="sans-serif">k &#233;tudes &middot; N patients &middot; Mortalit&#233;</text>
   </g>
 
   <text id="ll" x="380" y="440" text-anchor="middle" fill="rgba(6,182,212,0.28)" font-size="9" font-style="italic" font-family="monospace">
@@ -1328,22 +1317,22 @@ st.markdown("""
   <div style="display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-bottom:40px">
     <div style="text-align:center">
       <div style="font-size:1.8rem;font-weight:900;color:#06b6d4">97</div>
-      <div style="font-size:0.75rem;color:#475569;margin-top:2px">Essais cliniques</div>
+      <div style="font-size:0.75rem;color:#64748b;margin-top:2px">Essais cliniques</div>
     </div>
     <div style="width:1px;height:40px;background:rgba(255,255,255,0.06);align-self:center"></div>
     <div style="text-align:center">
       <div style="font-size:1.8rem;font-weight:900;color:#06b6d4">58 000+</div>
-      <div style="font-size:0.75rem;color:#475569;margin-top:2px">Patients</div>
+      <div style="font-size:0.75rem;color:#64748b;margin-top:2px">Patients</div>
     </div>
     <div style="width:1px;height:40px;background:rgba(255,255,255,0.06);align-self:center"></div>
     <div style="text-align:center">
       <div style="font-size:1.8rem;font-weight:900;color:#06b6d4">4</div>
-      <div style="font-size:0.75rem;color:#475569;margin-top:2px">Outils spécialisés</div>
+      <div style="font-size:0.75rem;color:#64748b;margin-top:2px">Outils spécialisés</div>
     </div>
     <div style="width:1px;height:40px;background:rgba(255,255,255,0.06);align-self:center"></div>
     <div style="text-align:center">
       <div style="font-size:1.8rem;font-weight:900;color:#10b981">83.1%</div>
-      <div style="font-size:0.75rem;color:#475569;margin-top:2px">Efficacité poolée max</div>
+      <div style="font-size:0.75rem;color:#64748b;margin-top:2px">Efficacité poolée max</div>
     </div>
   </div>
 
@@ -1362,7 +1351,6 @@ st.markdown("""
 # ─────────────────────────────────────────────────────────────────
 # PUBLICATIONS
 # ─────────────────────────────────────────────────────────────────
-_ticker_sep()
 st.markdown("<div id='publications'></div>", unsafe_allow_html=True)
 st.markdown("""
 <div class="section" style="background:#09090b">
@@ -1490,7 +1478,7 @@ _pub_cards_html = (
 )
 for pub in publications:
     tags_html = "".join(
-        '<span style="background:#0a1628;color:#475569;border-radius:5px;'
+        '<span style="background:#0a1628;color:#64748b;border-radius:5px;'
         'padding:2px 9px;font-size:0.68rem;margin:2px 2px 0 0;display:inline-block;'
         'border:1px solid rgba(255,255,255,0.05)">' + t + '</span>'
         for t in pub["tags"]
@@ -1530,7 +1518,7 @@ for pub in publications:
         'border-radius:7px;padding:6px 16px;font-size:0.75rem;font-weight:700;'
         f'text-decoration:none">{pub["url_label"]}</a>'
         f'<a href="{pub["github"]}" target="_blank" style="display:inline-block;'
-        'border:1px solid rgba(255,255,255,0.08);color:#475569;'
+        'border:1px solid rgba(255,255,255,0.08);color:#64748b;'
         'border-radius:7px;padding:6px 16px;font-size:0.75rem;font-weight:600;'
         'text-decoration:none">GitHub ↗</a>'
         '</div>'
@@ -1651,90 +1639,9 @@ peer_reviewed = [
 
 st.markdown("</div>", unsafe_allow_html=True)
 # ─────────────────────────────────────────────────────────────────
-# ÉQUIPE — Fondateur + photo
+# PUBLICATIONS PEER-REVIEWED
 # ─────────────────────────────────────────────────────────────────
-_ticker_sep()
-st.markdown("<div id='equipe'></div>", unsafe_allow_html=True)
-st.markdown("""
-<div class="section section-alt" style="text-align:center;background:#0c0c0e">
-  <div class="section-eyebrow" style="color:#f59e0b;text-align:center">Équipe</div>
-  <div class="section-h2" style="text-align:center">Le fondateur</div>
-  <div style="color:#475569;font-size:0.95rem;margin:0 auto 48px;max-width:500px;line-height:1.7">
-    MedFlow AI est un projet solo porté par un chercheur passionné, à l'intersection de la bioinformatique, de la médecine de précision et de l'intelligence artificielle.
-  </div>
-""", unsafe_allow_html=True)
-
-col_team_photo, col_team_info = st.columns([1, 2], gap="large")
-
-with col_team_photo:
-    st.markdown(f"""
-    {_photo_card_team}
-    """, unsafe_allow_html=True)
-
-with col_team_info:
-    st.markdown("""
-    <div class="team-card" style="text-align:left">
-      <div style="display:inline-block;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);
-           color:#f59e0b;border-radius:8px;padding:4px 14px;font-size:0.75rem;font-weight:700;
-           letter-spacing:2px;text-transform:uppercase;margin-bottom:20px">
-        Fondateur &amp; Développeur principal
-      </div>
-      <div class="team-name">Dr. Mamadou Lamine TALL</div>
-      <div class="team-role">PhD Bioinformatique · Aix-Marseille Université · Montpellier, France</div>
-      <div class="team-bio">
-        Chercheur spécialisé en <strong style="color:#f1f5f9">bioinformatique médicale</strong>,
-        <strong style="color:#f1f5f9">analyse multi-omique</strong> et
-        <strong style="color:#f1f5f9">intelligence artificielle appliquée à la médecine</strong>.
-        <br><br>
-        <strong style="color:#f59e0b">Thèse de doctorat (2020)</strong> —
-        <em>Études bioinformatiques et biostatistiques des structures mosaïques des génomes microbiens</em>,
-        Aix-Marseille Université, sous la direction du Pr. Anthony Levasseur.
-        Travaux portant sur le mosaïcisme génomique, la taxonogénomique et la phylogénomique comparative.
-        <br><br>
-        Fondateur de <strong style="color:#f1f5f9">MedFlow AI</strong> — plateforme open source d'aide
-        à la décision clinique entièrement en français. Auteur de 5 preprints soumis (2026),
-        développeur de 10 outils déployés sur Streamlit Cloud, et porteur de projets de recherche
-        translationelle en cardiologie, génomique musculaire et onco-microbiome.
-        <br><br>
-        <strong style="color:#f1f5f9">Domaines d'expertise :</strong>
-        génomique comparative · transcriptomique (bulk + single-cell) ·
-        variabilité de la fréquence cardiaque · méta-analyses PRISMA ·
-        Machine Learning clinique · biomarqueurs diagnostiques.
-      </div>
-      <div class="team-links">
-        <a href="https://github.com/mamadoulaminetall" target="_blank" class="team-link">GitHub ↗</a>
-        <a href="https://scholar.google.com/citations?user=qJaCV7MAAAAJ&hl=fr" target="_blank" class="team-link">Google Scholar ↗</a>
-        <a href="https://theses.fr/2020AIXM0426" target="_blank" class="team-link">Thèse 2020 ↗</a>
-        <a href="https://www.linkedin.com/in/medflow-ia-350531401/" target="_blank" class="team-link">LinkedIn ↗</a>
-        <a href="mailto:mamadoulaminetallgithub@gmail.com" class="team-link">Email ↗</a>
-      </div>
-      <div style="margin-top:24px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06)">
-        <div style="display:flex;gap:32px;flex-wrap:wrap">
-          <div>
-            <div style="font-size:1.6rem;font-weight:900;color:#10b981">7</div>
-            <div style="font-size:0.78rem;color:#475569">Outils déployés</div>
-          </div>
-          <div>
-            <div style="font-size:1.6rem;font-weight:900;color:#3b82f6">6</div>
-            <div style="font-size:0.78rem;color:#475569">Publications / Preprints</div>
-          </div>
-          <div>
-            <div style="font-size:1.6rem;font-weight:900;color:#8b5cf6">11</div>
-            <div style="font-size:0.78rem;color:#475569">Repos GitHub</div>
-          </div>
-          <div>
-            <div style="font-size:1.6rem;font-weight:900;color:#f59e0b">5 800+</div>
-            <div style="font-size:0.78rem;color:#475569">Échantillons analysés</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-st.markdown("</div>", unsafe_allow_html=True)
-# ─────────────────────────────────────────────────────────────────
-# PUBLICATIONS PEER-REVIEWED (après Fondateur)
-# ─────────────────────────────────────────────────────────────────
+st.markdown("<div id='peer-reviewed'></div>", unsafe_allow_html=True)
 st.markdown("""
 <div class="section" style="background:#09090b">
   <div class="section-eyebrow" style="color:#3b82f6">IHU M&eacute;diterran&eacute;e Infection &middot; Aix-Marseille</div>
@@ -1745,7 +1652,7 @@ st.markdown("""
           letter-spacing:2px;text-transform:uppercase">
       📄 29+ publications index&eacute;es · G&eacute;nomique &middot; M&eacute;tagenomique &middot; Microbiome
     </span>
-    <span style="color:#475569;font-size:0.82rem">Google Scholar · ID : qJaCV7MAAAAJ</span>
+    <span style="color:#64748b;font-size:0.82rem">Google Scholar · ID : qJaCV7MAAAAJ</span>
   </div>
 """, unsafe_allow_html=True)
 
@@ -1768,9 +1675,9 @@ for cit, color, title, authors, journal, year, url in peer_reviewed:
         'padding:3px 10px;font-size:0.75rem;font-weight:800;margin-left:12px;white-space:nowrap">'
         f'{cit} cit.</span>'
         '</div>'
-        f'<div style="font-size:0.75rem;color:#475569;margin-bottom:4px">{authors}</div>'
+        f'<div style="font-size:0.75rem;color:#64748b;margin-bottom:4px">{authors}</div>'
         '<div style="display:flex;justify-content:space-between;align-items:center">'
-        f'<span style="font-size:0.75rem;color:#475569;font-style:italic">{journal} · {year}</span>'
+        f'<span style="font-size:0.75rem;color:#64748b;font-style:italic">{journal} · {year}</span>'
         f'<a href="{url}" target="_blank" style="color:{color};font-size:0.72rem;'
         f'font-weight:600;white-space:nowrap;margin-left:8px">Voir →</a>'
         '</div>'
@@ -1786,19 +1693,19 @@ st.markdown(f"""
      border:1px solid rgba(255,255,255,0.06);display:flex;gap:40px;flex-wrap:wrap;align-items:center">
   <div>
     <span style="font-size:1.8rem;font-weight:900;color:#3b82f6">{len(peer_reviewed) + 5}</span>
-    <span style="color:#475569;font-size:0.82rem;margin-left:8px">Publications totales</span>
+    <span style="color:#64748b;font-size:0.82rem;margin-left:8px">Publications totales</span>
   </div>
   <div>
     <span style="font-size:1.8rem;font-weight:900;color:#10b981">{_total_cit}+</span>
-    <span style="color:#475569;font-size:0.82rem;margin-left:8px">Citations totales</span>
+    <span style="color:#64748b;font-size:0.82rem;margin-left:8px">Citations totales</span>
   </div>
   <div>
     <span style="font-size:1.8rem;font-weight:900;color:#8b5cf6">8</span>
-    <span style="color:#475569;font-size:0.82rem;margin-left:8px">Publications 1er auteur</span>
+    <span style="color:#64748b;font-size:0.82rem;margin-left:8px">Publications 1er auteur</span>
   </div>
   <div>
     <span style="font-size:1.8rem;font-weight:900;color:#f59e0b">2019–2026</span>
-    <span style="color:#475569;font-size:0.82rem;margin-left:8px">P&eacute;riode d'activit&eacute;</span>
+    <span style="color:#64748b;font-size:0.82rem;margin-left:8px">P&eacute;riode d'activit&eacute;</span>
   </div>
   <a href="https://scholar.google.com/citations?user=qJaCV7MAAAAJ&hl=fr" target="_blank"
      style="background:#1e3a5f;color:#60a5fa;padding:10px 22px;border-radius:8px;
@@ -1924,13 +1831,12 @@ st.markdown("</div>", unsafe_allow_html=True)
 # ─────────────────────────────────────────────────────────────────
 # MENTIONS LÉGALES
 # ─────────────────────────────────────────────────────────────────
-_ticker_sep()
 st.markdown("<div id='legal'></div>", unsafe_allow_html=True)
 st.markdown("""
 <div class="legal-section">
   <div style="text-align:center;margin-bottom:48px">
     <div style="font-size:0.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;
-                color:#475569;margin-bottom:12px">Informations légales</div>
+                color:#64748b;margin-bottom:12px">Informations légales</div>
     <div style="font-size:1.8rem;font-weight:800;color:#64748b">Mentions légales</div>
   </div>
 """, unsafe_allow_html=True)
