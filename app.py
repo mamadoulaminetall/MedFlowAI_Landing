@@ -1215,12 +1215,6 @@ components.html("""
   .flow-back   { animation:flow 2s   linear infinite !important; stroke-dasharray:6 6 !important; }
   .flow-slow   { animation:flow 2.4s linear infinite !important; stroke-dasharray:7 5 !important; }
 
-  /* ── Animations continues des boîtes (activées par JS) ── */
-  .float-box      { animation:boxFloat  3.5s ease-in-out infinite !important; }
-  .float-box-slow { animation:boxFloat  4.8s ease-in-out 1.4s infinite !important; }
-  .breath-box     { animation:boxBreath 2.8s ease-in-out infinite !important; }
-  .breath-box-alt { animation:boxBreath 3.4s ease-in-out 1.0s infinite !important; }
-
   @keyframes boxFloat  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
   @keyframes boxBreath { 0%,100%{transform:scale(1) translateY(0)} 50%{transform:scale(1.018) translateY(-2px)} }
   @keyframes agGlow    { 0%,100%{filter:drop-shadow(0 0 6px rgba(6,182,212,.6))}  50%{filter:drop-shadow(0 0 22px rgba(6,182,212,1))} }
@@ -1343,12 +1337,15 @@ setTimeout(function() {
   document.querySelectorAll('.aq').forEach(function(el) { el.classList.add('flow-slow'); });
   // Flèche agent → recommandation
   document.querySelectorAll('.ar').forEach(function(el) { el.classList.add('flow-back'); });
-  // Boîtes principales : float doux
-  document.getElementById('bloc-clinician').classList.add('float-box');
-  document.getElementById('bloc-db').classList.add('float-box-slow');
-  // Agent et Réponse : breathe (scale + montée)
-  document.getElementById('bloc-agent').classList.add('breath-box');
-  document.getElementById('bloc-response').classList.add('breath-box-alt');
+  // Boîtes : inline style pour ne pas effacer le forwards fill de l'entrée
+  var bc = document.getElementById('bloc-clinician');
+  if(bc){ bc.style.opacity='1'; bc.style.animation='boxFloat 3.5s ease-in-out infinite'; }
+  var bd = document.getElementById('bloc-db');
+  if(bd){ bd.style.opacity='1'; bd.style.animation='boxFloat 4.8s ease-in-out 1.4s infinite'; }
+  var ba = document.getElementById('bloc-agent');
+  if(ba){ ba.style.opacity='1'; ba.style.animation='boxBreath 2.8s ease-in-out infinite'; }
+  var br = document.getElementById('bloc-response');
+  if(br){ br.style.opacity='1'; br.style.animation='boxBreath 3.4s ease-in-out 1.0s infinite'; }
 }, 4400);
 </script>
 """, height=468)
