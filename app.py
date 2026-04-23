@@ -691,7 +691,7 @@ _TSET = (
   + _TBTN("#", "rgba(139,92,246,0.1)",  "rgba(139,92,246,0.3)",  "#a78bfa", "🧬", "MYOomics SaaS",        "Beta")
   + _TBTN("#", "rgba(59,130,246,0.1)",  "rgba(59,130,246,0.3)",  "#60a5fa", "🫀", "R&eacute;innervation", "preprint")
   + _TBTN("#", "rgba(16,185,129,0.1)",  "rgba(16,185,129,0.3)",  "#34d399", "📊", "QoL Cardiac IA",       "Streamlit")
-  + _TBTN("#", "rgba(249,115,22,0.1)",  "rgba(249,115,22,0.3)",  "#fb923c", "🦠", "Microbiome Cancer",    "bioRxiv")
+  + _TBTN("https://doi.org/10.64898/2026.04.19.719461", "rgba(249,115,22,0.1)",  "rgba(249,115,22,0.3)",  "#fb923c", "🦠", "Microbiome Cancer",    "DOI ✓")
   + _TBTN("#", "rgba(236,72,153,0.1)",  "rgba(236,72,153,0.3)",  "#f472b6", "🧩", "CNV Diagnostic IA",   "medRxiv")
   + _SEP
 )
@@ -1437,7 +1437,7 @@ publications = [
         "color": "#10b981",
         "type": "Preprint · Méta-analyse · Microbiome · Oncologie · 2026",
         "title": "Gut Microbiome Signatures as Early Diagnostic Biomarkers in Colorectal, Pancreatic, Gastric, Hepatocellular and Lung Cancers: A Systematic Review and Meta-Analysis of 18 Studies",
-        "meta": "Dr. Mamadou Lamine TALL · bioRxiv BIORXIV/2026/719461 · En screening · 18 études · N=2 587 patients",
+        "meta": "Dr. Mamadou Lamine TALL · bioRxiv BIORXIV/2026/719461 · En ligne · DOI: 10.64898/2026.04.19.719461 · 18 études · N=2 587 patients",
         "abstract": (
             "Méta-analyse random-effects (DerSimonian-Laird) portant sur 18 études (N=2 587 patients, 5 cancers). "
             "Sensibilité diagnostique poolée : cancer colorectal 74,1 % [68,2–79,3 %], pancréatique 71,8 %, "
@@ -1447,8 +1447,8 @@ publications = [
             "Modèles ML (RF AUC=0,91). PRISMA 2020."
         ),
         "tags": ["Microbiome", "5 cancers · DL meta-analysis", "16S rRNA · métagénomique", "RF AUC=0.91", "PRISMA 2020", "18 études · 2 587 patients"],
-        "url": "https://github.com/mamadoulaminetall/microbiome_diagnostic_cancer_precoce",
-        "url_label": "GitHub →",
+        "url": "https://doi.org/10.64898/2026.04.19.719461",
+        "url_label": "Lire le preprint →",
         "github": "https://github.com/mamadoulaminetall/microbiome_diagnostic_cancer_precoce",
     },
     {
