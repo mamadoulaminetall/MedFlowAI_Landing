@@ -37,10 +37,9 @@ st.markdown("""
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 [data-testid="stAppViewContainer"] {
-    background: #020c1e;
+    background: #09090b;
     background-image:
-        radial-gradient(ellipse 80% 50% at 20% 0%, rgba(16,185,129,0.05) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(59,130,246,0.04) 0%, transparent 60%);
+        radial-gradient(ellipse 60% 40% at 50% 0%, rgba(16,185,129,0.04) 0%, transparent 60%);
 }
 [data-testid="stSidebar"], [data-testid="collapsedControl"] { display:none; }
 [data-testid="stHeader"] { background: transparent; }
@@ -67,28 +66,25 @@ a { text-decoration: none; }
 html { scroll-behavior: smooth; }
 .nav {
     position: sticky; top: 0; z-index: 999;
-    background: rgba(4,10,22,0.78);
-    backdrop-filter: blur(28px) saturate(180%);
-    -webkit-backdrop-filter: blur(28px) saturate(180%);
-    border-bottom: 1px solid rgba(255,255,255,0.07);
-    box-shadow: 0 2px 40px rgba(0,0,0,0.5), 0 1px 0 rgba(16,185,129,0.12);
+    background: rgba(9,9,11,0.85);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
     padding: 0 48px;
     display: flex; align-items: center;
     justify-content: space-between;
-    height: 64px;
+    height: 60px;
     position: relative;
 }
 .nav::after {
     content: "";
     position: absolute; bottom: 0; left: 0;
-    width: 100%; height: 2px;
+    width: 100%; height: 1px;
     background: linear-gradient(90deg,
         transparent 0%,
-        rgba(16,185,129,0.6) 25%,
-        rgba(59,130,246,0.5) 55%,
-        rgba(139,92,246,0.4) 80%,
+        rgba(16,185,129,0.35) 40%,
+        rgba(16,185,129,0.35) 60%,
         transparent 100%);
-    box-shadow: 0 0 12px rgba(16,185,129,0.25);
 }
 .nav-logo {
     display: flex; align-items: center; gap: 10px;
@@ -164,15 +160,16 @@ html { scroll-behavior: smooth; }
 
 /* ── HERO ── */
 .hero {
-    background: linear-gradient(160deg, #03080f 0%, #071628 50%, #03080f 100%);
-    padding: 100px 80px 80px;
+    background: #09090b;
+    padding: 120px 80px 80px;
     position: relative; overflow: hidden;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 .hero::before {
     content: "";
-    position: absolute; top: -150px; left: 0; right: 0; height: 500px;
-    background: radial-gradient(ellipse 70% 60% at 30% 50%, rgba(16,185,129,0.07), transparent 70%);
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 500px;
+    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(16,185,129,0.05), transparent 70%);
     pointer-events: none;
 }
 .hero-eyebrow {
@@ -212,39 +209,38 @@ html { scroll-behavior: smooth; }
 }
 .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
 .btn-hero-primary {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    color: white; padding: 15px 38px; border-radius: 14px;
-    font-weight: 800; font-size: 0.95rem;
-    box-shadow: 0 8px 32px rgba(16,185,129,0.35), inset 0 1px 0 rgba(255,255,255,0.15);
-    transition: transform 0.2s, box-shadow 0.2s;
+    background: #10b981;
+    color: white; padding: 14px 36px; border-radius: 10px;
+    font-weight: 700; font-size: 0.92rem; letter-spacing: -0.2px;
+    transition: opacity 0.2s;
 }
+.btn-hero-primary:hover { opacity: 0.88; }
 .btn-hero-secondary {
-    border: 1px solid rgba(255,255,255,0.12);
-    background: rgba(255,255,255,0.04);
-    color: #94a3b8; padding: 14px 34px; border-radius: 14px;
-    font-weight: 600; font-size: 0.9rem;
-    backdrop-filter: blur(8px);
-    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.03);
+    color: #a1a1aa; padding: 14px 32px; border-radius: 10px;
+    font-weight: 500; font-size: 0.9rem;
+    transition: all 0.2s;
 }
 .btn-hero-secondary:hover {
-    border-color: rgba(6,182,212,0.5); color: #06b6d4;
-    background: rgba(6,182,212,0.06);
+    border-color: rgba(255,255,255,0.2); color: #e4e4e7;
+    background: rgba(255,255,255,0.06);
 }
 
 /* ── TICKER ── */
 .ticker-wrap {
-    background: linear-gradient(90deg, #020c1e 0%, #031525 50%, #020c1e 100%);
-    border-top: 1px solid rgba(6,182,212,0.12);
-    border-bottom: 1px solid rgba(6,182,212,0.12);
+    background: #09090b;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
     overflow: hidden; position: relative;
-    height: 46px; display: flex; align-items: center;
+    height: 44px; display: flex; align-items: center;
 }
 .ticker-wrap::before, .ticker-wrap::after {
     content: ""; position: absolute; top: 0; bottom: 0;
     width: 80px; z-index: 2; pointer-events: none;
 }
-.ticker-wrap::before { left: 0;  background: linear-gradient(90deg, #020c1e, transparent); }
-.ticker-wrap::after  { right: 0; background: linear-gradient(-90deg, #020c1e, transparent); }
+.ticker-wrap::before { left: 0;  background: linear-gradient(90deg, #09090b, transparent); }
+.ticker-wrap::after  { right: 0; background: linear-gradient(-90deg, #09090b, transparent); }
 .ticker-track {
     display: flex; align-items: center;
     animation: ticker-scroll 40s linear infinite;
@@ -289,7 +285,7 @@ html { scroll-behavior: smooth; }
 
 /* ── LOGO BOX ── */
 .logo-box {
-    background: linear-gradient(145deg, #071628 0%, #050e1d 100%);
+    background: linear-gradient(145deg, #111113 0%, #0c0c0e 100%);
     border: 1px solid rgba(16,185,129,0.15);
     border-radius: 28px; padding: 48px 36px;
     text-align: center;
@@ -326,22 +322,21 @@ html { scroll-behavior: smooth; }
 }
 
 /* ── SECTION ── */
-.section { padding: 96px 80px; }
+.section { padding: 112px 80px; }
 .section-alt {
-    background: #040c1c;
-    border-top: 1px solid rgba(59,130,246,0.08);
-    border-bottom: 1px solid rgba(59,130,246,0.08);
-    box-shadow: inset 0 1px 0 rgba(59,130,246,0.04), inset 0 -1px 0 rgba(59,130,246,0.04);
+    background: #0c0c0e;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 .section-eyebrow {
-    font-size: 0.7rem; font-weight: 700; letter-spacing: 3.5px;
-    text-transform: uppercase; margin-bottom: 14px;
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 16px;
 }
 .section-h2 {
-    font-size: 2.6rem; font-weight: 900; color: #f1f5f9;
-    letter-spacing: -1px; line-height: 1.15; margin-bottom: 18px;
+    font-size: clamp(2.4rem, 4vw, 3.2rem); font-weight: 900; color: #fafafa;
+    letter-spacing: -1.5px; line-height: 1.08; margin-bottom: 20px;
 }
-.section-lead { color: #475569; font-size: 1rem; line-height: 1.8; max-width: 580px; }
+.section-lead { color: #52525b; font-size: 1rem; line-height: 1.8; max-width: 520px; }
 .divider-line { border: none; border-top: 1px solid rgba(255,255,255,0.04); }
 
 /* ── SÉPARATION BLOCS — glow visible ── */
@@ -349,14 +344,8 @@ html { scroll-behavior: smooth; }
     border: none !important;
 }
 .block-sep {
-    width: 100%; height: 3px;
-    background: linear-gradient(90deg,
-        transparent 0%,
-        rgba(16,185,129,0.5) 20%,
-        rgba(59,130,246,0.45) 50%,
-        rgba(139,92,246,0.45) 80%,
-        transparent 100%);
-    box-shadow: 0 0 20px rgba(16,185,129,0.15), 0 0 40px rgba(59,130,246,0.08);
+    width: 100%; height: 1px;
+    background: rgba(255,255,255,0.06);
     margin: 0;
 }
 .section-wrap {
@@ -381,14 +370,14 @@ html { scroll-behavior: smooth; }
 .photo-modern-inner {
     position: relative; z-index: 1;
     border-radius: 24px; overflow: hidden;
-    background: #0d1829;
+    background: #111113;
 }
 .photo-modern-inner img {
     width: 100%; display: block;
     border-radius: 24px 24px 0 0;
 }
 .photo-modern-caption {
-    background: linear-gradient(135deg, #071628, #0d1829);
+    background: linear-gradient(135deg, #111113, #0c0c0e);
     padding: 20px 22px; border-radius: 0 0 24px 24px;
     border-top: 1px solid rgba(16,185,129,0.1);
 }
@@ -404,32 +393,26 @@ html { scroll-behavior: smooth; }
 
 /* ── CARDS GLASSMORPHISM ── */
 .glass-card {
-    background: rgba(13,24,41,0.7);
-    backdrop-filter: blur(16px) saturate(150%);
+    background: #111113;
     border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 20px; padding: 28px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3),
-                inset 0 1px 0 rgba(255,255,255,0.04);
-    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    border-radius: 16px; padding: 28px;
+    transition: border-color 0.2s, transform 0.2s;
 }
 .glass-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-3px);
     border-color: rgba(16,185,129,0.2);
-    box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(16,185,129,0.1);
 }
 
 /* ── ROADMAP CARDS ── */
 .rm-card {
-    background: rgba(13,24,41,0.8);
-    backdrop-filter: blur(12px);
-    border-radius: 18px; padding: 24px;
-    border: 1px solid rgba(255,255,255,0.06);
-    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+    background: #111113;
+    border-radius: 14px; padding: 24px;
+    border: 1px solid rgba(255,255,255,0.07);
+    transition: border-color 0.2s, transform 0.2s;
 }
 .rm-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+    transform: translateY(-3px);
+    border-color: rgba(255,255,255,0.14);
 }
 .rm-icon-wrap {
     width: 50px; height: 50px; border-radius: 14px;
@@ -448,7 +431,7 @@ html { scroll-behavior: smooth; }
 
 /* ── PUBLICATIONS ── */
 .pub-card {
-    background: #0d1829; border-radius: 14px; padding: 24px 28px;
+    background: #111113; border-radius: 14px; padding: 24px 28px;
     border: 1px solid rgba(255,255,255,0.06);
     border-left: 4px solid;
     margin-bottom: 16px;
@@ -486,7 +469,7 @@ html { scroll-behavior: smooth; }
 
 /* ── CONTACT ── */
 .contact-box {
-    background: #0d1829; border-radius: 16px; padding: 28px 32px;
+    background: #111113; border-radius: 16px; padding: 28px 32px;
     border: 1px solid rgba(255,255,255,0.07);
     display: flex; align-items: flex-start; gap: 18px;
 }
@@ -501,38 +484,31 @@ html { scroll-behavior: smooth; }
 .contact-sub { font-size: 0.8rem; color: #64748b; margin-top: 2px; }
 
 /* ── LEGAL ── */
-.legal-section { background: #020609; padding: 64px 80px;
+.legal-section { background: #09090b; padding: 64px 80px;
     border-top: 1px solid rgba(255,255,255,0.05); }
 .legal-card {
-    background: #080f1e; border-radius: 14px; padding: 28px 32px;
-    border: 1px solid rgba(255,255,255,0.05); height: 100%;
+    background: #111113; border-radius: 12px; padding: 28px 32px;
+    border: 1px solid rgba(255,255,255,0.06); height: 100%;
 }
-.legal-title { font-size: 0.9rem; font-weight: 700; color: #94a3b8; margin-bottom: 12px; }
-.legal-text { font-size: 0.82rem; color: #475569; line-height: 1.7; }
+.legal-title { font-size: 0.88rem; font-weight: 600; color: #a1a1aa; margin-bottom: 12px; }
+.legal-text { font-size: 0.8rem; color: #52525b; line-height: 1.7; }
 
 /* ── FOOTER ── */
 .footer {
-    background: #020609;
-    border-top: 1px solid rgba(16,185,129,0.12);
-    padding: 40px 80px;
+    background: #09090b;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 36px 80px;
     display: flex; align-items: center;
     justify-content: space-between; flex-wrap: wrap; gap: 16px;
 }
 .footer-brand {
-    font-size: 1.1rem; font-weight: 900;
-    background: linear-gradient(135deg, #f8fafc 0%, #94a3b8 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-size: 1rem; font-weight: 800; color: #fafafa;
 }
-.footer-brand span {
-    background: linear-gradient(135deg, #10b981, #34d399);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-.footer-copy { font-size: 0.78rem; color: #4b5e78; margin-top: 4px; }
+.footer-brand span { color: #10b981; }
+.footer-copy { font-size: 0.75rem; color: #52525b; margin-top: 4px; }
 .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
-.footer-links a { font-size: 0.78rem; color: #4b5e78; transition: color 0.2s; }
-.footer-links a:hover { color: #10b981; }
+.footer-links a { font-size: 0.75rem; color: #52525b; transition: color 0.2s; }
+.footer-links a:hover { color: #a1a1aa; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -707,74 +683,68 @@ _ticker_sep()
 _logo_big = LOGO_IMG.replace('height:38px', 'height:80px').replace('border-radius:6px', 'border-radius:14px') if _LOGO_B64 else '<span style="font-size:4rem">🩺</span>'
 
 _hero_html = (
-    '<div style="background:linear-gradient(170deg,#020c1e 0%,#031525 45%,#020b18 100%);'
-    'padding:100px 80px 0;position:relative;overflow:hidden;">'
-    '<div style="position:absolute;top:-120px;left:-60px;width:600px;height:600px;'
-    'background:radial-gradient(ellipse,rgba(16,185,129,0.07) 0%,transparent 65%);'
+    '<div style="background:#09090b;padding:120px 48px 0;position:relative;overflow:hidden;">'
+    '<div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:800px;height:600px;'
+    'background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(16,185,129,0.06) 0%,transparent 70%);'
     'pointer-events:none"></div>'
-    '<div style="position:absolute;top:-80px;right:-80px;width:500px;height:500px;'
-    'background:radial-gradient(ellipse,rgba(59,130,246,0.06) 0%,transparent 65%);'
-    'pointer-events:none"></div>'
-    '<div style="max-width:860px;margin:0 auto;text-align:center;position:relative;z-index:1">'
-    f'<div style="margin-bottom:28px">{_logo_big}</div>'
-    '<div style="display:inline-flex;align-items:center;gap:8px;'
-    'background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.22);'
-    'color:#10b981;border-radius:100px;padding:7px 20px;'
-    'font-size:0.72rem;font-weight:700;letter-spacing:2.5px;'
-    'text-transform:uppercase;margin-bottom:32px">'
-    '&#128302; Recherche &amp; Clinique &middot; Open Source'
+    '<div style="max-width:780px;margin:0 auto;text-align:center;position:relative;z-index:1">'
+    '<div style="display:inline-flex;align-items:center;gap:6px;'
+    'background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.18);'
+    'color:#10b981;border-radius:100px;padding:5px 16px;'
+    'font-size:0.7rem;font-weight:600;letter-spacing:1.5px;'
+    'text-transform:uppercase;margin-bottom:36px">'
+    '<span style="width:6px;height:6px;border-radius:50%;background:#10b981;display:inline-block;'
+    'box-shadow:0 0 6px #10b981"></span>'
+    'Plateforme IA M&eacute;dicale &middot; Open Source'
     '</div>'
-    '<div style="font-size:clamp(2.8rem,6vw,4.8rem);font-weight:900;color:#f8fafc;'
-    'line-height:1.04;letter-spacing:-2.5px;margin-bottom:24px">'
-    "L'IA au service des<br>"
-    '<span style="background:linear-gradient(135deg,#10b981 0%,#34d399 50%,#3b82f6 100%);'
+    '<div style="font-size:clamp(3rem,6.5vw,5.2rem);font-weight:900;color:#fafafa;'
+    'line-height:1.02;letter-spacing:-3px;margin-bottom:28px">'
+    "L&rsquo;IA au service des<br>"
+    '<span style="background:linear-gradient(135deg,#10b981 0%,#34d399 100%);'
     '-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">'
     'M&eacute;decins &amp; Chercheurs'
     '</span></div>'
-    '<div style="font-size:1.1rem;color:#64748b;line-height:1.8;max-width:640px;margin:0 auto 40px">'
-    'Des outils IA con&ccedil;us par un chercheur en bioinformatique m&eacute;dicale &mdash; '
-    'pour la d&eacute;cision clinique, l&rsquo;analyse multi-omique et la recherche translationnelle. '
-    '<strong style="color:#94a3b8">Enti&egrave;rement en fran&ccedil;ais.</strong>'
+    '<div style="font-size:1.05rem;color:#52525b;line-height:1.75;max-width:520px;margin:0 auto 44px;font-weight:400">'
+    'Outils IA con&ccedil;us par un chercheur en bioinformatique m&eacute;dicale &mdash; '
+    'd&eacute;cision clinique, multi-omique, recherche translationnelle.'
     '</div>'
-    '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:44px">'
-    '<span class="hero-tag" style="background:rgba(6,182,212,0.15);border-color:rgba(6,182,212,0.4);color:#06b6d4">&#129302; 1er Agent IA Clinique</span>'
-    '<span class="hero-tag">&#129516; Multi-omique</span>'
-    '<span class="hero-tag">&#128202; 10 outils d&eacute;ploy&eacute;s</span>'
-    '<span class="hero-tag">&#128218; 5 Preprints soumis 2026</span>'
-    '<span class="hero-tag">&#127467;&#127479; 100&nbsp;% fran&ccedil;ais</span>'
-    '<span class="hero-tag">&#128275; Open Source</span>'
-    '</div>'
-    '<div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:72px">'
-    '<a href="https://buy.stripe.com/9B63cvb3G8kZ5cGfHwb3q01" target="_blank" class="btn-hero-primary">'
+    '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:80px">'
+    '<a href="https://buy.stripe.com/9B63cvb3G8kZ5cGfHwb3q01" target="_blank" '
+    'style="background:#10b981;color:#fff;padding:14px 36px;border-radius:10px;'
+    'font-weight:700;font-size:0.92rem;letter-spacing:-0.2px;'
+    'transition:opacity .2s;display:inline-block">'
     'Commencer &mdash; 9&euro;/mois'
     '</a>'
-    '<a href="https://cardiac-qol-ai.streamlit.app" target="_blank" class="btn-hero-secondary">'
+    '<a href="https://cardiac-qol-ai.streamlit.app" target="_blank" '
+    'style="border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);'
+    'color:#a1a1aa;padding:14px 32px;border-radius:10px;'
+    'font-weight:500;font-size:0.9rem;'
+    'transition:all .2s;display:inline-block">'
     'Essayer gratuitement &rarr;'
     '</a>'
     '</div>'
     '</div>'
-    '<div style="border-top:1px solid rgba(255,255,255,0.06);'
-    'background:rgba(2,8,16,0.6);backdrop-filter:blur(12px);'
-    'padding:28px 80px;display:flex;justify-content:center;flex-wrap:wrap">'
-    '<div style="display:flex;align-items:center;gap:32px;flex-wrap:wrap;justify-content:center">'
-    '<div style="text-align:center;padding:0 32px">'
-    '<div style="font-size:2rem;font-weight:900;color:#10b981;line-height:1">10</div>'
-    '<div style="font-size:0.72rem;color:#475569;margin-top:4px">Outils d&eacute;ploy&eacute;s</div>'
+    '<div style="border-top:1px solid rgba(255,255,255,0.05);'
+    'padding:32px 48px;display:flex;justify-content:center">'
+    '<div style="display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center">'
+    '<div style="text-align:center;padding:0 48px">'
+    '<div style="font-size:2.4rem;font-weight:900;color:#fafafa;line-height:1;letter-spacing:-1.5px">10</div>'
+    '<div style="font-size:0.72rem;color:#52525b;margin-top:6px;letter-spacing:0.5px;text-transform:uppercase">Outils d&eacute;ploy&eacute;s</div>'
     '</div>'
-    '<div style="width:1px;height:40px;background:rgba(255,255,255,0.06)"></div>'
-    '<div style="text-align:center;padding:0 32px">'
-    '<div style="font-size:2rem;font-weight:900;color:#3b82f6;line-height:1">31+</div>'
-    '<div style="font-size:0.72rem;color:#475569;margin-top:4px">Publications index&eacute;es</div>'
+    '<div style="width:1px;height:36px;background:rgba(255,255,255,0.06)"></div>'
+    '<div style="text-align:center;padding:0 48px">'
+    '<div style="font-size:2.4rem;font-weight:900;color:#fafafa;line-height:1;letter-spacing:-1.5px">31+</div>'
+    '<div style="font-size:0.72rem;color:#52525b;margin-top:6px;letter-spacing:0.5px;text-transform:uppercase">Publications</div>'
     '</div>'
-    '<div style="width:1px;height:40px;background:rgba(255,255,255,0.06)"></div>'
-    '<div style="text-align:center;padding:0 32px">'
-    '<div style="font-size:2rem;font-weight:900;color:#8b5cf6;line-height:1">5&nbsp;800+</div>'
-    '<div style="font-size:0.72rem;color:#475569;margin-top:4px">&Eacute;chantillons analys&eacute;s</div>'
+    '<div style="width:1px;height:36px;background:rgba(255,255,255,0.06)"></div>'
+    '<div style="text-align:center;padding:0 48px">'
+    '<div style="font-size:2.4rem;font-weight:900;color:#fafafa;line-height:1;letter-spacing:-1.5px">5 800+</div>'
+    '<div style="font-size:0.72rem;color:#52525b;margin-top:6px;letter-spacing:0.5px;text-transform:uppercase">&Eacute;chantillons analys&eacute;s</div>'
     '</div>'
-    '<div style="width:1px;height:40px;background:rgba(255,255,255,0.06)"></div>'
-    '<div style="text-align:center;padding:0 32px">'
-    '<div style="font-size:2rem;font-weight:900;color:#f59e0b;line-height:1">248+</div>'
-    '<div style="font-size:0.72rem;color:#475569;margin-top:4px">Citations Google Scholar</div>'
+    '<div style="width:1px;height:36px;background:rgba(255,255,255,0.06)"></div>'
+    '<div style="text-align:center;padding:0 48px">'
+    '<div style="font-size:2.4rem;font-weight:900;color:#fafafa;line-height:1;letter-spacing:-1.5px">248+</div>'
+    '<div style="font-size:0.72rem;color:#52525b;margin-top:6px;letter-spacing:0.5px;text-transform:uppercase">Citations Scholar</div>'
     '</div>'
     '</div>'
     '</div>'
@@ -798,7 +768,7 @@ if _photo_src:
         '<div style="border-radius:999px;'
         'background:linear-gradient(160deg,#10b981 0%,#3b82f6 50%,#8b5cf6 100%);'
         'padding:3px;box-shadow:0 0 48px rgba(16,185,129,0.18),0 24px 64px rgba(0,0,0,0.55)">'
-        '<div style="border-radius:999px;overflow:hidden;background:#03080f">'
+        '<div style="border-radius:999px;overflow:hidden;background:#09090b">'
         f'<img src="{_photo_src}" style="width:260px;display:block;'
         'height:340px;object-fit:cover;object-position:50% 18%">'
         '</div></div>'
@@ -823,7 +793,7 @@ if _photo_src:
         '<div style="border-radius:999px;'
         'background:linear-gradient(160deg,#f59e0b 0%,#ef4444 50%,#8b5cf6 100%);'
         'padding:3px;box-shadow:0 0 40px rgba(245,158,11,0.15),0 20px 60px rgba(0,0,0,0.5)">'
-        '<div style="border-radius:999px;overflow:hidden;background:#03080f">'
+        '<div style="border-radius:999px;overflow:hidden;background:#09090b">'
         f'<img src="{_photo_src}" style="width:240px;display:block;'
         'height:316px;object-fit:cover;object-position:50% 18%">'
         '</div></div></div>'
@@ -834,12 +804,12 @@ if _photo_src:
         '</div></div></div>'
     )
 else:
-    _fallback = '<div style="height:380px;background:linear-gradient(135deg,#071628,#0d1829);display:flex;align-items:center;justify-content:center;font-size:5rem">👤</div>'
+    _fallback = '<div style="height:380px;background:linear-gradient(135deg,#111113,#0c0c0e);display:flex;align-items:center;justify-content:center;font-size:5rem">👤</div>'
     _photo_card_about = _fallback
     _photo_card_team  = _fallback
 
 st.markdown("""
-<div style="background:#050e1d;padding:56px 0 0;
+<div style="background:#0c0c0e;padding:56px 0 0;
      border-bottom:1px solid rgba(255,255,255,0.04)">
 </div>
 """, unsafe_allow_html=True)
@@ -848,7 +818,7 @@ col_about_photo, col_about_text = st.columns([1, 2], gap="large")
 
 with col_about_photo:
     st.markdown(f"""
-    <div style="padding:0 0 56px 40px;background:#050e1d">
+    <div style="padding:0 0 56px 40px;background:#0c0c0e">
       {_photo_card_about}
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px">
         <div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.12);
@@ -891,7 +861,7 @@ with col_about_photo:
 
 with col_about_text:
     st.markdown("""
-    <div style="padding:0 40px 56px 0;background:#050e1d">
+    <div style="padding:0 40px 56px 0;background:#0c0c0e">
       <div style="font-size:0.7rem;font-weight:700;letter-spacing:3.5px;
            text-transform:uppercase;color:#10b981;margin-bottom:14px">
         À propos · Mission
@@ -1014,7 +984,7 @@ def _eco_card(t, side):
         else f"border-left:2px solid {t['color']}55"
     )
     return (
-        f'<div style="background:#060e1e;border:1px solid rgba(255,255,255,0.07);'
+        f'<div style="background:#111113;border:1px solid rgba(255,255,255,0.08);'
         f'border-radius:14px;padding:14px 16px;{acc_border};'
         'transition:transform 0.2s,box-shadow 0.2s">'
         f'<div style="display:flex;align-items:center;gap:10px;flex-direction:{icon_order}">'
@@ -1144,8 +1114,8 @@ st.markdown(_galaxy_html, unsafe_allow_html=True)
 _ticker_sep()
 st.markdown("<div id='agent'></div>", unsafe_allow_html=True)
 st.markdown("""
-<div style="background:linear-gradient(160deg,#03080f 0%,#040d1a 60%,#03080f 100%);
-    padding:80px 48px 40px;border-top:1px solid rgba(6,182,212,0.15)">
+<div style="background:#09090b;
+    padding:96px 48px 40px;border-top:1px solid rgba(255,255,255,0.06)">
 
   <!-- Header -->
   <div style="text-align:center;margin-bottom:40px">
@@ -1172,8 +1142,8 @@ st.markdown("""
 components.html("""
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:#03080f; }
-  .wrap { background:linear-gradient(160deg,#03080f 0%,#040d1a 100%);
+  body { background:#09090b; }
+  .wrap { background:#09090b;
           padding:8px 0 8px; display:flex; justify-content:center; }
 
   /* ── Entrée (une seule fois) ── */
@@ -1238,7 +1208,7 @@ components.html("""
     <filter id="gg" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   </defs>
 
-  <rect width="920" height="450" rx="16" fill="#060e1e" stroke="rgba(6,182,212,0.18)" stroke-width="1.5"/>
+  <rect width="920" height="450" rx="16" fill="#111113" stroke="rgba(6,182,212,0.18)" stroke-width="1.5"/>
   <text x="460" y="443" text-anchor="middle" fill="rgba(6,182,212,0.16)" font-size="9" font-family="monospace" letter-spacing="2">MEDFLOW AI &middot; amr-ai.streamlit.app</text>
 
   <g id="bloc-clinician">
@@ -1252,7 +1222,7 @@ components.html("""
   <text id="lq" x="221" y="219" text-anchor="middle" fill="#475569" font-size="9" font-family="sans-serif">Query</text>
 
   <g id="bloc-agent">
-    <rect id="agent-glow" x="264" y="155" width="210" height="145" rx="14" fill="#060e1e" stroke="#06b6d4" stroke-width="2.5" filter="url(#gc)"/>
+    <rect id="agent-glow" x="264" y="155" width="210" height="145" rx="14" fill="#111113" stroke="#06b6d4" stroke-width="2.5" filter="url(#gc)"/>
     <rect x="264" y="155" width="210" height="40" rx="14" fill="rgba(6,182,212,0.14)"/>
     <rect x="264" y="181" width="210" height="14" fill="rgba(6,182,212,0.14)"/>
     <text x="369" y="178" text-anchor="middle" fill="#06b6d4" font-size="10" font-weight="700" font-family="sans-serif" letter-spacing="1.5">AMR-AI AGENT</text>
@@ -1299,7 +1269,7 @@ components.html("""
   <line class="ab4" x1="556" y1="323" x2="476" y2="235" stroke="#10b981" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#agreen)"/>
 
   <g id="bloc-db">
-    <rect x="752" y="160" width="140" height="130" rx="10" fill="#060e1e" stroke="rgba(59,130,246,0.4)" stroke-width="1.5"/>
+    <rect x="752" y="160" width="140" height="130" rx="10" fill="#111113" stroke="rgba(59,130,246,0.4)" stroke-width="1.5"/>
     <text x="822" y="182" text-anchor="middle" fill="#3b82f6" font-size="10" font-weight="700" font-family="sans-serif">&#x1F4BE; Donn&#233;es</text>
     <text x="822" y="202" text-anchor="middle" fill="#475569" font-size="8" font-family="monospace">molecules_db.csv</text>
     <text x="822" y="217" text-anchor="middle" fill="#475569" font-size="8" font-family="monospace">eskape_pathogens.csv</text>
@@ -1351,8 +1321,8 @@ setTimeout(function() {
 """, height=468)
 
 st.markdown("""
-<div style="background:linear-gradient(160deg,#040d1a 0%,#03080f 100%);
-    padding:40px 48px 80px;border-bottom:1px solid rgba(6,182,212,0.1)">
+<div style="background:#09090b;
+    padding:40px 48px 80px;border-bottom:1px solid rgba(255,255,255,0.06)">
 
   <!-- Stats row -->
   <div style="display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-bottom:40px">
@@ -1395,7 +1365,7 @@ st.markdown("""
 _ticker_sep()
 st.markdown("<div id='publications'></div>", unsafe_allow_html=True)
 st.markdown("""
-<div class="section" style="background:#030810">
+<div class="section" style="background:#09090b">
   <div class="section-eyebrow" style="color:#8b5cf6">Publications · Preprints · Recherche</div>
   <div class="section-h2">Travaux scientifiques</div>
   <div class="section-lead" style="margin-bottom:48px">
@@ -1526,9 +1496,9 @@ for pub in publications:
         for t in pub["tags"]
     )
     _pub_cards_html += (
-        '<div style="display:flex;flex-direction:column;background:#060e1e;'
-        'border:1px solid rgba(255,255,255,0.06);border-radius:16px;overflow:hidden;'
-        'transition:transform 0.2s,box-shadow 0.2s">'
+        '<div style="display:flex;flex-direction:column;background:#111113;'
+        'border:1px solid rgba(255,255,255,0.07);border-radius:14px;overflow:hidden;'
+        'transition:transform 0.2s,border-color 0.2s">'
 
         # Bande colorée en haut
         f'<div style="height:4px;background:{pub["color"]};flex-shrink:0"></div>'
@@ -1686,7 +1656,7 @@ st.markdown("</div>", unsafe_allow_html=True)
 _ticker_sep()
 st.markdown("<div id='equipe'></div>", unsafe_allow_html=True)
 st.markdown("""
-<div class="section section-alt" style="text-align:center;background:#040c1c">
+<div class="section section-alt" style="text-align:center;background:#0c0c0e">
   <div class="section-eyebrow" style="color:#f59e0b;text-align:center">Équipe</div>
   <div class="section-h2" style="text-align:center">Le fondateur</div>
   <div style="color:#475569;font-size:0.95rem;margin:0 auto 48px;max-width:500px;line-height:1.7">
@@ -1766,7 +1736,7 @@ st.markdown("</div>", unsafe_allow_html=True)
 # PUBLICATIONS PEER-REVIEWED (après Fondateur)
 # ─────────────────────────────────────────────────────────────────
 st.markdown("""
-<div class="section" style="background:#030810">
+<div class="section" style="background:#09090b">
   <div class="section-eyebrow" style="color:#3b82f6">IHU M&eacute;diterran&eacute;e Infection &middot; Aix-Marseille</div>
   <div class="section-h2">Publications Peer-Reviewed</div>
   <div style="display:flex;align-items:center;gap:16px;margin-bottom:32px;flex-wrap:wrap">
@@ -1788,7 +1758,7 @@ for cit, color, title, authors, journal, year, url in peer_reviewed:
                 'padding:1px 8px;font-size:0.68rem;font-weight:700;margin-right:6px">1er auteur</span>'
                 if first_auth else "")
     _pr_grid += (
-        f'<div style="background:#080f1e;border:1px solid rgba(255,255,255,0.05);'
+        f'<div style="background:#111113;border:1px solid rgba(255,255,255,0.05);'
         f'border-left:3px solid {color};border-radius:10px;padding:16px 18px">'
         '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">'
         f'<div style="flex:1">{fa_badge}'
@@ -1812,7 +1782,7 @@ st.markdown(_pr_grid, unsafe_allow_html=True)
 # Stats globales
 _total_cit = sum(int(c) for c, *_ in peer_reviewed)
 st.markdown(f"""
-<div style="margin-top:24px;background:#0d1829;border-radius:12px;padding:20px 28px;
+<div style="margin-top:24px;background:#111113;border-radius:12px;padding:20px 28px;
      border:1px solid rgba(255,255,255,0.06);display:flex;gap:40px;flex-wrap:wrap;align-items:center">
   <div>
     <span style="font-size:1.8rem;font-weight:900;color:#3b82f6">{len(peer_reviewed) + 5}</span>
