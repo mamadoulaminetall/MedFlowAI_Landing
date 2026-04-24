@@ -855,7 +855,7 @@ with col_about_photo:
            style="flex:1;text-align:center;background:rgba(255,255,255,0.04);
            border:1px solid rgba(255,255,255,0.07);color:#64748b;
            border-radius:10px;padding:8px 12px;font-size:0.76rem;font-weight:600">LinkedIn ↗</a>
-        <a href="/cv" target="_blank"
+        <a href="https://medflowailanding.streamlit.app/cv" target="_blank"
            style="flex:1;text-align:center;background:rgba(16,185,129,0.08);
            border:1px solid rgba(16,185,129,0.3);color:#10b981;
            border-radius:10px;padding:8px 12px;font-size:0.76rem;font-weight:700">CV ↗</a>

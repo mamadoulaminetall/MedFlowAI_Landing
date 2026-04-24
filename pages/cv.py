@@ -31,7 +31,7 @@ st.markdown("""
   <div style="display:flex;justify-content:space-between;align-items:center;
               margin-bottom:48px;padding-bottom:24px;
               border-bottom:1px solid rgba(16,185,129,0.15)">
-    <a href="/" style="display:flex;align-items:center;gap:8px;text-decoration:none">
+    <a href="https://medflowailanding.streamlit.app" style="display:flex;align-items:center;gap:8px;text-decoration:none">
       <span style="font-size:0.75rem;font-weight:700;letter-spacing:2px;
                    text-transform:uppercase;color:#64748b">← MedFlow AI</span>
     </a>
@@ -460,7 +460,7 @@ st.markdown("""
   <!-- footer -->
   <div style="text-align:center;margin-top:64px;padding-top:32px;
               border-top:1px solid rgba(255,255,255,0.06)">
-    <a href="/" style="color:#10b981;font-size:0.8rem;font-weight:600;text-decoration:none">
+    <a href="https://medflowailanding.streamlit.app" style="color:#10b981;font-size:0.8rem;font-weight:600;text-decoration:none">
       ← Retour sur MedFlow AI
     </a>
   </div>
