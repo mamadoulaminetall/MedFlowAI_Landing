@@ -65,8 +65,8 @@ a { text-decoration: none; }
 /* ── NAV ── */
 html { scroll-behavior: smooth; }
 .nav {
-    position: sticky; top: 0; z-index: 999;
-    background: rgba(9,9,11,0.85);
+    position: sticky; top: 0; z-index: 9999;
+    background: rgba(9,9,11,0.92);
     backdrop-filter: blur(24px) saturate(160%);
     -webkit-backdrop-filter: blur(24px) saturate(160%);
     border-bottom: 1px solid rgba(255,255,255,0.06);
@@ -74,7 +74,6 @@ html { scroll-behavior: smooth; }
     display: flex; align-items: center;
     justify-content: space-between;
     height: 60px;
-    position: relative;
 }
 .nav::after {
     content: "";
@@ -119,13 +118,12 @@ html { scroll-behavior: smooth; }
     font-size: 0.6rem; opacity: 0.55; transition: transform 0.2s;
     display: inline-block;
 }
-.nav-item.open > a .nav-chevron { transform: rotate(180deg); }
-.nav-item.open > a { color: #f1f5f9; background: rgba(255,255,255,0.07); }
+.nav-item:hover > a { color: #f1f5f9; background: rgba(255,255,255,0.07); }
 .nav-dropdown {
     display: none;
-    position: absolute; top: calc(100% + 10px); left: 50%;
+    position: absolute; top: calc(100% + 6px); left: 50%;
     transform: translateX(-50%);
-    min-width: 210px;
+    min-width: 220px;
     background: rgba(4,10,24,0.97);
     backdrop-filter: blur(28px) saturate(180%);
     border: 1px solid rgba(255,255,255,0.1);
@@ -138,7 +136,7 @@ html { scroll-behavior: smooth; }
     from { opacity:0; transform: translateX(-50%) translateY(-6px); }
     to   { opacity:1; transform: translateX(-50%) translateY(0); }
 }
-.nav-item.open .nav-dropdown { display: block; }
+.nav-item:hover .nav-dropdown { display: block; }
 .nav-dropdown-item {
     display: flex; align-items: center; gap: 10px;
     padding: 9px 12px; border-radius: 9px;
@@ -515,129 +513,47 @@ html { scroll-behavior: smooth; }
 # ─────────────────────────────────────────────────────────────────
 # NAV
 # ─────────────────────────────────────────────────────────────────
-_nd = (
-    "display:none;position:absolute;top:calc(100% + 10px);left:50%;"
-    "transform:translateX(-50%);min-width:200px;"
-    "background:rgba(4,10,24,0.97);backdrop-filter:blur(24px);"
-    "border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:8px;"
-    "box-shadow:0 24px 64px rgba(0,0,0,0.6);z-index:99999;"
-)
-_da = (
-    "display:block;padding:9px 14px;border-radius:9px;color:#8ba3c1;"
-    "font-size:0.8rem;font-weight:500;text-decoration:none;cursor:pointer;white-space:nowrap;"
-)
-_hover_on  = "this.style.background='rgba(255,255,255,0.07)';this.style.color='#f1f5f9';"
-_hover_off = "this.style.background='transparent';this.style.color='#8ba3c1';"
-_div_sep   = '<div style="height:1px;background:rgba(255,255,255,0.07);margin:4px 6px"></div>'
+_div_sep = '<div style="height:1px;background:rgba(255,255,255,0.07);margin:4px 6px"></div>'
 st.markdown(
     '<div class="nav">'
     f'<div class="nav-logo">{LOGO_IMG}<span class="nav-badge">v2.0</span></div>'
     '<div class="nav-links">'
 
     '<div class="nav-item">'
-    '<a class="nav-link" href="#about" onclick="navTo(\'about\');return false;">&#192;&nbsp;propos</a>'
+    '<a class="nav-link" href="#about">&#192;&nbsp;propos</a>'
     '</div>'
 
-    '<div class="nav-item" id="ni-projets">'
-    '<a class="nav-link" href="#" onclick="tDrop(\'nd-projets\');return false;">'
-    'Projets &#9660;</a>'
-    f'<div id="nd-projets" style="{_nd}">'
-    f'<a style="{_da}" onmouseover="{_hover_on}" onmouseout="{_hover_off}"'
-    ' onclick="navTo(\'roadmap\');closeDrops();return false;">'
+    '<div class="nav-item">'
+    '<a class="nav-link" href="#roadmap">Projets <span class="nav-chevron">&#9660;</span></a>'
+    '<div class="nav-dropdown">'
+    '<a class="nav-dropdown-item" href="#roadmap">'
     '&#127758; Ecosyst&egrave;me &mdash; Roadmap &amp; outils</a>'
     + _div_sep +
-    f'<a style="{_da}" onmouseover="{_hover_on}" onmouseout="{_hover_off}"'
-    ' onclick="navTo(\'agent\');closeDrops();return false;">'
+    '<a class="nav-dropdown-item" href="#agent">'
     '&#129302; AMR-AI Agent &mdash; 1er agent clinique IA</a>'
     '</div></div>'
 
-    '<div class="nav-item" id="ni-publications">'
-    '<a class="nav-link" href="#" onclick="tDrop(\'nd-publications\');return false;">'
-    'Publications &#9660;</a>'
-    f'<div id="nd-publications" style="{_nd}">'
-    f'<a style="{_da}" onmouseover="{_hover_on}" onmouseout="{_hover_off}"'
-    ' onclick="navTo(\'publications\');closeDrops();return false;">'
+    '<div class="nav-item">'
+    '<a class="nav-link" href="#publications">Publications <span class="nav-chevron">&#9660;</span></a>'
+    '<div class="nav-dropdown">'
+    '<a class="nav-dropdown-item" href="#publications">'
     '&#128196; Travaux scientifiques</a>'
     + _div_sep +
-    f'<a style="{_da}" onmouseover="{_hover_on}" onmouseout="{_hover_off}"'
-    ' onclick="navTo(\'peer-reviewed\');closeDrops();return false;">'
+    '<a class="nav-dropdown-item" href="#peer-reviewed">'
     '&#127963; Peer-Reviewed &mdash; IHU M&eacute;diterran&eacute;e</a>'
     '</div></div>'
 
     '<div class="nav-item">'
-    '<a class="nav-link" href="#contact" onclick="navTo(\'contact\');return false;">Contact</a>'
+    '<a class="nav-link" href="#contact">Contact</a>'
     '</div>'
 
     '<div class="nav-item">'
-    '<a class="nav-link" href="#legal" onclick="navTo(\'legal\');return false;">Mentions l&eacute;gales</a>'
+    '<a class="nav-link" href="#legal">Mentions l&eacute;gales</a>'
     '</div>'
 
     '</div></div>',
     unsafe_allow_html=True
 )
-components.html("""
-<script>
-(function(){
-  var p = window.parent.document;
-  var _drops = ["nd-projets","nd-publications"];
-
-  function navTo(id){
-    var el = p.getElementById(id);
-    if(el){
-      var y = el.getBoundingClientRect().top + window.parent.pageYOffset - 72;
-      window.parent.scrollTo({top: y, behavior:"smooth"});
-    }
-    p.querySelectorAll(".nav-link").forEach(function(a){
-      a.style.background=""; a.style.color="#8ba3c1";
-    });
-    var hit = p.querySelector(".nav-link[href='#"+id+"']");
-    if(hit){ hit.style.background="rgba(16,185,129,0.12)"; hit.style.color="#f1f5f9"; }
-  }
-  function tDrop(id){
-    _drops.forEach(function(d){
-      var el=p.getElementById(d); if(el && d!==id) el.style.display="none";
-    });
-    var drop = p.getElementById(id);
-    if(drop) drop.style.display = (drop.style.display==="block" ? "none" : "block");
-  }
-  function closeDrops(){
-    _drops.forEach(function(d){ var el=p.getElementById(d); if(el) el.style.display="none"; });
-  }
-  window.navTo = navTo;
-  window.tDrop = tDrop;
-  window.closeDrops = closeDrops;
-
-  function attachListeners(){
-    p.querySelectorAll(".nav-link").forEach(function(a){
-      a.onclick = function(e){
-        e.preventDefault();
-        var href = this.getAttribute("href");
-        var id = href && href.startsWith("#") ? href.slice(1) : null;
-        if(id) navTo(id);
-      };
-    });
-    p.querySelectorAll("[onclick]").forEach(function(el){
-      var oc = el.getAttribute("onclick")||"";
-      if(oc.includes("tDrop")){
-        var m = oc.match(/tDrop\\('([^']+)'\\)/);
-        if(m){(function(mm){ el.onclick = function(e){ e.preventDefault(); tDrop(mm[1]); }; })(m);}
-      } else if(oc.includes("navTo")){
-        var m2 = oc.match(/navTo\\('([^']+)'\\)/);
-        if(m2){(function(mm){ el.onclick = function(e){ e.preventDefault(); navTo(mm[1]); closeDrops(); }; })(m2);}
-      }
-    });
-    p.addEventListener("click", function(e){
-      if(!e.target.closest(".nav-item")) closeDrops();
-    });
-  }
-  // Retry until nav elements are in parent DOM
-  var tries = 0;
-  var iv = setInterval(function(){
-    if(p.querySelector(".nav-link") || tries++ > 20){ clearInterval(iv); attachListeners(); }
-  }, 150);
-})();
-</script>
-""", height=0)
 
 # ─────────────────────────────────────────────────────────────────
 # TICKER STRIP — défilement continu projets & outils
