@@ -66,14 +66,13 @@ a { text-decoration: none; }
 html { scroll-behavior: smooth; }
 .nav {
     position: sticky; top: 0; z-index: 9999;
-    background: rgba(9,9,11,0.92);
-    backdrop-filter: blur(24px) saturate(160%);
-    -webkit-backdrop-filter: blur(24px) saturate(160%);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    padding: 0 48px;
+    background: rgba(9,9,11,0.94);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    padding: 0 40px;
     display: flex; align-items: center;
     justify-content: space-between;
-    height: 60px;
+    height: 64px;
 }
 .nav::after {
     content: "";
@@ -81,14 +80,12 @@ html { scroll-behavior: smooth; }
     width: 100%; height: 1px;
     background: linear-gradient(90deg,
         transparent 0%,
-        rgba(16,185,129,0.35) 40%,
-        rgba(16,185,129,0.35) 60%,
+        rgba(16,185,129,0.45) 40%,
+        rgba(16,185,129,0.45) 60%,
         transparent 100%);
 }
 .nav-logo {
     display: flex; align-items: center; gap: 10px;
-    padding-right: 20px;
-    border-right: 1px solid rgba(255,255,255,0.08);
 }
 .nav-badge {
     font-size: 0.58rem; font-weight: 700; letter-spacing: 1.5px;
@@ -102,58 +99,97 @@ html { scroll-behavior: smooth; }
 }
 .nav-item { position: relative; }
 .nav-item > a {
-    color: #8ba3c1;
-    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.3px;
-    padding: 7px 14px; border-radius: 8px;
-    transition: all 0.18s; position: relative;
-    text-decoration: none; display: flex; align-items: center; gap: 5px;
+    color: #94a3b8;
+    font-size: 0.83rem; font-weight: 500; letter-spacing: 0.15px;
+    padding: 7px 16px; border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.04);
+    transition: all 0.18s;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
     white-space: nowrap; cursor: pointer;
 }
-.nav-item > a:hover { color: #f1f5f9; background: rgba(255,255,255,0.07); }
-.nav-item > a.active {
-    color: #f1f5f9; background: rgba(16,185,129,0.12);
-    border: 1px solid rgba(16,185,129,0.22);
+.nav-item > a:hover,
+.nav-item:hover > a {
+    color: #f1f5f9;
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.18);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
 }
 .nav-chevron {
-    font-size: 0.6rem; opacity: 0.55; transition: transform 0.2s;
-    display: inline-block;
+    font-size: 0.58rem; opacity: 0.55;
+    display: inline-block; transition: transform 0.2s;
 }
-.nav-item:hover > a { color: #f1f5f9; background: rgba(255,255,255,0.07); }
+.nav-item:hover > a .nav-chevron { transform: rotate(180deg); }
+
+/* ── DROPDOWN ── */
 .nav-dropdown {
     display: none;
-    position: absolute; top: calc(100% + 6px); left: 50%;
+    position: absolute; top: calc(100% + 8px); left: 50%;
     transform: translateX(-50%);
-    min-width: 220px;
-    background: rgba(4,10,24,0.97);
-    backdrop-filter: blur(28px) saturate(180%);
+    min-width: 248px;
+    background: rgba(6,8,20,0.98);
+    backdrop-filter: blur(32px) saturate(180%);
     border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 14px; padding: 8px;
-    box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.05) inset;
+    border-radius: 16px; padding: 8px;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.7),
+                0 1px 0 rgba(255,255,255,0.05) inset;
     z-index: 99999;
     animation: dropFade 0.15s ease;
 }
 @keyframes dropFade {
-    from { opacity:0; transform: translateX(-50%) translateY(-6px); }
+    from { opacity:0; transform: translateX(-50%) translateY(-8px); }
     to   { opacity:1; transform: translateX(-50%) translateY(0); }
 }
 .nav-item:hover .nav-dropdown { display: block; }
 .nav-dropdown-item {
-    display: flex; align-items: center; gap: 10px;
-    padding: 9px 12px; border-radius: 9px;
-    color: #8ba3c1; font-size: 0.8rem; font-weight: 500;
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px; border-radius: 10px;
     text-decoration: none; cursor: pointer;
-    transition: all 0.15s;
+    transition: background 0.15s;
 }
-.nav-dropdown-item:hover {
-    background: rgba(255,255,255,0.07); color: #f1f5f9;
-}
-.nav-dropdown-icon {
-    width: 30px; height: 30px; border-radius: 8px;
+.nav-dropdown-item:hover { background: rgba(255,255,255,0.06); }
+.ndi {
+    width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
-    font-size: 0.9rem; flex-shrink: 0;
+    font-size: 1rem;
 }
+.ndi-green  { background: rgba(16,185,129,0.13); border: 1px solid rgba(16,185,129,0.22); }
+.ndi-cyan   { background: rgba(6,182,212,0.13);  border: 1px solid rgba(6,182,212,0.22); }
+.ndi-blue   { background: rgba(59,130,246,0.13); border: 1px solid rgba(59,130,246,0.22); }
+.ndi-violet { background: rgba(139,92,246,0.13); border: 1px solid rgba(139,92,246,0.22); }
+.ndi-text { display: flex; flex-direction: column; gap: 2px; }
+.ndi-title { font-size: 0.82rem; font-weight: 600; color: #e2e8f0; }
+.ndi-sub   { font-size: 0.72rem; color: #64748b; }
 .nav-dropdown-divider {
-    height: 1px; background: rgba(255,255,255,0.07); margin: 6px 4px;
+    height: 1px; background: rgba(255,255,255,0.06); margin: 5px 4px;
+}
+
+/* ── NAV RIGHT CTA ── */
+.nav-right { display: flex; align-items: center; gap: 8px; }
+.nav-ghost {
+    color: #64748b; font-size: 0.82rem; font-weight: 500;
+    padding: 7px 16px; border-radius: 100px;
+    border: 1px solid transparent;
+    text-decoration: none; transition: all 0.18s; white-space: nowrap;
+}
+.nav-ghost:hover {
+    color: #e2e8f0;
+    border-color: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+}
+.nav-pill {
+    background: #10b981; color: #fff !important;
+    font-size: 0.82rem; font-weight: 700; letter-spacing: -0.1px;
+    padding: 8px 20px; border-radius: 100px;
+    text-decoration: none; transition: all 0.2s;
+    box-shadow: 0 0 22px rgba(16,185,129,0.3);
+    white-space: nowrap;
+}
+.nav-pill:hover {
+    background: #0ea271;
+    box-shadow: 0 0 32px rgba(16,185,129,0.45);
+    transform: translateY(-1px);
 }
 
 /* ── HERO ── */
@@ -513,34 +549,56 @@ html { scroll-behavior: smooth; }
 # ─────────────────────────────────────────────────────────────────
 # NAV
 # ─────────────────────────────────────────────────────────────────
-_div_sep = '<div style="height:1px;background:rgba(255,255,255,0.07);margin:4px 6px"></div>'
+_dd_sep = '<div class="nav-dropdown-divider"></div>'
 st.markdown(
     '<div class="nav">'
+
+    # ── Logo gauche ──
     f'<div class="nav-logo">{LOGO_IMG}<span class="nav-badge">v2.0</span></div>'
+
+    # ── Liens centrés ──
     '<div class="nav-links">'
 
     '<div class="nav-item">'
-    '<a class="nav-link" href="#about">&#192;&nbsp;propos</a>'
+    '<a class="nav-link" href="#about">&Agrave;&nbsp;propos</a>'
     '</div>'
 
     '<div class="nav-item">'
-    '<a class="nav-link" href="#roadmap">Projets <span class="nav-chevron">&#9660;</span></a>'
+    '<a class="nav-link" href="#roadmap">'
+    'Projets <span class="nav-chevron">&#9660;</span></a>'
     '<div class="nav-dropdown">'
     '<a class="nav-dropdown-item" href="#roadmap">'
-    '&#127758; Ecosyst&egrave;me &mdash; Roadmap &amp; outils</a>'
-    + _div_sep +
+    '<span class="ndi ndi-green">&#127758;</span>'
+    '<span class="ndi-text">'
+    '<span class="ndi-title">Ecosyst&egrave;me</span>'
+    '<span class="ndi-sub">Roadmap &amp; outils IA</span>'
+    '</span></a>'
+    + _dd_sep +
     '<a class="nav-dropdown-item" href="#agent">'
-    '&#129302; AMR-AI Agent &mdash; 1er agent clinique IA</a>'
+    '<span class="ndi ndi-cyan">&#129302;</span>'
+    '<span class="ndi-text">'
+    '<span class="ndi-title">AMR-AI Agent</span>'
+    '<span class="ndi-sub">1er agent clinique IA</span>'
+    '</span></a>'
     '</div></div>'
 
     '<div class="nav-item">'
-    '<a class="nav-link" href="#publications">Publications <span class="nav-chevron">&#9660;</span></a>'
+    '<a class="nav-link" href="#publications">'
+    'Publications <span class="nav-chevron">&#9660;</span></a>'
     '<div class="nav-dropdown">'
     '<a class="nav-dropdown-item" href="#publications">'
-    '&#128196; Travaux scientifiques</a>'
-    + _div_sep +
+    '<span class="ndi ndi-blue">&#128196;</span>'
+    '<span class="ndi-text">'
+    '<span class="ndi-title">Travaux scientifiques</span>'
+    '<span class="ndi-sub">M&eacute;ta-analyses &amp; revues</span>'
+    '</span></a>'
+    + _dd_sep +
     '<a class="nav-dropdown-item" href="#peer-reviewed">'
-    '&#127963; Peer-Reviewed &mdash; IHU M&eacute;diterran&eacute;e</a>'
+    '<span class="ndi ndi-violet">&#127963;</span>'
+    '<span class="ndi-text">'
+    '<span class="ndi-title">Peer-Reviewed</span>'
+    '<span class="ndi-sub">IHU M&eacute;diterran&eacute;e</span>'
+    '</span></a>'
     '</div></div>'
 
     '<div class="nav-item">'
@@ -551,9 +609,45 @@ st.markdown(
     '<a class="nav-link" href="#legal">Mentions l&eacute;gales</a>'
     '</div>'
 
-    '</div></div>',
+    '</div>'
+
+    '</div>',
     unsafe_allow_html=True
 )
+
+# ── Injection script dans le <head> parent (même contexte que le document) ──
+components.html("""
+<script>(function(){
+  var p = window.parent.document;
+  if(p.getElementById('mf-nav')) return; /* injecte une seule fois */
+  var s = p.createElement('script');
+  s.id = 'mf-nav';
+  s.textContent = `(function(){
+    function getScroller(){
+      var cs = ['[data-testid="stAppViewContainer"]','[data-testid="stMain"]','body'];
+      for(var i=0;i<cs.length;i++){
+        var el=document.querySelector(cs[i]);
+        if(el && el.scrollHeight > el.clientHeight+10) return el;
+      }
+      return document.documentElement;
+    }
+    function navGo(id){
+      var el = document.getElementById(id);
+      if(!el) return;
+      var sc = getScroller();
+      var top = sc.scrollTop + el.getBoundingClientRect().top - sc.getBoundingClientRect().top - 68;
+      sc.scrollTo({top: top, behavior:'smooth'});
+    }
+    document.addEventListener('click', function(e){
+      var a = e.target.closest('a.nav-link, a.nav-dropdown-item');
+      if(!a) return;
+      var h = a.getAttribute('href') || '';
+      if(h[0] === '#'){ e.preventDefault(); navGo(h.slice(1)); }
+    }, true);
+  })();`;
+  p.head.appendChild(s);
+})();</script>
+""", height=0)
 
 # ─────────────────────────────────────────────────────────────────
 # TICKER STRIP — défilement continu projets & outils
