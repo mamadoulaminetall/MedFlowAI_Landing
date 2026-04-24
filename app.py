@@ -42,7 +42,14 @@ if st.query_params.get("page") == "cv":
 body { font-family: 'Inter', sans-serif; }
 </style>
 """, unsafe_allow_html=True)
-    st.markdown("""
+    components.html("""<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>* { box-sizing:border-box; margin:0; padding:0; } html,body { background:#09090b; }</style>
+</head>
+<body>
 <div style="background:#09090b;min-height:100vh;padding:60px 5% 80px;font-family:'Inter',sans-serif">
 
   <!-- top bar -->
@@ -350,7 +357,8 @@ body { font-family: 'Inter', sans-serif; }
   </div>
 
 </div>
-""", unsafe_allow_html=True)
+</body>
+</html>""", height=2400, scrolling=False)
     st.stop()
 
 # ─────────────────────────────────────────────────────────────────
