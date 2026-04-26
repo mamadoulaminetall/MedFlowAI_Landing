@@ -999,6 +999,7 @@ _TSET = (
   + _TBTN("#", "rgba(16,185,129,0.1)",  "rgba(16,185,129,0.3)",  "#34d399", "📊", "QoL Cardiac IA",       "Streamlit")
   + _TBTN("https://doi.org/10.64898/2026.04.19.719461", "rgba(249,115,22,0.1)",  "rgba(249,115,22,0.3)",  "#fb923c", "🦠", "Microbiome Cancer",    "DOI ✓")
   + _TBTN("#", "rgba(236,72,153,0.1)",  "rgba(236,72,153,0.3)",  "#f472b6", "🧩", "CNV Diagnostic IA",   "medRxiv")
+  + _TBTN("https://medflow-posologie.streamlit.app", "rgba(249,115,22,0.1)", "rgba(249,115,22,0.3)", "#f97316", "💊", "MedFlow Posologie", "Nouveau")
   + _SEP
 )
 _TICKER_HTML = '<div class="ticker-wrap"><div class="ticker-track">' + _TSET * 2 + '</div></div>'
@@ -1308,10 +1309,14 @@ _eco_tools = [
      "desc": "1er agent IA clinique · 97 essais · 58 000+ patients · recommandations AMR en temps réel",
      "badge": "🚀 Agent IA", "bc": "rgba(6,182,212,0.18)", "bt": "#06b6d4",
      "url": "https://amr-ai.streamlit.app"},
+    {"icon": "💊", "color": "#f97316", "title": "MedFlow Posologie",
+     "desc": "Tacrolimus · MMF · Prednisolone · PDF tri-module + résumé IA post-greffe cardiaque",
+     "badge": "Nouveau", "bc": "rgba(249,115,22,0.15)", "bt": "#f97316",
+     "url": "https://medflow-posologie.streamlit.app"},
 ]
 
-_left_eco  = _eco_tools[:4]   # QoL, Scores, Réinnervation, Biostat
-_right_eco = _eco_tools[4:]   # Générateur CR, Revue, MYOomics, CardioSurg AI
+_left_eco  = _eco_tools[:5]   # QoL, Scores, Réinnervation, Biostat, Générateur CR
+_right_eco = _eco_tools[5:]   # Revue, MYOomics, CardioSurg, AMR-AI, Posologie
 
 def _eco_card(t, side):
     """Compact planet card — left cards face right, right cards face left."""
