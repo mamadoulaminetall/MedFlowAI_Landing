@@ -120,7 +120,7 @@ body { font-family: 'Inter', sans-serif; }
     </div>
     <div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15);
          border-radius:14px;padding:18px 12px">
-      <div style="font-size:2rem;font-weight:900;color:#f59e0b">10</div>
+      <div style="font-size:2rem;font-weight:900;color:#f59e0b">11</div>
       <div style="font-size:0.7rem;color:#64748b;margin-top:4px">Outils IA déployés</div>
     </div>
   </div>
@@ -1000,6 +1000,7 @@ _TSET = (
   + _TBTN("https://doi.org/10.64898/2026.04.19.719461", "rgba(249,115,22,0.1)",  "rgba(249,115,22,0.3)",  "#fb923c", "🦠", "Microbiome Cancer",    "DOI ✓")
   + _TBTN("#", "rgba(236,72,153,0.1)",  "rgba(236,72,153,0.3)",  "#f472b6", "🧩", "CNV Diagnostic IA",   "medRxiv")
   + _TBTN("https://medflow-posologie.streamlit.app", "rgba(249,115,22,0.1)", "rgba(249,115,22,0.3)", "#f97316", "💊", "MedFlow Posologie", "Nouveau")
+  + _TBTN("https://bioreport-ai.streamlit.app", "rgba(37,99,235,0.1)", "rgba(37,99,235,0.3)", "#60a5fa", "🔬", "BioReport AI", "Nouveau")
   + _SEP
 )
 _TICKER_HTML = '<div class="ticker-wrap"><div class="ticker-track">' + _TSET * 2 + '</div></div>'
@@ -1059,7 +1060,7 @@ _hero_html = (
     'padding:32px 48px;display:flex;justify-content:center">'
     '<div style="display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center">'
     '<div style="text-align:center;padding:0 48px">'
-    '<div style="font-size:2.4rem;font-weight:900;color:#fafafa;line-height:1;letter-spacing:-1.5px">10</div>'
+    '<div style="font-size:2.4rem;font-weight:900;color:#fafafa;line-height:1;letter-spacing:-1.5px">11</div>'
     '<div style="font-size:0.72rem;color:#71717a;margin-top:6px;letter-spacing:0.5px;text-transform:uppercase">Outils d&eacute;ploy&eacute;s</div>'
     '</div>'
     '<div style="width:1px;height:36px;background:rgba(255,255,255,0.06)"></div>'
@@ -1153,7 +1154,7 @@ with col_about_photo:
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px">
         <div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.12);
              border-radius:14px;padding:14px 16px;text-align:center">
-          <div style="font-size:1.6rem;font-weight:900;color:#10b981;line-height:1">10</div>
+          <div style="font-size:1.6rem;font-weight:900;color:#10b981;line-height:1">11</div>
           <div style="font-size:0.7rem;color:#64748b;margin-top:3px">Outils déployés</div>
         </div>
         <div style="background:rgba(59,130,246,0.06);border:1px solid rgba(59,130,246,0.12);
@@ -1313,10 +1314,14 @@ _eco_tools = [
      "desc": "Tacrolimus · MMF · Prednisolone · PDF tri-module + résumé IA post-greffe cardiaque",
      "badge": "Nouveau", "bc": "rgba(249,115,22,0.15)", "bt": "#f97316",
      "url": "https://medflow-posologie.streamlit.app"},
+    {"icon": "🔬", "color": "#2563eb", "title": "BioReport AI",
+     "desc": "PDF/photo/texte → rapport structuré 5 sections · transplantation · posologie adaptée",
+     "badge": "Nouveau", "bc": "rgba(37,99,235,0.15)", "bt": "#2563eb",
+     "url": "https://bioreport-ai.streamlit.app"},
 ]
 
 _left_eco  = _eco_tools[:5]   # QoL, Scores, Réinnervation, Biostat, Générateur CR
-_right_eco = _eco_tools[5:]   # Revue, MYOomics, CardioSurg, AMR-AI, Posologie
+_right_eco = _eco_tools[5:]   # Revue, MYOomics, CardioSurg, AMR-AI, Posologie, BioReport
 
 def _eco_card(t, side):
     """Compact planet card — left cards face right, right cards face left."""
