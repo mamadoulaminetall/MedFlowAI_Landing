@@ -362,6 +362,76 @@ body { font-family: 'Inter', sans-serif; }
     st.stop()
 
 # ─────────────────────────────────────────────────────────────────
+# SEO — meta tags injectés dans <head> via JS
+# ─────────────────────────────────────────────────────────────────
+st.markdown("""
+<script>
+(function() {
+  var head = document.head;
+  function meta(attrs) {
+    var m = document.createElement('meta');
+    Object.keys(attrs).forEach(function(k){ m.setAttribute(k, attrs[k]); });
+    head.appendChild(m);
+  }
+  function link(attrs) {
+    var l = document.createElement('link');
+    Object.keys(attrs).forEach(function(k){ l.setAttribute(k, attrs[k]); });
+    head.appendChild(l);
+  }
+
+  // Basic SEO
+  meta({name:'description', content:'MedFlow AI — Suite d\'outils IA pour médecins et chercheurs : interprétation de bilans biologiques, prédiction de variants génétiques, analyse scRNA-seq, posologie adaptée, résistance antibiotique.'});
+  meta({name:'keywords', content:'IA médicale, bioinformatique, scRNA-seq, variants génétiques, bilan biologique IA, antibiogramme IA, MedFlow AI, BioReport AI, GenGI, MYOomics, AMR-AI, CardioSurg AI'});
+  meta({name:'author', content:'Dr. Mamadou Lamine TALL, PhD'});
+  meta({name:'robots', content:'index, follow'});
+
+  // Open Graph
+  meta({property:'og:type',        content:'website'});
+  meta({property:'og:title',       content:'MedFlow AI — L\'IA pour les Médecins & Chercheurs'});
+  meta({property:'og:description', content:'Suite de 13 outils IA biomédicaux : interprétation de bilans, génomique, scRNA-seq, posologie, résistance antibiotique, chirurgie cardiaque.'});
+  meta({property:'og:url',         content:'https://medflowailanding.streamlit.app'});
+  meta({property:'og:site_name',   content:'MedFlow AI'});
+  meta({property:'og:locale',      content:'fr_FR'});
+
+  // Twitter Card
+  meta({name:'twitter:card',        content:'summary_large_image'});
+  meta({name:'twitter:title',       content:'MedFlow AI — L\'IA pour les Médecins & Chercheurs'});
+  meta({name:'twitter:description', content:'Suite de 13 outils IA biomédicaux développés par Dr. Mamadou Lamine TALL, PhD Bioinformatique.'});
+
+  // Canonical
+  link({rel:'canonical', href:'https://medflowailanding.streamlit.app'});
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "MedFlow AI",
+  "url": "https://medflowailanding.streamlit.app",
+  "description": "Suite d'outils IA pour médecins et chercheurs en biomédecine",
+  "founder": {
+    "@type": "Person",
+    "name": "Mamadou Lamine TALL",
+    "jobTitle": "PhD Bioinformatique",
+    "url": "https://github.com/mamadoulaminetall"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Outils MedFlow AI",
+    "itemListElement": [
+      {"@type":"SoftwareApplication","name":"BioReport AI","applicationCategory":"MedicalApplication","url":"https://bioreport-ai.streamlit.app"},
+      {"@type":"SoftwareApplication","name":"GenGI","applicationCategory":"MedicalApplication","url":"https://gengi-ai.streamlit.app"},
+      {"@type":"SoftwareApplication","name":"MYOomics","applicationCategory":"MedicalApplication","url":"https://myoomics.streamlit.app"},
+      {"@type":"SoftwareApplication","name":"AMR-AI","applicationCategory":"MedicalApplication"},
+      {"@type":"SoftwareApplication","name":"CardioSurg AI","applicationCategory":"MedicalApplication"}
+    ]
+  }
+}
+</script>
+""", unsafe_allow_html=True)
+
+# ─────────────────────────────────────────────────────────────────
 # CSS GLOBAL
 # ─────────────────────────────────────────────────────────────────
 st.markdown("""
