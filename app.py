@@ -1372,28 +1372,28 @@ _eco_tools = [
      "url": "https://clinia-review.streamlit.app"},
     {"icon": "🧬", "color": "#a78bfa", "title": "MYOomics",
      "desc": "RNA-seq · scRNA-seq · ML · myopathies",
-     "badge": "Gratuit", "bc": "rgba(16,185,129,0.15)", "bt": "#10b981",
-     "url": "https://myoomics.streamlit.app"},
+     "badge": "149€/mois", "bc": "rgba(16,185,129,0.15)", "bt": "#10b981",
+     "url": "https://myoomics.streamlit.app", "stripe": "https://buy.stripe.com/fZu8wP8VycBf20udzob3q08"},
     {"icon": "🫀", "color": "#f43f5e", "title": "CardioSurg AI",
      "desc": "EuroSCORE II + ML · complications post-op · timing valvulaire · CR opératoire",
-     "badge": "Nouveau", "bc": "rgba(244,63,94,0.15)", "bt": "#f43f5e",
-     "url": "https://cardiosurg-ai.streamlit.app"},
+     "badge": "79€/mois", "bc": "rgba(244,63,94,0.15)", "bt": "#f43f5e",
+     "url": "https://cardiosurg-ai.streamlit.app", "stripe": "https://buy.stripe.com/28E9ATdbO9p348C7b0b3q06"},
     {"icon": "🤖", "color": "#06b6d4", "title": "AMR-AI Agent",
      "desc": "1er agent IA clinique · 97 essais · 58 000+ patients · recommandations AMR en temps réel",
-     "badge": "🚀 Agent IA", "bc": "rgba(6,182,212,0.18)", "bt": "#06b6d4",
-     "url": "https://amr-ai.streamlit.app"},
+     "badge": "69€/mois", "bc": "rgba(6,182,212,0.18)", "bt": "#06b6d4",
+     "url": "https://amr-ai.streamlit.app", "stripe": "https://buy.stripe.com/dRm6oH7Ru1WBgVoeDsb3q05"},
     {"icon": "💊", "color": "#f97316", "title": "MedFlow Posologie",
      "desc": "Tacrolimus · MMF · Prednisolone · PDF tri-module + résumé IA post-greffe cardiaque",
-     "badge": "Nouveau", "bc": "rgba(249,115,22,0.15)", "bt": "#f97316",
-     "url": "https://medflow-posologie.streamlit.app"},
+     "badge": "39€/mois", "bc": "rgba(249,115,22,0.15)", "bt": "#f97316",
+     "url": "https://medflow-posologie.streamlit.app", "stripe": "https://buy.stripe.com/eVq9AT9ZCbxb34ybrgb3q04"},
     {"icon": "🔬", "color": "#2563eb", "title": "BioReport AI",
      "desc": "PDF/photo/texte → rapport structuré 5 sections · transplantation · posologie adaptée",
-     "badge": "Nouveau", "bc": "rgba(37,99,235,0.15)", "bt": "#2563eb",
-     "url": "https://bioreport-ai.streamlit.app"},
+     "badge": "49€/mois", "bc": "rgba(37,99,235,0.15)", "bt": "#2563eb",
+     "url": "https://bioreport-ai.streamlit.app", "stripe": "https://buy.stripe.com/7sY3cv0p2cBf20ucvkb3q03"},
     {"icon": "🧬", "color": "#7c3aed", "title": "GenGI",
      "desc": "DNA-LLM + TransformerEncoder · prédiction pathogénicité variante · XAI génomique · ClinVar",
-     "badge": "Nouveau", "bc": "rgba(124,58,237,0.15)", "bt": "#7c3aed",
-     "url": "https://gengi-ai.streamlit.app"},
+     "badge": "99€/mois", "bc": "rgba(124,58,237,0.15)", "bt": "#7c3aed",
+     "url": "https://gengi-ai.streamlit.app", "stripe": "https://buy.stripe.com/00w9AT8Vy0SxcF81QGb3q07"},
     {"icon": "🚀", "color": "#eab308", "title": "OutreachAI",
      "desc": "Sales & Revenue Dashboard · prospection Claude API · suivi campagnes · Stripe live",
      "badge": "Nouveau", "bc": "rgba(234,179,8,0.15)", "bt": "#eab308",
@@ -1428,7 +1428,8 @@ def _eco_card(t, side):
         f'padding:2px 8px;font-size:0.67rem;font-weight:700">{t["badge"]}</span>'
         f'<a href="{t["url"]}" target="_blank" style="color:{t["color"]};font-size:0.71rem;'
         'font-weight:700;text-decoration:none">Ouvrir ↗</a>'
-        '</div>'
+        + (f'<a href="{t["stripe"]}" target="_blank" style="background:linear-gradient(135deg,#10b981,#059669);color:white;font-size:0.67rem;font-weight:700;padding:2px 8px;border-radius:5px;text-decoration:none">💳 S\'abonner</a>' if t.get("stripe") else "")
+        + '</div>'
         '</div>'
         '</div>'
         '</div>'
