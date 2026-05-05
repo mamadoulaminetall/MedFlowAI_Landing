@@ -1072,7 +1072,8 @@ _TSET = (
   + _TBTN("https://medflow-posologie.streamlit.app", "rgba(249,115,22,0.1)", "rgba(249,115,22,0.3)", "#f97316", "💊", "MedFlow Posologie", "Nouveau")
   + _TBTN("https://bioreport-ai.streamlit.app", "rgba(37,99,235,0.1)", "rgba(37,99,235,0.3)", "#60a5fa", "🔬", "BioReport AI", "Nouveau")
   + _TBTN("https://gengi-ai.streamlit.app", "rgba(124,58,237,0.1)", "rgba(124,58,237,0.3)", "#a78bfa", "🧬", "GenGI", "Nouveau")
-  + _TBTN("https://outreach-ai.streamlit.app", "rgba(234,179,8,0.1)", "rgba(234,179,8,0.3)", "#facc15", "🚀", "OutreachAI", "Nouveau")
+  + _TBTN("https://github.com/mamadoulaminetall/D-tection-de-CNV-et-Visualisation-Interactive-", "rgba(168,85,247,0.1)", "rgba(168,85,247,0.3)", "#c084fc", "🔍", "CNV Diagnostic", "79€/mois")
+  + _TBTN("https://github.com/mamadoulaminetall/microbiome_diagnostic_cancer_precoce", "rgba(20,184,166,0.1)", "rgba(20,184,166,0.3)", "#2dd4bf", "🦠", "Microbiome &amp; Cancer", "89€/mois")
   + _SEP
 )
 _TICKER_HTML = '<div class="ticker-wrap"><div class="ticker-track">' + _TSET * 2 + '</div></div>'
@@ -1394,14 +1395,20 @@ _eco_tools = [
      "desc": "DNA-LLM + TransformerEncoder · prédiction pathogénicité variante · XAI génomique · ClinVar",
      "badge": "99€/mois", "bc": "rgba(124,58,237,0.15)", "bt": "#7c3aed",
      "url": "https://gengi-ai.streamlit.app", "stripe": "https://buy.stripe.com/00w9AT8Vy0SxcF81QGb3q07"},
-    {"icon": "🚀", "color": "#eab308", "title": "OutreachAI",
-     "desc": "Sales & Revenue Dashboard · prospection Claude API · suivi campagnes · Stripe live",
-     "badge": "Nouveau", "bc": "rgba(234,179,8,0.15)", "bt": "#eab308",
-     "url": "https://outreach-ai.streamlit.app"},
+    {"icon": "🔍", "color": "#a855f7", "title": "CNV Diagnostic",
+     "desc": "Détection CNV et visualisation interactive · CMA · 79 417 patients · 6 indications cliniques",
+     "badge": "79€/mois", "bc": "rgba(168,85,247,0.15)", "bt": "#a855f7",
+     "url": "https://github.com/mamadoulaminetall/D-tection-de-CNV-et-Visualisation-Interactive-",
+     "stripe": "https://buy.stripe.com/dRm3cv2xadFj9sW3YOb3q09"},
+    {"icon": "🦠", "color": "#14b8a6", "title": "Microbiome & Cancer",
+     "desc": "Détection précoce cancer via microbiome · 18 études · 2 587 patients · 5 cancers",
+     "badge": "89€/mois", "bc": "rgba(20,184,166,0.15)", "bt": "#14b8a6",
+     "url": "https://github.com/mamadoulaminetall/microbiome_diagnostic_cancer_precoce",
+     "stripe": "https://buy.stripe.com/dRm6oH5JmdFj7kObrgb3q0a"},
 ]
 
 _left_eco  = _eco_tools[:5]   # QoL, Scores, Réinnervation, Biostat, Générateur CR
-_right_eco = _eco_tools[5:]   # Revue, MYOomics, CardioSurg, AMR-AI, Posologie, BioReport, GenGI, OutreachAI
+_right_eco = _eco_tools[5:]   # Revue, MYOomics, CardioSurg, AMR-AI, Posologie, BioReport, GenGI, CNV, Microbiome
 
 def _eco_card(t, side):
     """Compact planet card — left cards face right, right cards face left."""
