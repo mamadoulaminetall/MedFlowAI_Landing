@@ -1072,8 +1072,8 @@ _TSET = (
   + _TBTN("https://medflow-posologie.streamlit.app", "rgba(249,115,22,0.1)", "rgba(249,115,22,0.3)", "#f97316", "💊", "MedFlow Posologie", "Nouveau")
   + _TBTN("https://bioreport-ai.streamlit.app", "rgba(37,99,235,0.1)", "rgba(37,99,235,0.3)", "#60a5fa", "🔬", "BioReport AI", "Nouveau")
   + _TBTN("https://gengi-ai.streamlit.app", "rgba(124,58,237,0.1)", "rgba(124,58,237,0.3)", "#a78bfa", "🧬", "GenGI", "Nouveau")
-  + _TBTN("https://github.com/mamadoulaminetall/D-tection-de-CNV-et-Visualisation-Interactive-", "rgba(168,85,247,0.1)", "rgba(168,85,247,0.3)", "#c084fc", "🔍", "CNV Diagnostic", "79€/mois")
-  + _TBTN("https://github.com/mamadoulaminetall/microbiome_diagnostic_cancer_precoce", "rgba(20,184,166,0.1)", "rgba(20,184,166,0.3)", "#2dd4bf", "🦠", "Microbiome &amp; Cancer", "89€/mois")
+  + _TBTN("https://cnv-diagnostic-platform.streamlit.app", "rgba(168,85,247,0.1)", "rgba(168,85,247,0.3)", "#c084fc", "🔍", "CNV Diagnostic", "79€/mois")
+  + _TBTN("https://microbiome-cancer-diagnostic.streamlit.app", "rgba(20,184,166,0.1)", "rgba(20,184,166,0.3)", "#2dd4bf", "🦠", "Microbiome &amp; Cancer", "89€/mois")
   + _SEP
 )
 _TICKER_HTML = '<div class="ticker-wrap"><div class="ticker-track">' + _TSET * 2 + '</div></div>'
@@ -1398,12 +1398,12 @@ _eco_tools = [
     {"icon": "🔍", "color": "#a855f7", "title": "CNV Diagnostic",
      "desc": "Détection CNV et visualisation interactive · CMA · 79 417 patients · 6 indications cliniques",
      "badge": "79€/mois", "bc": "rgba(168,85,247,0.15)", "bt": "#a855f7",
-     "url": "https://github.com/mamadoulaminetall/D-tection-de-CNV-et-Visualisation-Interactive-",
+     "url": "https://cnv-diagnostic-platform.streamlit.app",
      "stripe": "https://buy.stripe.com/dRm3cv2xadFj9sW3YOb3q09"},
     {"icon": "🦠", "color": "#14b8a6", "title": "Microbiome & Cancer",
      "desc": "Détection précoce cancer via microbiome · 18 études · 2 587 patients · 5 cancers",
      "badge": "89€/mois", "bc": "rgba(20,184,166,0.15)", "bt": "#14b8a6",
-     "url": "https://github.com/mamadoulaminetall/microbiome_diagnostic_cancer_precoce",
+     "url": "https://microbiome-cancer-diagnostic.streamlit.app",
      "stripe": "https://buy.stripe.com/dRm6oH5JmdFj7kObrgb3q0a"},
 ]
 
