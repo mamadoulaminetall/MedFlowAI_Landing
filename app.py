@@ -381,7 +381,7 @@ st.markdown("""
 
   // Basic SEO
   meta({name:'description', content:'MedFlow AI — Suite d\'outils IA pour médecins et chercheurs : interprétation de bilans biologiques, prédiction de variants génétiques, analyse scRNA-seq, posologie adaptée, résistance antibiotique.'});
-  meta({name:'keywords', content:'IA médicale, bioinformatique, scRNA-seq, variants génétiques, bilan biologique IA, antibiogramme IA, MedFlow AI, BioReport AI, GenGI, MYOomics, AMR-AI, CardioSurg AI'});
+  meta({name:'keywords', content:'IA médicale, bioinformatique, scRNA-seq, variants génétiques, bilan biologique IA, antibiogramme IA, MedFlow AI, BioReport AI, DeltaVar, MYOomics, AMR-AI, CardioSurg AI'});
   meta({name:'author', content:'Dr. Mamadou Lamine TALL, PhD'});
   meta({name:'robots', content:'index, follow'});
 
@@ -421,7 +421,7 @@ st.markdown("""
     "name": "Outils MedFlow AI",
     "itemListElement": [
       {"@type":"SoftwareApplication","name":"BioReport AI","applicationCategory":"MedicalApplication","url":"https://bioreport-ai.streamlit.app"},
-      {"@type":"SoftwareApplication","name":"GenGI","applicationCategory":"MedicalApplication","url":"https://gengi-ai.streamlit.app"},
+      {"@type":"SoftwareApplication","name":"DeltaVar","applicationCategory":"MedicalApplication","url":"https://medflow-ai.fr/deltavar/"},
       {"@type":"SoftwareApplication","name":"MYOomics","applicationCategory":"MedicalApplication","url":"https://myoomics.streamlit.app"},
       {"@type":"SoftwareApplication","name":"AMR-AI","applicationCategory":"MedicalApplication"},
       {"@type":"SoftwareApplication","name":"CardioSurg AI","applicationCategory":"MedicalApplication"}
@@ -1071,7 +1071,7 @@ _TSET = (
   + _TBTN("#", "rgba(236,72,153,0.1)",  "rgba(236,72,153,0.3)",  "#f472b6", "🧩", "CNV Diagnostic IA",   "medRxiv")
   + _TBTN("https://medflow-posologie.streamlit.app", "rgba(249,115,22,0.1)", "rgba(249,115,22,0.3)", "#f97316", "💊", "MedFlow Posologie", "Nouveau")
   + _TBTN("https://bioreport-ai.streamlit.app", "rgba(37,99,235,0.1)", "rgba(37,99,235,0.3)", "#60a5fa", "🔬", "BioReport AI", "Nouveau")
-  + _TBTN("https://gengi-ai.streamlit.app", "rgba(124,58,237,0.1)", "rgba(124,58,237,0.3)", "#a78bfa", "🧬", "GenGI", "Nouveau")
+  + _TBTN("https://medflow-ai.fr/deltavar/", "rgba(124,58,237,0.1)", "rgba(124,58,237,0.3)", "#a78bfa", "🧬", "DeltaVar", "Nouveau")
   + _TBTN("https://cnv-diagnostic-platform.streamlit.app", "rgba(168,85,247,0.1)", "rgba(168,85,247,0.3)", "#c084fc", "🔍", "CNV Diagnostic", "79€/mois")
   + _TBTN("https://microbiome-cancer-diagnostic.streamlit.app", "rgba(20,184,166,0.1)", "rgba(20,184,166,0.3)", "#2dd4bf", "🦠", "Microbiome &amp; Cancer", "89€/mois")
   + _SEP
@@ -1391,10 +1391,10 @@ _eco_tools = [
      "desc": "PDF/photo/texte → rapport structuré 5 sections · transplantation · posologie adaptée",
      "badge": "49€/mois", "bc": "rgba(37,99,235,0.15)", "bt": "#2563eb",
      "url": "https://bioreport-ai.streamlit.app", "stripe": "https://buy.stripe.com/7sY3cv0p2cBf20ucvkb3q03"},
-    {"icon": "🧬", "color": "#7c3aed", "title": "GenGI",
+    {"icon": "🧬", "color": "#7c3aed", "title": "DeltaVar",
      "desc": "DNA-LLM + TransformerEncoder · prédiction pathogénicité variante · XAI génomique · ClinVar",
      "badge": "99€/mois", "bc": "rgba(124,58,237,0.15)", "bt": "#7c3aed",
-     "url": "https://gengi-ai.streamlit.app", "stripe": "https://buy.stripe.com/00w9AT8Vy0SxcF81QGb3q07"},
+     "url": "https://medflow-ai.fr/deltavar/", "stripe": "https://buy.stripe.com/00w9AT8Vy0SxcF81QGb3q07"},
     {"icon": "🔍", "color": "#a855f7", "title": "CNV Diagnostic",
      "desc": "Détection CNV et visualisation interactive · CMA · 79 417 patients · 6 indications cliniques",
      "badge": "79€/mois", "bc": "rgba(168,85,247,0.15)", "bt": "#a855f7",
@@ -1408,7 +1408,7 @@ _eco_tools = [
 ]
 
 _left_eco  = _eco_tools[:5]   # QoL, Scores, Réinnervation, Biostat, Générateur CR
-_right_eco = _eco_tools[5:]   # Revue, MYOomics, CardioSurg, AMR-AI, Posologie, BioReport, GenGI, CNV, Microbiome
+_right_eco = _eco_tools[5:]   # Revue, MYOomics, CardioSurg, AMR-AI, Posologie, BioReport, DeltaVar, CNV, Microbiome
 
 def _eco_card(t, side):
     """Compact planet card — left cards face right, right cards face left."""
